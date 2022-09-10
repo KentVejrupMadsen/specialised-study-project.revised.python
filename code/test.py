@@ -1,6 +1,8 @@
+#!/usr/bin/python3
 import os
 
-from dataset import Dataset
+from libraries.dataset \
+    import Dataset
 
 
 def main():

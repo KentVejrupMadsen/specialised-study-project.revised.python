@@ -1,6 +1,7 @@
 import os
 
 
+# Interface for dataset directory
 class Dataset:
     def __init__(self):
         self.path = ''
