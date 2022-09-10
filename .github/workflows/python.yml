@@ -26,9 +26,14 @@ jobs:
         python -m pip install --upgrade pip
         pip install flake8 pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-    - name: test
+    - name: setup dependencies & enviroments
       run: |
         cd code
-        python3 -m venv .venv
+        python -m venv .venv
+        source .venv/bin/activate
+
+    - name: run
+      run: |
+        cd code
         source .venv/bin/activate
         python test.py
