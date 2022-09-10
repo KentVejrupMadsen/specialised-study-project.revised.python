@@ -15,6 +15,7 @@ def main():
 
 def db():
     db = Database('test')
+    db.setup_tables()
 
 
 def ds():
