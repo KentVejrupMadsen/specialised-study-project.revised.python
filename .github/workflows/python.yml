@@ -29,5 +29,6 @@ jobs:
     - name: test
       run: |
         cd code
+        python3 -m venv .venv
         source .venv/bin/activate
         python test.py
