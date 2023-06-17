@@ -1,3 +1,8 @@
-class NaiveBayes:
+from ssp.algorithms.function_class \
+    import FunctionClass
+
+
+class NaiveBayes(FunctionClass):
     def __init__(self):
-        pass
+        super().__init__()
+

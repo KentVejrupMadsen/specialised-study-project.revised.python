@@ -1,3 +1,7 @@
-class LaplaceSmoothing:
+from ssp.algorithms.function_class \
+    import FunctionClass
+
+
+class LaplaceSmoothing(FunctionClass):
     def __init__(self):
-        pass
+        super().__init__()
