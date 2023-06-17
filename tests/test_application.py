@@ -1,4 +1,4 @@
-from ssp.entry \
+from ssp \
     import on_entry_call
 
 
