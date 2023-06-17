@@ -28,12 +28,4 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: setup dependencies & enviroments
       run: |
-        cd code
-        python -m venv .venv
-        source .venv/bin/activate
-
-    - name: run
-      run: |
-        cd code
-        source .venv/bin/activate
-        python test.py
+        bash .workflow.sh
