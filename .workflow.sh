@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
-git submodule update --init
-git submodule update --recursive
-
-ls -a dataset/Reuters21578
-
+bash .setup.sh
 
 # setup of local environment
 python -m venv .venv
