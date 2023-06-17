@@ -1,6 +1,7 @@
 # directories
 .idea/*
 .venv/*
+.pytest_cache/*
 
 # extensions
 *.pyc
