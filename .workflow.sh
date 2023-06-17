@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+ls -a
+
 # setup of local environment
 python -m venv .venv
 source ./.venv/bin/activate
