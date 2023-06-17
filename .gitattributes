@@ -1,21 +1,21 @@
 # Files
 * text=auto eol=lf
 
-*.py diff=py eol=lf
-*.md diff=md eol=crlf
+*.py text diff=py eol=lf
+*.md text diff=md eol=crlf
 
-*.yml diff=yml eol=lf
-*.json diff=json eol=lf
-*.xml diff=xml eol=lf
+*.yml text diff=yml eol=lf
+*.json text diff=json eol=lf
+*.xml text diff=xml eol=lf
 
-*.sh diff=bash eol=lf
+*.sh text diff=bash eol=lf
 
 # Specific files
 Vagrantfile diff=auto eol=lf
 
 # Git
-.gitattributes diff=auto eol=lf
-.gitignore diff=auto eol=lf
+.gitattributes text diff=auto eol=lf
+.gitignore text diff=auto eol=lf
 
 /.github export-ignore
 CHANGELOG.md export-ignore
