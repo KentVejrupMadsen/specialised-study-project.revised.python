@@ -1,5 +1,5 @@
-def main():
-    pass
+from ssp.application \
+    import main
 
 
 if __name__ == '__main__':
