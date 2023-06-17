@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 git submodule update --recursive
 
-ls -a dataset
+ls -a dataset/Reuters21578
 
 
 # setup of local environment
