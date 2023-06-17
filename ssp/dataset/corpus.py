@@ -1,5 +1,16 @@
 from os.path \
-    import isdir
+    import isdir, join
+
+from ssp.dataset \
+    import CorpusSet
+
+
+def training_label() -> str:
+    return 'training'
+
+
+def test_label() -> str:
+    return 'test'
 
 
 class DataSetCorpus:
@@ -8,6 +19,27 @@ class DataSetCorpus:
             dataset_location: str
     ):
         self.path_to_dataset: str = dataset_location
+
+        if not self.exist_dataset_location():
+            raise Exception('dataset location path does not exist')
+
+        path_to_training: str = join(
+            self.path_to_dataset,
+            training_label()
+        )
+        self.training: CorpusSet = CorpusSet(
+            path_to_training,
+            training_label()
+        )
+
+        path_to_test: str = join(
+            self.path_to_dataset,
+            test_label()
+        )
+        self.test: CorpusSet = CorpusSet(
+            path_to_test,
+            test_label()
+        )
 
     def get_dataset_location(self) -> str:
         return self.path_to_dataset
