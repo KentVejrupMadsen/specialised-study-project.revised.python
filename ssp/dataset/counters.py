@@ -8,7 +8,14 @@ class CounterObject:
         self.move: int = move_by
 
     def __del__(self):
-        pass
+        del \
+            self.value, \
+            self.move
+
+    def reset(self):
+        self.set_value(
+            0
+        )
 
     def get_move_size(self) -> int:
         return self.move
@@ -57,3 +64,11 @@ class CounterObject:
         self.decrease(
             self.get_move_size()
         )
+
+    def __str__(self) -> str:
+        return str(
+            self.get_value()
+        )
+
+    def __int__(self) -> int:
+        return self.get_value()
