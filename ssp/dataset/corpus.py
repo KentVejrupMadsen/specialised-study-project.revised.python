@@ -19,4 +19,6 @@ class DataSetCorpus:
         self.path_to_dataset = value
 
     def exist_dataset_location(self) -> bool:
-        return isdir(self.path_to_dataset)
+        return isdir(
+            self.path_to_dataset
+        )

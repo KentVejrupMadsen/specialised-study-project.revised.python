@@ -1,4 +1,4 @@
-from ssp.algorithms.function_class \
+from ssp.algorithms \
     import FunctionClass
 
 

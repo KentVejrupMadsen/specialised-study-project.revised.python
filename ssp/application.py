@@ -1,4 +1,4 @@
-from ssp.controller \
+from ssp \
     import Controller
 
 

@@ -1,4 +1,4 @@
-from ssp.application \
+from ssp \
     import Application
 
 
