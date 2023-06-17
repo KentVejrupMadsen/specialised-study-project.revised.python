@@ -4,8 +4,7 @@ python -m venv .venv
 source ./.venv/bin/activate
 
 #
-pwd 
-export dataset_location_at="./dataset/Reuters21578/dataset"
+export dataset_location_at="dataset/Reuters21578/dataset"
 
 
 # Upgrades pip for the local environment
