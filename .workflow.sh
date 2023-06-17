@@ -3,10 +3,6 @@
 python -m venv .venv
 source ./.venv/bin/activate
 
-#
-export dataset_location_at="dataset/Reuters21578/dataset"
-
-
 # Upgrades pip for the local environment
 python -m pip install --upgrade pip
 
@@ -18,6 +14,10 @@ fi
 
 # Load required submodules
 git submodule update --recursive
+bash ./.replicate.sh
+
+#
+export dataset_location_at="/tmp/dataset"
 
 # runs test environment
 pytest -s
