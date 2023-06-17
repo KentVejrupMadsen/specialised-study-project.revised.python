@@ -1,2 +1,6 @@
+# directories
 .idea/*
 .venv/*
+
+# extensions
+*.pyc
