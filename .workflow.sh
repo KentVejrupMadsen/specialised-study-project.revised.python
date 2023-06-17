@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 bash .setup.sh
 
+#
+export dataset_location_at="/tmp/dataset"
+
 # setup of local environment
 python -m venv .venv
 source ./.venv/bin/activate
@@ -16,9 +19,6 @@ fi
 
 # Load required submodules
 bash ./.replicate.sh
-
-#
-export dataset_location_at="/tmp/dataset"
 
 # runs test environment
 pytest -s

@@ -1,16 +1,15 @@
 from os.path \
-    import isdir, join
+    import \
+    isdir, \
+    join
 
 from ssp.dataset \
     import CorpusSet
 
-
-def training_label() -> str:
-    return 'training'
-
-
-def test_label() -> str:
-    return 'test'
+from ssp.variables \
+    import \
+    training_label, \
+    test_label
 
 
 class DataSetCorpus:
