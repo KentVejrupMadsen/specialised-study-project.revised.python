@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
-ls -a
+git submodule update --recursive
+
+ls -a dataset
+
 
 # setup of local environment
 python -m venv .venv
@@ -15,7 +18,6 @@ then
 fi
 
 # Load required submodules
-git submodule update --recursive
 bash ./.replicate.sh
 
 #
