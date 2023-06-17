@@ -1,3 +1,9 @@
+from ssp.dataset.counters \
+    import CounterObject
+
+from ssp.dataset.documents \
+    import Document
+
 from ssp.dataset.categories \
     import Category
 

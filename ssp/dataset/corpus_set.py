@@ -25,7 +25,17 @@ class CorpusSet:
             raise Exception('set directory does not exist')
 
         self.corpus_set: str = corpus_set
+        self.categories: list = []
         self.search()
+
+    def get_categories(self) -> list:
+        return self.categories
+
+    def set_categories(
+            self,
+            values: list
+    ):
+        self.categories = values
 
     def exist_location_path(self) -> bool:
         return isdir(self.location)
@@ -50,6 +60,12 @@ class CorpusSet:
                 category = self.retrieve_files_in_category(
                     category=category,
                     at_category_location=full_path_to_category
+                )
+
+                category.load()
+
+                self.get_categories().append(
+                    category
                 )
 
     def retrieve_files_in_category(
