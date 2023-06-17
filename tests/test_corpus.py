@@ -1,8 +1,11 @@
+from os \
+    import environ
+
 from ssp.dataset.corpus \
     import DataSetCorpus
 
 
-path_to_dataset: str = 'C:\\Workspace\\Codespace\\containers\\projects\\ssp.revised.python\\dataset\\Reuters21578\\dataset'
+path_to_dataset: str = environ['dataset_location_at']
 
 
 def get_dataset_location_path() -> str:
