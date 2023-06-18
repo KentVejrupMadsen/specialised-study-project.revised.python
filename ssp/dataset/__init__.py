@@ -1,6 +1,12 @@
 from ssp.dataset.counters \
     import CounterObject
 
+from ssp.dataset.tokens \
+    import \
+    DocumentToken, \
+    CategoryToken, \
+    TokenWord
+
 from ssp.dataset.documents \
     import Document
 

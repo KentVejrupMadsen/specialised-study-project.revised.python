@@ -1,8 +1,16 @@
+def zero() -> int:
+    return 0
+
+
+def one() -> int:
+    return 1
+
+
 class CounterObject:
     def __init__(
             self,
-            start_value: int = 0,
-            move_by: int = 1
+            start_value: int = zero(),
+            move_by: int = one()
     ):
         self.value: int = start_value
         self.move: int = move_by
@@ -14,7 +22,7 @@ class CounterObject:
 
     def reset(self):
         self.set_value(
-            0
+            zero()
         )
 
     def get_move_size(self) -> int:
@@ -64,6 +72,9 @@ class CounterObject:
         self.decrease(
             self.get_move_size()
         )
+
+    def is_zero(self) -> bool:
+        return self.get_value() == zero()
 
     def __str__(self) -> str:
         return str(
