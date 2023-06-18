@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 class Document:
     def __init__(
             self,

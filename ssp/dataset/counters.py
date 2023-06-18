@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 def zero() -> int:
     return 0
 

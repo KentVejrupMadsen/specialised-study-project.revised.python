@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # Import of packages
 from os \
     import environ

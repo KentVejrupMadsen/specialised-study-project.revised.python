@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from ssp.dataset.counters \
     import CounterObject
 

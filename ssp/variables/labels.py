@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 training_label: str = 'training'
 test_label: str = 'test'
 

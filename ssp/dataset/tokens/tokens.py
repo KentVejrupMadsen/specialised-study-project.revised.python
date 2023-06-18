@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 class TokenWord:
     def __init__(
             self,

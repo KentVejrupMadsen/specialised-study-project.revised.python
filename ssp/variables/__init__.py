@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from ssp.variables.labels \
     import \
     get_training_label, \

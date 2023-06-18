@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from ssp.controller \
     import Controller
 

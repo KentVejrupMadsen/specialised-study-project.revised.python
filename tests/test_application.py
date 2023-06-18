@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # Import of packages
 from ssp \
     import on_entry_call
