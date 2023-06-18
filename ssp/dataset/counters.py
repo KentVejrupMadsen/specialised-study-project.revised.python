@@ -1,17 +1,15 @@
 #!/usr/bin/env python
-def zero() -> int:
-    return 0
-
-
-def one() -> int:
-    return 1
+from ssp.variables \
+    import \
+    get_zero,\
+    get_one
 
 
 class CounterObject:
     def __init__(
             self,
-            start_value: int = zero(),
-            move_by: int = one()
+            start_value: int = get_zero(),
+            move_by: int = get_one()
     ):
         self.value: int = start_value
         self.move: int = move_by
@@ -23,7 +21,7 @@ class CounterObject:
 
     def reset(self):
         self.set_value(
-            zero()
+            get_zero()
         )
 
     def get_move_size(self) -> int:
@@ -75,7 +73,7 @@ class CounterObject:
         )
 
     def is_zero(self) -> bool:
-        return self.get_value() == zero()
+        return self.get_value() == get_zero()
 
     def __str__(self) -> str:
         return str(
