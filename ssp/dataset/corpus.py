@@ -8,8 +8,8 @@ from ssp.dataset \
 
 from ssp.variables \
     import \
-    training_label, \
-    test_label
+    get_training_label, \
+    get_test_label
 
 
 class DataSetCorpus:
@@ -24,20 +24,20 @@ class DataSetCorpus:
 
         path_to_training: str = join(
             self.path_to_dataset,
-            training_label()
+            get_training_label()
         )
         self.training: CorpusSet = CorpusSet(
             path_to_training,
-            training_label()
+            get_training_label()
         )
 
         path_to_test: str = join(
             self.path_to_dataset,
-            test_label()
+            get_test_label()
         )
         self.test: CorpusSet = CorpusSet(
             path_to_test,
-            test_label()
+            get_test_label()
         )
 
     def get_dataset_location(self) -> str:
