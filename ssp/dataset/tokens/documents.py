@@ -89,3 +89,13 @@ class DocumentToken:
             value: CounterObject
     ) -> None:
         self.counter = value
+
+    def __str__(self) -> str:
+        return str(
+            self.get_word()
+        )
+
+    def __int__(self) -> int:
+        return int(
+            self.counter
+        )

@@ -72,3 +72,13 @@ class CategoryToken:
             value: CounterObject
     ) -> None:
         self.counter = value
+
+    def __int__(self) -> int:
+        return int(
+            self.counter
+        )
+
+    def __str__(self) -> str:
+        return str(
+            self.get_word()
+        )
