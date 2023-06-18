@@ -24,3 +24,12 @@ class DocumentToken:
 
     def get_word(self) -> TokenWord:
         return self.word
+
+    def get_counter(self) -> CounterObject:
+        return self.counter
+
+    def set_counter(
+            self,
+            value: CounterObject
+    ) -> None:
+        self.counter = value
