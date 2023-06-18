@@ -20,13 +20,17 @@ class DocumentToken:
             self,
             value: int
     ) -> int:
-        self.counter.increase(value)
+        self.counter.increase(
+            value
+        )
+
         return int(
             self.counter
         )
 
     def increment(self) -> int:
         self.counter.increment()
+
         return int(
             self.counter
         )
@@ -35,13 +39,17 @@ class DocumentToken:
             self,
             value: int
     ) -> int:
-        self.counter.decrease(value)
+        self.counter.decrease(
+            value
+        )
+
         return int(
             self.counter
         )
 
     def decrement(self) -> int:
         self.counter.decrement()
+        
         return int(
             self.counter
         )
@@ -50,7 +58,9 @@ class DocumentToken:
             self,
             size: int
     ) -> int:
-        self.counter.set_value(size)
+        self.counter.set_value(
+            size
+        )
 
         return int(
             self.counter

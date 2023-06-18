@@ -18,7 +18,7 @@ class CategoryToken:
 
     def increment(self) -> int:
         self.counter.increment()
-        
+
         return int(
             self.counter
         )
