@@ -1,4 +1,5 @@
-from ssp.algorithms \
+#!/usr/bin/env python
+from ssp.logic.templates \
     import FunctionClass
 
 

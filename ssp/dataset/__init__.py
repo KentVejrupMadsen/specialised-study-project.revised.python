@@ -1,12 +1,4 @@
-from ssp.dataset.counters \
-    import CounterObject
-
-from ssp.dataset.tokens \
-    import \
-    DocumentToken, \
-    CategoryToken, \
-    TokenWord
-
+#!/usr/bin/env python
 from ssp.dataset.documents \
     import Document
 

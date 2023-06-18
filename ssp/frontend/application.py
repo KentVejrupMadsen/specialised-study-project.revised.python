@@ -1,4 +1,5 @@
-from ssp \
+#!/usr/bin/env python
+from ssp.frontend \
     import Controller
 
 

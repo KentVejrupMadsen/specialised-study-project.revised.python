@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 class Document:
     def __init__(
             self,
@@ -11,7 +12,10 @@ class Document:
 
     def open(self):
         self.set_file_object(
-            open(self.file_location, 'r')
+            open(
+                self.file_location,
+                'r'
+            )
         )
 
     def done(self):

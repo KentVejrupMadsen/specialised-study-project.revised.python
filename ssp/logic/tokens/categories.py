@@ -1,11 +1,12 @@
-from ssp.dataset \
+#!/usr/bin/env python
+from ssp.logic.structures \
     import CounterObject
 
-from ssp.dataset.tokens \
+from ssp.logic.tokens \
     import TokenWord
 
 
-class DocumentToken:
+class CategoryToken:
     def __init__(
             self,
             token_name: str
@@ -16,9 +17,16 @@ class DocumentToken:
 
         self.counter = CounterObject()
 
+    def increment(self) -> int:
+        self.counter.increment()
+
+        return int(
+            self.counter
+        )
+
     def increase(
             self,
-            value: int
+            value
     ) -> int:
         self.counter.increase(
             value
@@ -28,16 +36,9 @@ class DocumentToken:
             self.counter
         )
 
-    def increment(self) -> int:
-        self.counter.increment()
-
-        return int(
-            self.counter
-        )
-
     def decrease(
             self,
-            value: int
+            value
     ) -> int:
         self.counter.decrease(
             value
@@ -54,31 +55,14 @@ class DocumentToken:
             self.counter
         )
 
-    def set_counter_value(
-            self,
-            size: int
-    ) -> int:
-        self.counter.set_value(
-            size
-        )
-
-        return int(
-            self.counter
-        )
-
-    def get_counter_value(self) -> int:
-        return int(
-            self.counter
-        )
+    def get_word(self) -> TokenWord:
+        return self.word
 
     def set_word(
             self,
-            token: TokenWord
-    ):
-        self.word = token
-
-    def get_word(self) -> TokenWord:
-        return self.word
+            value: TokenWord
+    ) -> None:
+        self.word = value
 
     def get_counter(self) -> CounterObject:
         return self.counter
@@ -88,3 +72,13 @@ class DocumentToken:
             value: CounterObject
     ) -> None:
         self.counter = value
+
+    def __int__(self) -> int:
+        return int(
+            self.counter
+        )
+
+    def __str__(self) -> str:
+        return str(
+            self.get_word()
+        )
