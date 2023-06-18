@@ -4,7 +4,7 @@ from ssp \
 
 def on_entry_call():
     app = Application()
-    app.execute()
+    app.run()
 
 
 if __name__ == '__main__':

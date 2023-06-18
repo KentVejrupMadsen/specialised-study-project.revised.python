@@ -4,7 +4,13 @@ from os \
 from ssp.dataset.corpus \
     import DataSetCorpus
 
-environment_dataset_pointer = environ['dataset_location_at']
+from ssp.variables \
+    import get_environment_dataset_location
+
+
+environment_dataset_pointer = environ[
+    get_environment_dataset_location()
+]
 
 if not (environment_dataset_pointer is None):
     path_to_dataset: str = environment_dataset_pointer
