@@ -10,6 +10,19 @@ class TokenFactory:
     def __init__(self):
         self.corpus: list | None = None
 
+    def retrieve_at(
+            self,
+            index: int
+    ) -> TokenWord:
+        return self.corpus[index]
+
+    def corpus_range(self):
+        return range(
+            len(
+                self
+            )
+        )
+
     def insert(
             self,
             value: str
@@ -33,10 +46,8 @@ class TokenFactory:
         if self.is_corpus_empty():
             return None
 
-        for index in range(
-            len(self)
-        ):
-            token: TokenWord = self.corpus[index]
+        for index in self.corpus_range():
+            token: TokenWord = self.retrieve_at(index)
 
             if str(token) == search_value:
                 return token
@@ -52,27 +63,34 @@ class TokenFactory:
 
         delete_position: int | None = None
 
-        for index in range(len(self)):
-            token: TokenWord = self.corpus[index]
+        for index in self.corpus_range():
+            token: TokenWord = self.retrieve_at(index)
 
             if str(token) == token_value:
                 delete_position = index
                 break
 
         if not (delete_position is None):
-            self.corpus.pop(delete_position)
+            self.corpus.pop(
+                delete_position
+            )
 
     def is_corpus_empty(self) -> bool:
         return \
-                self.is_corpus_none() \
-                or \
-                len(self.corpus) == get_zero()
+            self.is_corpus_none() \
+            or \
+            len(self) == get_zero()
 
     def is_corpus_none(self) -> bool:
         return self.corpus is None
 
     def get_corpus(self) -> list | None:
         return self.corpus
+
+    def empty_corpus(self) -> None:
+        self.set_corpus(
+            []
+        )
 
     def set_corpus(
             self,
@@ -82,15 +100,14 @@ class TokenFactory:
 
     def __len__(self):
         self.__initialise__()
+
         return len(
             self.corpus
         )
 
     def __initialise__(self):
         if self.is_corpus_none():
-            self.set_corpus(
-                []
-            )
+            self.empty_corpus()
 
 
 singleton: TokenFactory | None = None

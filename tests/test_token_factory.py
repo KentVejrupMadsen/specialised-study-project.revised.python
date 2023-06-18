@@ -63,3 +63,17 @@ def test_list_dump() -> None:
     assert not(
             get_singleton_token_factory() is None
     )
+
+
+def test_search_for_token() -> None:
+    factory = get_singleton_token_factory()
+
+    label_to_search_for: str = 'adam'
+    factory.insert(
+        label_to_search_for
+    )
+    search_token = factory.search_for_token(
+        label_to_search_for
+    )
+
+    assert str(search_token) == label_to_search_for
