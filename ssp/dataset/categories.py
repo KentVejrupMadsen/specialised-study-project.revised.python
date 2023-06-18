@@ -1,6 +1,9 @@
 from os.path \
     import isfile
 
+from ssp.dataset \
+    import Document
+
 
 class Category:
     def __init__(
@@ -11,6 +14,33 @@ class Category:
         self.name: str = name
         self.category_directory_location: str = category_directory_location
         self.files_in_category: list = []
+        self.documents: list = []
+
+    def load(self):
+        if not (self.number_of_files_in_category() == 0):
+            for file_location in self.files_in_category:
+                doc = Document(location=file_location)
+                self.add_document(doc)
+
+    def add_document(
+            self,
+            document: Document
+    ):
+        self.get_documents().append(
+            document
+        )
+
+    def number_of_files_in_category(self) -> int:
+        return len(self.files_in_category)
+
+    def get_documents(self) -> list:
+        return self.documents
+
+    def set_documents(
+            self,
+            value: list
+    ):
+        self.documents = value
 
     def get_name(self) -> str:
         return self.name
@@ -32,7 +62,7 @@ class Category:
 
     def size_of_category(self) -> int:
         return len(
-            self.files_in_category
+            self.documents
         )
 
     def insert_file(
