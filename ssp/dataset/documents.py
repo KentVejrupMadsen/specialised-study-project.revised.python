@@ -12,7 +12,10 @@ class Document:
 
     def open(self):
         self.set_file_object(
-            open(self.file_location, 'r')
+            open(
+                self.file_location,
+                'r'
+            )
         )
 
     def done(self):
