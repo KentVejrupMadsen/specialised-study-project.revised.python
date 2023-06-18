@@ -1,3 +1,4 @@
+# Import of packages
 from ssp.dataset.tokens \
     import \
     TokenWord, \
@@ -5,13 +6,14 @@ from ssp.dataset.tokens \
     CategoryToken
 
 
-def test_word():
+# Test
+def test_word() -> None:
     label = 'label'
     word = TokenWord(label)
     assert str(word) == label
 
 
-def test_document_token():
+def test_document_token() -> None:
     label = 'test_a'
     word = DocumentToken(label)
 
@@ -24,7 +26,7 @@ def test_document_token():
         int(word.get_counter()) == 2
 
 
-def test_category_token():
+def test_category_token() -> None:
     label = 'test_b'
     word = CategoryToken(label)
 

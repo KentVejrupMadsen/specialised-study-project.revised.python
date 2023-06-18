@@ -1,6 +1,8 @@
+# Import of packages
 from ssp \
     import on_entry_call
 
 
-def test_main_entry():
+# test
+def test_main_entry() -> None:
     on_entry_call()

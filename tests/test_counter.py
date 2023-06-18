@@ -1,7 +1,9 @@
+# Import of packages
 from ssp.dataset \
     import CounterObject
 
 
+# Test
 def test_get() -> None:
     cobj = CounterObject(4, 1)
 
@@ -46,7 +48,9 @@ def test_counter_decrease() -> None:
 
 
 def test_counter_reset() -> None:
-    cobj = CounterObject(start_value=400)
+    cobj = CounterObject(
+        start_value = 400
+    )
 
     cobj.reset()
 
