@@ -48,7 +48,9 @@ def test_counter_decrease() -> None:
 
 
 def test_counter_reset() -> None:
-    cobj = CounterObject(start_value=400)
+    cobj = CounterObject(
+        start_value = 400
+    )
 
     cobj.reset()
 

@@ -38,7 +38,7 @@ def get_dataset() -> DataSetCorpus:
 
 
 # Test
-def test_dataset():
+def test_dataset() -> None:
     ds = get_dataset()
 
     assert ds.exist_dataset_location()
