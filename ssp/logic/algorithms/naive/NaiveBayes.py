@@ -1,8 +1,9 @@
 #!/usr/bin/env python
-from ssp.algorithms \
+from ssp.logic.templates \
     import FunctionClass
 
 
-class LaplaceSmoothing(FunctionClass):
+class NaiveBayes(FunctionClass):
     def __init__(self):
         super().__init__()
+

@@ -2,7 +2,8 @@
 from ssp \
     import get_entry_main_label
 
-from ssp.frontend import Application
+from ssp.frontend \
+    import Application
 
 
 def on_entry_call():
