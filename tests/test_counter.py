@@ -1,7 +1,10 @@
 #!/usr/bin/env python
 # Import of packages
 from tests \
-    import CounterObject, get_zero, get_one
+    import \
+    CounterObject, \
+    get_zero, \
+    get_one
 
 
 # Test

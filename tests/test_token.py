@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # Import of packages
-from ssp.dataset.tokens \
+from tests \
     import \
     TokenWord, \
     DocumentToken, \
@@ -12,6 +12,12 @@ def test_word() -> None:
     label = 'label'
     word = TokenWord(label)
     assert str(word) == label
+
+
+def test_work_length() -> None:
+    label: str = 'tokenised'
+    word = TokenWord(label)
+    assert len(word) == len(label)
 
 
 def test_document_label() -> None:

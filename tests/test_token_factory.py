@@ -1,9 +1,7 @@
 #!/usr/bin/env python
 from tests \
-    import get_zero
-
-from ssp.logic.structures.factories \
     import \
+    get_zero, \
     get_singleton_token_factory
 
 

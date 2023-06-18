@@ -3,11 +3,11 @@
 from os \
     import environ
 
-from ssp.dataset.corpus \
-    import DataSetCorpus
+from tests \
+    import \
+    get_environment_dataset_location, \
+    DataSetCorpus
 
-from ssp.variables \
-    import get_environment_dataset_location
 
 # Global Variables
 environment_dataset_pointer = environ[

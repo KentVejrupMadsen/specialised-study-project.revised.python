@@ -15,6 +15,11 @@ class TokenWord:
     ) -> None:
         self.word = value
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.get_word()
+
+    def __len__(self) -> int:
+        return len(
+            self.get_word()
+        )
 
