@@ -31,4 +31,7 @@ def test_category_token():
     word.increment()
     word.increment()
 
-    assert str(word.get_word() == label) and int(word.get_counter()) == 2
+    assert \
+        str(word.get_word() == label) \
+        and \
+        int(word.get_counter()) == 2
