@@ -1,7 +1,9 @@
+# Import of packages
 from ssp.dataset \
     import CounterObject
 
 
+# Test
 def test_get() -> None:
     cobj = CounterObject(4, 1)
 
