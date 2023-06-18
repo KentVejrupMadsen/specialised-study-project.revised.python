@@ -25,5 +25,6 @@ Vagrantfile diff=auto eol=lf export-ignore
 
 # removing tests
 tests/ export-ignore
+dataset/ export-ignore
 
 /.github export-ignore
