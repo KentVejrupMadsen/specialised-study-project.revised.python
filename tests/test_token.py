@@ -1,3 +1,4 @@
+# Import of packages
 from ssp.dataset.tokens \
     import \
     TokenWord, \
@@ -5,6 +6,7 @@ from ssp.dataset.tokens \
     CategoryToken
 
 
+# Test
 def test_word():
     label = 'label'
     word = TokenWord(label)
