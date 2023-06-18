@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from ssp.dataset.tokens \
     import TokenWord
 
@@ -25,11 +26,50 @@ class TokenFactory:
 
     def search_for_token(
             self,
-            token: str
-    ):
+            search_value: str
+    ) -> TokenWord | None:
         self.__initialise__()
 
-        pass
+        if self.is_corpus_empty():
+            return None
+
+        for index in range(
+            len(self)
+        ):
+            token: TokenWord = self.corpus[index]
+
+            if str(token) == search_value:
+                return token
+
+    def delete(
+            self,
+            token_value: str
+    ) -> None:
+        self.__initialise__()
+
+        if self.is_corpus_empty():
+            return None
+
+        delete_position: int | None = None
+
+        for index in range(len(self)):
+            token: TokenWord = self.corpus[index]
+
+            if str(token) == token_value:
+                delete_position = index
+                break
+
+        if not (delete_position is None):
+            self.corpus.pop(delete_position)
+
+    def is_corpus_empty(self) -> bool:
+        return \
+                self.is_corpus_none() \
+                or \
+                len(self.corpus) == get_zero()
+
+    def is_corpus_none(self) -> bool:
+        return self.corpus is None
 
     def get_corpus(self) -> list | None:
         return self.corpus
@@ -42,14 +82,15 @@ class TokenFactory:
 
     def __len__(self):
         self.__initialise__()
-        return len(self.corpus)
+        return len(
+            self.corpus
+        )
 
     def __initialise__(self):
-        if self.__corpus_is_none():
-            self.set_corpus([])
-
-    def __corpus_is_none(self):
-        return self.get_corpus() is None
+        if self.is_corpus_none():
+            self.set_corpus(
+                []
+            )
 
 
 singleton: TokenFactory | None = None
