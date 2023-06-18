@@ -11,15 +11,19 @@
 *.sh text diff=bash eol=lf
 
 # Specific files
-Vagrantfile diff=auto eol=lf
+Vagrantfile diff=auto eol=lf export-ignore
 
 # Git
-.gitattributes text diff=auto eol=lf
-.gitignore text diff=auto eol=lf
+.gitattributes text diff=auto eol=lf export-ignore
+.gitignore text diff=auto eol=lf export-ignore
+.gitmodules text diff=auto eol=lf export-ignore
 
 # Related to workflow
 .replicate.sh export-ignore
+.setup.sh export-ignore
+.workflow.sh export-ignore
 
+# removing tests
+tests/ export-ignore
 
 /.github export-ignore
-changelog.md
