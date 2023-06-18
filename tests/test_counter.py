@@ -1,17 +1,17 @@
 #!/usr/bin/env python
 # Import of packages
 from tests \
-    import CounterObject
+    import CounterObject, get_zero, get_one
 
 
 # Test
 def test_get() -> None:
-    cobj = CounterObject(4, 1)
+    cobj = CounterObject(4, get_one())
 
     assert \
         int(cobj) == 4 \
         and \
-        cobj.get_move_size() == 1
+        cobj.get_move_size() == get_one()
 
 
 def test_counter_increment() -> None:
@@ -19,7 +19,7 @@ def test_counter_increment() -> None:
 
     cobj.increment()
 
-    assert int(cobj) == 1
+    assert int(cobj) == get_one()
 
 
 def test_counter_increase() -> None:
@@ -55,17 +55,23 @@ def test_counter_reset() -> None:
 
     cobj.reset()
 
-    assert int(cobj) == 0
+    assert int(cobj) == get_zero()
 
 
 def test_counter_zero() -> None:
-    cobj = CounterObject(0, 1)
+    cobj = CounterObject(
+        get_zero(),
+        get_one()
+    )
 
     assert cobj.is_zero()
 
 
 def test_counter_not_zero() -> None:
-    cobj = CounterObject(200, 1)
+    cobj = CounterObject(
+        200,
+        get_one()
+    )
 
     assert not cobj.is_zero()
 

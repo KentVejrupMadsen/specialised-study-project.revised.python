@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from ssp \
+from ssp.variables \
     import get_entry_main_label
 
 from ssp \
