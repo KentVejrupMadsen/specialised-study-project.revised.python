@@ -17,5 +17,9 @@ Vagrantfile diff=auto eol=lf
 .gitattributes text diff=auto eol=lf
 .gitignore text diff=auto eol=lf
 
+# Related to workflow
+.replicate.sh export-ignore
+
+
 /.github export-ignore
-CHANGELOG.md export-ignore
+changelog.md
