@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 from ssp \
-    import \
-    Application, \
-    get_entry_main_label
+    import get_entry_main_label
+
+from ssp.frontend import Application
 
 
 def on_entry_call():
