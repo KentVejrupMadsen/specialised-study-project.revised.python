@@ -7,3 +7,6 @@ from ssp.application \
 
 from ssp.entry \
     import on_entry_call
+
+from ssp.variables \
+    import get_entry_main_label
