@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # Import of packages
-from ssp.dataset \
+from tests \
     import CounterObject
 
 

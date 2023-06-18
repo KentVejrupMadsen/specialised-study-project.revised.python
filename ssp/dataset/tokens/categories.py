@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from ssp.dataset \
+from ssp.structures \
     import CounterObject
 
 from ssp.dataset.tokens \

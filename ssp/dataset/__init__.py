@@ -1,7 +1,4 @@
 #!/usr/bin/env python
-from ssp.dataset.counters \
-    import CounterObject
-
 from ssp.dataset.tokens \
     import \
     DocumentToken, \
