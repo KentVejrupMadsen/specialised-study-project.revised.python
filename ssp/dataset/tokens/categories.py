@@ -10,8 +10,41 @@ class CategoryToken:
             self,
             token_name: str
     ):
-        self.word = TokenWord(token_name)
+        self.word = TokenWord(
+            token_name
+        )
+        
         self.counter = CounterObject()
+
+    def increment(self) -> int:
+        self.counter.increment()
+        return int(
+            self.counter
+        )
+
+    def increase(
+            self,
+            value
+    ) -> int:
+        self.counter.increase(value)
+        return int(
+            self.counter
+        )
+
+    def decrease(
+            self,
+            value
+    ) -> int:
+        self.counter.decrease(value)
+        return int(
+            self.counter
+        )
+
+    def decrement(self) -> int:
+        self.counter.decrement()
+        return int(
+            self.counter
+        )
 
     def get_word(self) -> TokenWord:
         return self.word
