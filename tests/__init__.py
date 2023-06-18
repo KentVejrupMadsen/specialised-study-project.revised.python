@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from ssp.structures \
+from ssp.logic.structures \
     import CounterObject
 
 from ssp.variables \
