@@ -3,7 +3,7 @@
 name: Python application
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "working", "development" ]
   pull_request:
     branches: [ "main" ]
 
