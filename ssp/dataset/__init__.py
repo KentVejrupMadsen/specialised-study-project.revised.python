@@ -1,10 +1,4 @@
 #!/usr/bin/env python
-from ssp.dataset.tokens \
-    import \
-    DocumentToken, \
-    CategoryToken, \
-    TokenWord
-
 from ssp.dataset.documents \
     import Document
 

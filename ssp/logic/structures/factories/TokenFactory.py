@@ -1,9 +1,9 @@
 #!/usr/bin/env python
-from ssp.dataset.tokens \
-    import TokenWord
-
 from ssp.variables \
     import get_zero
+
+from ssp.logic.structures.factories \
+    import TokenWord
 
 
 class TokenFactory:
