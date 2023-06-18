@@ -49,7 +49,7 @@ class DocumentToken:
 
     def decrement(self) -> int:
         self.counter.decrement()
-        
+
         return int(
             self.counter
         )

@@ -21,4 +21,14 @@ def test_document_token():
     assert \
         str(word.get_word()) == label \
         and \
-        word.get_counter().get_value() == 2
+        int(word.get_counter()) == 2
+
+
+def test_category_token():
+    label = 'test_b'
+    word = CategoryToken(label)
+
+    word.increment()
+    word.increment()
+
+    assert str(word.get_word() == label) and int(word.get_counter()) == 2
