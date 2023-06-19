@@ -4,12 +4,16 @@ from ssp.logic.tokens \
     TokenWord
 
 from ssp.variables \
-    import is_int_zero
+    import \
+    is_int_zero, \
+    get_zero, \
+    get_one
 
 from ssp.logic.structures.factories \
     import \
     get_singleton_token_factory, \
     TokenFactory
+
 
 class CorpusPreprocessor:
     def __init__(
@@ -23,13 +27,27 @@ class CorpusPreprocessor:
         self.token_set: list | None = None
         self.debugging: bool = True
 
-        self.token_factory: TokenFactory = get_singleton_token_factory()
+        self.token_factory: TokenFactory | None = None
 
     def __del__(self):
         del                     \
             self.encoding,      \
             self.normalisation, \
             self.token_set
+
+    def get_factory(self) -> TokenFactory:
+        if self.token_factory is None:
+            self.set_factory(
+                get_singleton_token_factory()
+            )
+
+        return self.token_factory
+
+    def set_factory(
+            self,
+            value: TokenFactory | None
+    ) -> None:
+        self.token_factory = value
 
     def open_stream(self):
         self.initialise_token_set()
@@ -49,17 +67,24 @@ class CorpusPreprocessor:
                 tokens
             )
 
-    def get_token_factory(self) -> TokenFactory:
-        return self.token_factory
+    def insert_token(
+            self,
+            word: TokenWord
+    ):
+        self.token_set.append(
+            DocumentToken(
+                word=word,
+                counter_value=get_one()
+            )
+        )
 
     def iterate_tokens_from_stream(
             self,
             tokens: list
     ):
-        factory = self.get_token_factory()
+        factory = self.get_factory()
 
-        for token \
-                in tokens:
+        for token in tokens:
             current_token: str = self.normalisation_of_token(
                 token
             )
@@ -75,19 +100,18 @@ class CorpusPreprocessor:
                     current_token
                 )
 
-                self.token_set.append(
-                    DocumentToken(
-                        word=search,
-                        counter_value=1
-                    )
+                self.insert_token(
+                    search
                 )
-
-            if not search_is_none:
+            else:
                 self.search_in_list(
                     search
                 )
 
-    def get_token_by_index(self, index: int) -> DocumentToken:
+    def get_token_by_index(
+            self,
+            index: int
+    ) -> DocumentToken:
         return self.get_token_set()[index]
 
 
@@ -96,9 +120,7 @@ class CorpusPreprocessor:
             word: TokenWord
     ):
         if not is_int_zero(
-                len(
-                    self.get_token_set()
-                )
+            len(self)
         ):
             is_found: bool = False
 
@@ -113,21 +135,14 @@ class CorpusPreprocessor:
                     break
 
             if not is_found:
-                self.token_set.append(
-                    DocumentToken(
-                        word=word,
-                        counter_value=1
-                    )
+                self.insert_token(
+                    word
                 )
 
         else:
-            self.token_set.append(
-                DocumentToken(
-                    word=word,
-                    counter_value=1
-                )
+            self.insert_token(
+                word
             )
-
 
     def normalisation_of_token(
             self,
@@ -178,7 +193,7 @@ class CorpusPreprocessor:
 
     def __len__(self) -> int:
         if self.is_token_set_none():
-            return 0
+            return get_zero()
 
         return len(
             self.token_set
@@ -186,5 +201,7 @@ class CorpusPreprocessor:
 
     def range_of_set(self):
         return range(
-            len(self)
+            len(
+                self
+            )
         )

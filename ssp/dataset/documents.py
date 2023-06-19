@@ -17,7 +17,7 @@ class Document:
         self.file_object = None
         self.processor = processor
         self.tokens: list | None = None
-        self.debugging: bool = True
+        self.debugging: bool = False
 
     def __del__(self):
         self.done()
@@ -25,7 +25,10 @@ class Document:
     def get_tokens(self) -> list | None:
         return self.tokens
 
-    def set_tokens(self, value: list | None) -> None:
+    def set_tokens(
+            self,
+            value: list | None
+    ) -> None:
         self.tokens = value
 
     def open(self):
@@ -89,7 +92,10 @@ class Document:
     def get_file_object(self):
         return self.file_object
 
-    def set_file_object(self, value) -> None:
+    def set_file_object(
+            self,
+            value
+    ) -> None:
         self.file_object = value
 
     def is_file_object_none(self) -> bool:
@@ -97,3 +103,9 @@ class Document:
 
     def is_debugging(self) -> bool:
         return self.debugging
+
+    def set_is_debugging(
+            self,
+            value: bool
+    ) -> None:
+        self.debugging = value
