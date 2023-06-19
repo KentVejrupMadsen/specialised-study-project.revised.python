@@ -9,13 +9,14 @@ from ssp.logic.tokens \
 class DocumentToken:
     def __init__(
             self,
-            token_name: str
+            word: TokenWord,
+            counter_value: int = 0
     ):
-        self.word = TokenWord(
-            token_name
-        )
+        self.word = word
 
-        self.counter = CounterObject()
+        self.counter = CounterObject(
+            start_value=counter_value
+        )
 
     def increase(
             self,
@@ -92,7 +93,7 @@ class DocumentToken:
 
     def __str__(self) -> str:
         return str(
-            self.get_word()
+            self.word
         )
 
     def __int__(self) -> int:

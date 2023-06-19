@@ -22,7 +22,7 @@ class CorpusSet:
             self,
             location: str,
             corpus_set: str,
-            corpus_processor: CorpusPreprocessor
+            corpus_processor: CorpusPreprocessor = CorpusPreprocessor()
     ):
         self.location: str = location
 
