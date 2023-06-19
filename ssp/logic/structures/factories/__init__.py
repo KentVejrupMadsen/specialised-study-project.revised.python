@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 from ssp.logic.tokens \
-    import TokenWord
+    import \
+    TokenWord, \
+    DocumentToken
 
 from ssp.logic.structures.factories.TokenFactory \
     import \
