@@ -37,6 +37,8 @@ class Category:
                     location=file_location,
                     processor=self.get_processor()
                 )
+                doc.process()
+
                 self.add_document(
                     doc
                 )

@@ -7,7 +7,7 @@ class Document:
     def __init__(
             self,
             location: str,
-            processor: CorpusPreprocessor
+            processor: CorpusPreprocessor = CorpusPreprocessor()
     ):
         self.file_location: str = location
 
@@ -26,8 +26,13 @@ class Document:
         )
 
     def done(self):
-        if not(self.get_file_object() is None):
+        if not self.is_file_object_none():
             self.get_file_object().close()
+
+    def process(self):
+        self.processor.open_stream()
+
+        self.processor.close_stream()
 
     def get_file_location(self) -> str:
         return self.file_location
@@ -43,3 +48,6 @@ class Document:
 
     def set_file_object(self, value) -> None:
         self.file_object = value
+
+    def is_file_object_none(self) -> bool:
+        return self.get_file_object() is None
