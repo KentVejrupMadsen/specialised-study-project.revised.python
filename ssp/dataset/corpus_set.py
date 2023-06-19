@@ -13,12 +13,16 @@ from os.path \
 from os \
     import listdir
 
+from ssp.dataset \
+    import CorpusPreprocessor
+
 
 class CorpusSet:
     def __init__(
             self,
             location: str,
-            corpus_set: str
+            corpus_set: str,
+            corpus_processor: CorpusPreprocessor
     ):
         self.location: str = location
 
@@ -26,6 +30,8 @@ class CorpusSet:
             raise Exception(
                 'set directory does not exist'
             )
+
+        self.processor = corpus_processor
 
         self.corpus_set: str = corpus_set
         self.categories: list = []
@@ -79,7 +85,8 @@ class CorpusSet:
     ):
         label = Category(
             name=category,
-            category_directory_location=at_category_location
+            category_directory_location=at_category_location,
+            processor=self.processor
         )
 
         for root, dirs, files in walk(

@@ -26,13 +26,16 @@ class DataSetCorpus:
         if not self.exist_dataset_location():
             raise Exception('dataset location path does not exist')
 
+        self.preprocessor = CorpusPreprocessor()
+
         path_to_training: str = join(
             self.path_to_dataset,
             get_training_label()
         )
         self.training: CorpusSet = CorpusSet(
             path_to_training,
-            get_training_label()
+            get_training_label(),
+            self.preprocessor
         )
 
         path_to_test: str = join(
@@ -41,10 +44,9 @@ class DataSetCorpus:
         )
         self.test: CorpusSet = CorpusSet(
             path_to_test,
-            get_test_label()
+            get_test_label(),
+            self.preprocessor
         )
-
-        self.preprocessor = CorpusPreprocessor()
 
     def get_dataset_location(self) -> str:
         return self.path_to_dataset

@@ -8,17 +8,23 @@ from ssp.dataset \
 from ssp.variables \
     import is_int_zero
 
+from ssp.dataset \
+    import CorpusPreprocessor
+
 
 class Category:
     def __init__(
             self,
             name: str,
-            category_directory_location: str
+            category_directory_location: str,
+            processor: CorpusPreprocessor
     ):
         self.name: str = name
         self.category_directory_location: str = category_directory_location
         self.files_in_category: list = []
         self.documents: list = []
+
+        self.preprocessor: CorpusPreprocessor = processor
 
     def load(self):
         if not is_int_zero(
@@ -28,7 +34,8 @@ class Category:
                     in self.files_in_category:
 
                 doc = Document(
-                    location=file_location
+                    location=file_location,
+                    processor=self.get_processor()
                 )
                 self.add_document(
                     doc
@@ -37,7 +44,7 @@ class Category:
     def add_document(
             self,
             document: Document
-    ):
+    ) -> None:
         self.get_documents().append(
             document
         )
@@ -53,7 +60,7 @@ class Category:
     def set_documents(
             self,
             value: list
-    ):
+    ) -> None:
         self.documents = value
 
     def get_name(self) -> str:
@@ -62,7 +69,7 @@ class Category:
     def set_name(
             self,
             value: str
-    ):
+    ) -> None:
         self.name = value
 
     def get_category_directory_location(self) -> str:
@@ -71,7 +78,7 @@ class Category:
     def set_category_directory_location(
             self,
             value: str
-    ):
+    ) -> None:
         self.category_directory_location = value
 
     def size_of_category(self) -> int:
@@ -82,17 +89,26 @@ class Category:
     def insert_file(
             self,
             located_at: str
-    ):
+    ) -> None:
         if isfile(located_at):
             self.files_in_category.append(
                 located_at
             )
 
-    def get_files(self):
+    def get_files(self) -> list:
         return self.files_in_category
 
     def set_files(
             self,
             value: list
-    ):
+    ) -> None:
         self.files_in_category = value
+
+    def get_processor(self) -> CorpusPreprocessor:
+        return self.preprocessor
+
+    def set_processor(
+            self,
+            value: CorpusPreprocessor
+    ) -> None:
+        self.preprocessor = value

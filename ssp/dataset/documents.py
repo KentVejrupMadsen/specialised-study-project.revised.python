@@ -1,11 +1,18 @@
 #!/usr/bin/env python
+from ssp.dataset \
+    import CorpusPreprocessor
+
+
 class Document:
     def __init__(
             self,
-            location: str
+            location: str,
+            processor: CorpusPreprocessor
     ):
         self.file_location: str = location
+
         self.file_object = None
+        self.processor = processor
 
     def __del__(self):
         self.done()
