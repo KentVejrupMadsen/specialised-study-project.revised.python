@@ -26,7 +26,7 @@ class TokenFactory:
     def insert(
             self,
             value: str
-    ) -> None:
+    ) -> None | TokenWord:
         self.__initialise__()
 
         created_object = TokenWord(
@@ -36,6 +36,8 @@ class TokenFactory:
         self.corpus.append(
             created_object
         )
+
+        return created_object
 
     def search_for_token(
             self,

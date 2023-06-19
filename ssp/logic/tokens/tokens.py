@@ -4,7 +4,7 @@ class TokenWord:
             self,
             word: str
     ):
-        self.word = word
+        self.word: str = word
 
     def get_word(self) -> str:
         return self.word
@@ -16,7 +16,9 @@ class TokenWord:
         self.word = value
 
     def __str__(self) -> str:
-        return self.get_word()
+        return str(
+            self.get_word()
+        )
 
     def __len__(self) -> int:
         return len(
