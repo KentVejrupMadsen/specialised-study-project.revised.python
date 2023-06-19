@@ -23,7 +23,9 @@ class CorpusSet:
         self.location: str = location
 
         if not self.exist_location_path():
-            raise Exception('set directory does not exist')
+            raise Exception(
+                'set directory does not exist'
+            )
 
         self.corpus_set: str = corpus_set
         self.categories: list = []
@@ -49,7 +51,8 @@ class CorpusSet:
             self.get_location_path()
         )
 
-        for category in found_categories:
+        for category \
+                in found_categories:
             full_path_to_category = join(
                 self.get_location_path(),
                 category
@@ -84,7 +87,10 @@ class CorpusSet:
             topdown=False
         ):
             for name in files:
-                file_location = join(root, name)
+                file_location = join(
+                    root,
+                    name
+                )
 
                 label.insert_file(
                     located_at=file_location
