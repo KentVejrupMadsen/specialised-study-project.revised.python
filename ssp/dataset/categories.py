@@ -5,6 +5,9 @@ from os.path \
 from ssp.dataset \
     import Document
 
+from ssp.variables \
+    import is_int_zero
+
 
 class Category:
     def __init__(
@@ -18,9 +21,15 @@ class Category:
         self.documents: list = []
 
     def load(self):
-        if not (self.number_of_files_in_category() == 0):
-            for file_location in self.files_in_category:
-                doc = Document(location=file_location)
+        if not is_int_zero(
+                self.number_of_files_in_category()
+        ):
+            for file_location \
+                    in self.files_in_category:
+
+                doc = Document(
+                    location=file_location
+                )
                 self.add_document(doc)
 
     def add_document(

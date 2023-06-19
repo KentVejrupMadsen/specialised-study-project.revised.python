@@ -12,3 +12,8 @@ from ssp.variables.constants \
     import \
     get_one, \
     get_zero
+
+
+from ssp.variables.states \
+    import \
+    is_int_zero
