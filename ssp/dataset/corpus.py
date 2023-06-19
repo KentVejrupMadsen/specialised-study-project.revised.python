@@ -12,6 +12,9 @@ from ssp.variables \
     get_training_label, \
     get_test_label
 
+from ssp.dataset \
+    import CorpusPreprocessor
+
 
 class DataSetCorpus:
     def __init__(
@@ -41,6 +44,8 @@ class DataSetCorpus:
             get_test_label()
         )
 
+        self.preprocessor = CorpusPreprocessor()
+
     def get_dataset_location(self) -> str:
         return self.path_to_dataset
 
@@ -54,3 +59,30 @@ class DataSetCorpus:
         return isdir(
             self.path_to_dataset
         )
+
+    def get_preprocessor(self) -> CorpusPreprocessor:
+        return self.preprocessor
+
+    def set_preprocessor(
+            self,
+            with_value: CorpusPreprocessor
+    ) -> None:
+        self.preprocessor = with_value
+
+    def get_test(self) -> CorpusSet:
+        return self.test
+
+    def get_training(self) -> CorpusSet:
+        return self.training
+
+    def set_training(
+            self,
+            value: CorpusSet
+    ) -> None:
+        self.training = value
+
+    def set_test(
+            self,
+            value: CorpusSet
+    ) -> None:
+        self.test = value

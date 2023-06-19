@@ -30,7 +30,9 @@ class Category:
                 doc = Document(
                     location=file_location
                 )
-                self.add_document(doc)
+                self.add_document(
+                    doc
+                )
 
     def add_document(
             self,
@@ -41,7 +43,9 @@ class Category:
         )
 
     def number_of_files_in_category(self) -> int:
-        return len(self.files_in_category)
+        return len(
+            self.files_in_category
+        )
 
     def get_documents(self) -> list:
         return self.documents

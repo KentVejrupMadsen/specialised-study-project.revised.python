@@ -10,3 +10,6 @@ from ssp.dataset.corpus_set \
 
 from ssp.dataset.corpus \
     import DataSetCorpus
+
+from ssp.dataset.preprocessor \
+    import CorpusPreprocessor
