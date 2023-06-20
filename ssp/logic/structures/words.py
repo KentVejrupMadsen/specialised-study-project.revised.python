@@ -29,3 +29,13 @@ class Word(Token):
             value: CounterObject
     ) -> None:
         self.counter = value
+
+    def __int__(self):
+        return int(
+            self.get_counter()
+        )
+
+    def __str__(self):
+        return str(
+            self.get_word()
+        )

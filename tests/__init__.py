@@ -2,7 +2,9 @@
 from ssp.logic.structures \
     import \
     CounterObject, \
-    Token
+    Token, \
+    DocumentToken, \
+    CategoryToken
 
 from ssp.variables  \
     import          \
@@ -27,4 +29,6 @@ from ssp                        \
     get_location_of_repository, \
     get_location_of_dataset
 
-
+from tests.globals \
+    import get_generator \
+    as get_random_generator
