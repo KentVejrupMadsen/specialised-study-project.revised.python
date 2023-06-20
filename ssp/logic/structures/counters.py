@@ -6,6 +6,24 @@ from ssp.variables \
     is_int_zero
 
 
+def is_instance_of_counter_object(
+        value
+) -> bool:
+    return isinstance(
+        value,
+        CounterObject
+    )
+
+
+def is_instance_of_integer(
+        value
+) -> bool:
+    return isinstance(
+        value,
+        int
+    )
+
+
 class CounterObject:
     def __init__(
             self,
@@ -19,6 +37,85 @@ class CounterObject:
         del \
             self.value, \
             self.move
+
+    def __add__(
+            self,
+            other
+    ):
+        if is_instance_of_counter_object(
+            other
+        ):
+            o_co: CounterObject = other
+            self.increase(
+                o_co.get_value()
+            )
+
+        if is_instance_of_integer(
+            other
+        ):
+            o_int: int = other
+            self.increase(
+                o_int
+            )
+
+        return self
+
+    def __sub__(
+            self,
+            other
+    ):
+        if is_instance_of_counter_object(
+            other
+        ):
+            o_co: CounterObject = other
+            self.decrease(
+                o_co.get_value()
+            )
+
+        if is_instance_of_integer(
+            other
+        ):
+            o_int: int = other
+
+            self.decrease(
+                o_int
+            )
+
+        return self
+
+    def __eq__(
+            self,
+            other
+    ) -> bool:
+        if is_instance_of_counter_object(other):
+            o_co: CounterObject = other
+            rVal = bool(
+                self.get_value()
+                ==
+                o_co.get_value()
+            )
+
+            return rVal
+
+        if is_instance_of_integer(other):
+            o_int: int = other
+            rVal = bool(
+                self.get_value()
+                ==
+                o_int
+            )
+
+            return rVal
+
+        return False
+
+    def __str__(self) -> str:
+        return str(
+            self.get_value()
+        )
+
+    def __int__(self) -> int:
+        return self.get_value()
 
     def reset(self):
         self.set_value(
@@ -78,10 +175,7 @@ class CounterObject:
             self.get_value()
         )
 
-    def __str__(self) -> str:
-        return str(
+    def is_not_zero(self) -> bool:
+        return not is_int_zero(
             self.get_value()
         )
-
-    def __int__(self) -> int:
-        return self.get_value()
