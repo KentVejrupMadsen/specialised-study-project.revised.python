@@ -1,13 +1,11 @@
-from os.path    \
+from ssp.adhoc      \
     import      \
-    realpath,   \
+    listdir,    \
     dirname,    \
     pardir,     \
+    realpath,   \
     join,       \
     isdir
-
-from os \
-    import listdir
 
 location_of_script: str | None = None
 location_of_repository: str | None = None
