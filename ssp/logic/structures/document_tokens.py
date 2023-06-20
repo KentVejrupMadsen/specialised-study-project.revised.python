@@ -7,9 +7,9 @@ from ssp.logic.structures \
 
 class DocumentToken(Word):
     def __init(
-            self,
-            word: str,
-            instances: int = get_one()
+        self,
+        word: str,
+        instances: int = get_one()
     ):
         super().__init__(
             word=word,

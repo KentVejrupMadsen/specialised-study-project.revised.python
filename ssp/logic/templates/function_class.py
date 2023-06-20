@@ -1,13 +1,14 @@
 #!/usr/bin/env python
 from ssp.logic.templates \
-    import ABC
+    import ABC, abstractmethod
 
 
 class FunctionClass(ABC):
     def __init__(self):
         self.result = None
 
-    def execute(self):
+    @abstractmethod
+    def compute(self) -> None:
         pass
 
     def get_result(self) -> None | float:
