@@ -8,7 +8,7 @@ from ssp.variables.labels   \
 from ssp.variables.environments \
     import \
     get_environment_dataset_location, \
-    get_environment_labels
+    get_environment_dataset_labels
 
 from ssp.variables.constants \
     import      \

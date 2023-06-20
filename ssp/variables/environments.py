@@ -15,7 +15,7 @@ def set_environment_dataset_location(
     environment_dataset_location = value
 
 
-def get_environment_labels() -> str:
+def get_environment_dataset_labels() -> str:
     global environment_labels
     return environment_labels
 

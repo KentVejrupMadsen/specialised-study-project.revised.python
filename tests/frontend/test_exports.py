@@ -8,9 +8,15 @@ def test_environment() -> None:
 
 def test_environment_labels() -> None:
     singleton = get_export_singleton()
-    singleton.get_labels()
+    print(
+        'labels: ',
+        singleton.get_labels()
+    )
 
 
 def test_environment_dataset_location() -> None:
     singleton = get_export_singleton()
-    singleton.get_dataset_location()
+    print(
+        'dataset location: ',
+        singleton.get_dataset_location()
+    )
