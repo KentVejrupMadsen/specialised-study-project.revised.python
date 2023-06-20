@@ -6,14 +6,18 @@ from ssp.variables \
     is_int_zero
 
 
-def is_instance_of_counter_object(value) -> bool:
+def is_instance_of_counter_object(
+        value
+) -> bool:
     return isinstance(
         value,
         CounterObject
     )
 
 
-def is_instance_of_integer(value) -> bool:
+def is_instance_of_integer(
+        value
+) -> bool:
     return isinstance(
         value,
         int
@@ -160,6 +164,11 @@ class CounterObject:
 
     def is_zero(self) -> bool:
         return is_int_zero(
+            self.get_value()
+        )
+
+    def is_not_zero(self) -> bool:
+        return not is_int_zero(
             self.get_value()
         )
 
