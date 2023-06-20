@@ -2,7 +2,7 @@ from ssp.frontend.environment \
     import Environment
 
 
-def test_env():
+def test_env() -> None:
     env = Environment()
 
     print({

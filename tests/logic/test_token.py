@@ -1,9 +1,12 @@
 from tests \
     import Token
 
+from tests.strings \
+    import random_text
+
 
 def test_token() -> None:
-    test_token = Token('lerom ipsum merara')
+    test_token = Token(random_text(40))
 
     print()
     print(
@@ -14,7 +17,7 @@ def test_token() -> None:
 
 
 def test_comparison_true() -> None:
-    test_token: str = 'sierra'
+    test_token: str = random_text(40)
 
     test_a = Token(test_token)
     test_b = Token(test_token)

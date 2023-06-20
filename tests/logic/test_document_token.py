@@ -1,4 +1,5 @@
-from tests import DocumentToken
+from tests \
+    import DocumentToken
 
 
 def test_create_doc_token() -> None:
