@@ -1,20 +1,16 @@
 #!/usr/bin/env python
-from ssp.dataset \
-    import Category
-
-from os \
-    import walk
-
-from os.path \
+from ssp.adhoc \
     import \
+    walk, \
     isdir, \
-    join
+    join, \
+    listdir
 
-from os \
-    import listdir
-
-from ssp.dataset \
-    import CorpusPreprocessor
+from ssp.logic.dataset \
+    import \
+    CorpusPreprocessor, \
+    raise_set_directory_does_not_exist, \
+    Category
 
 
 class CorpusSet:
@@ -27,9 +23,7 @@ class CorpusSet:
         self.location: str = location
 
         if not self.exist_location_path():
-            raise Exception(
-                'set directory does not exist'
-            )
+            raise_set_directory_does_not_exist()
 
         self.processor = corpus_processor
 

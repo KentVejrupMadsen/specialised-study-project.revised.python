@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from abc \
+from ssp.logic.templates \
     import ABC
 
 

@@ -37,22 +37,21 @@ def test_search_for_token_in_factory() -> None:
     factory = get_singleton_token_factory()
     test_label = 'test_search'
 
-    factory.insert(
-        test_label
-    )
-    word = factory.search_for_token(
+    word = factory.insert(
         test_label
     )
 
-    assert str(word) == test_label
+    search = factory.search_for_token(test_label)
+
+    assert str(search) == test_label
 
 
 def test_list_dump() -> None:
     print('\nList Dump')
 
-    list = get_singleton_token_factory().get_corpus()
+    corpus_list = get_singleton_token_factory().get_corpus()
 
-    for e in list:
+    for e in corpus_list:
         print(
             '  -- token dump: ',
             str(e)

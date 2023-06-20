@@ -2,18 +2,46 @@
 from ssp.variables \
     import get_zero
 
-from ssp.logic.structures.factories \
+from ssp.logic.templates \
+    import Factory
+
+from ssp.logic.structures.tokens.factories \
     import TokenWord
 
 
-class TokenFactory:
+class TokenFactory(Factory):
     def __init__(self):
+        super().__init__()
+
         self.corpus: list | None = None
+        self.size_of_corpus: int = get_zero()
+
+    def __del__(self):
+        del \
+            self.corpus, \
+            self.size_of_corpus
+
+    def get_size_of_corpus(self) -> int:
+        return self.size_of_corpus
+
+    def set_size_of_corpus(
+            self,
+            value: int
+    ) -> None:
+        self.size_of_corpus = value
+
+    def calculate_size_of_corpus(self) -> None:
+        self.set_size_of_corpus(
+            len(
+                self.corpus
+            )
+        )
 
     def retrieve_at(
             self,
             index: int
     ) -> TokenWord:
+
         return self.corpus[index]
 
     def corpus_range(self):
@@ -37,6 +65,8 @@ class TokenFactory:
             created_object
         )
 
+        self.calculate_size_of_corpus()
+
         return created_object
 
     def search_for_token(
@@ -49,10 +79,16 @@ class TokenFactory:
             return None
 
         for index in self.corpus_range():
-            token: TokenWord = self.retrieve_at(index)
+            token: TokenWord = self.retrieve_at(
+                index
+            )
 
-            if str(token) == search_value:
+            if token.same_as_by_string(
+                    search_value
+            ):
                 return token
+
+        return None
 
     def delete(
             self,
@@ -66,9 +102,13 @@ class TokenFactory:
         delete_position: int | None = None
 
         for index in self.corpus_range():
-            token: TokenWord = self.retrieve_at(index)
+            currently_selected_token: TokenWord = self.retrieve_at(
+                index
+            )
 
-            if str(token) == token_value:
+            if currently_selected_token.same_as_by_string(
+                    token_value
+            ):
                 delete_position = index
                 break
 
@@ -76,6 +116,7 @@ class TokenFactory:
             self.corpus.pop(
                 delete_position
             )
+            self.calculate_size_of_corpus()
 
     def is_corpus_empty(self) -> bool:
         return \
@@ -102,10 +143,7 @@ class TokenFactory:
 
     def __len__(self):
         self.__initialise__()
-
-        return len(
-            self.corpus
-        )
+        return self.size_of_corpus
 
     def __initialise__(self):
         if self.is_corpus_none():

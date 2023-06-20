@@ -1,15 +1,14 @@
 #!/usr/bin/env python
-from os.path \
+from ssp.adhoc \
     import isfile
-
-from ssp.dataset \
-    import Document
 
 from ssp.variables \
     import is_int_zero
 
-from ssp.dataset \
-    import CorpusPreprocessor
+from ssp.logic.dataset \
+    import \
+    CorpusPreprocessor, \
+    Document
 
 
 class Category:

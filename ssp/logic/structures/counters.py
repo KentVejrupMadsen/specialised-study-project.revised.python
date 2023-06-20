@@ -2,7 +2,8 @@
 from ssp.variables \
     import \
     get_zero,\
-    get_one
+    get_one, \
+    is_int_zero
 
 
 class CounterObject:
@@ -73,7 +74,9 @@ class CounterObject:
         )
 
     def is_zero(self) -> bool:
-        return self.get_value() == get_zero()
+        return is_int_zero(
+            self.get_value()
+        )
 
     def __str__(self) -> str:
         return str(
