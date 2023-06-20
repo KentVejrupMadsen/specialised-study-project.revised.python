@@ -1,12 +1,10 @@
 #!/usr/bin/env python
 # Import of packages
-from os \
-    import environ
-
 from tests \
     import \
     get_environment_dataset_location, \
-    DataSetCorpus
+    DataSetCorpus, \
+    environ
 
 
 # Global Variables

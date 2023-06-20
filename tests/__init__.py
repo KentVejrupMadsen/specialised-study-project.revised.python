@@ -1,4 +1,7 @@
 #!/usr/bin/env python
+from ssp.adhoc \
+    import environ
+
 from ssp.logic.structures \
     import CounterObject
 
