@@ -1,7 +1,11 @@
 from tests \
-    import get_location_of_script, get_location_of_repository, get_location_of_dataset
+    import \
+    get_location_of_script, \
+    get_location_of_repository, \
+    get_location_of_dataset
 
-from os.path import isdir
+from os.path \
+    import isdir
 
 
 def test_path() -> None:
