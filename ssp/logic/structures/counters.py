@@ -109,6 +109,15 @@ class CounterObject:
 
         return False
 
+    def __str__(self) -> str:
+        return str(
+            self.get_value()
+        )
+
+    def __int__(self) -> int:
+        return self.get_value()
+
+
     def reset(self):
         self.set_value(
             get_zero()
@@ -171,11 +180,3 @@ class CounterObject:
         return not is_int_zero(
             self.get_value()
         )
-
-    def __str__(self) -> str:
-        return str(
-            self.get_value()
-        )
-
-    def __int__(self) -> int:
-        return self.get_value()
