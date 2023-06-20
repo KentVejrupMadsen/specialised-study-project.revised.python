@@ -1,7 +1,4 @@
 #!/usr/bin/env python
-from ssp.dataset \
-    import Category
-
 from os \
     import walk
 
@@ -13,11 +10,11 @@ from os.path \
 from os \
     import listdir
 
-from ssp.dataset \
-    import CorpusPreprocessor
-
-from ssp.dataset\
-    import raise_set_directory_does_not_exist
+from ssp.logic.dataset \
+    import \
+    CorpusPreprocessor, \
+    raise_set_directory_does_not_exist, \
+    Category
 
 
 class CorpusSet:

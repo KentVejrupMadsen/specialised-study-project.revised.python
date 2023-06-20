@@ -18,12 +18,11 @@ from ssp.logic.tokens \
     CategoryToken, \
     DocumentToken
 
-from ssp.dataset.corpus \
+from ssp.logic.dataset \
     import DataSetCorpus
 
 from ssp.variables \
     import get_environment_dataset_location
-
 
 from ssp \
     import on_entry_call

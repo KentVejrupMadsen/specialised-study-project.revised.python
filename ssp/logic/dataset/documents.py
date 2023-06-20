@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from ssp.dataset \
+from ssp.logic.dataset \
     import CorpusPreprocessor
 
 from ssp.logic.tokens \

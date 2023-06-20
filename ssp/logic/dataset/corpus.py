@@ -4,7 +4,7 @@ from os.path \
     isdir, \
     join
 
-from ssp.dataset \
+from ssp.logic.dataset \
     import CorpusSet
 
 from ssp.variables \
@@ -12,7 +12,7 @@ from ssp.variables \
     get_training_label, \
     get_test_label
 
-from ssp.dataset \
+from ssp.logic.dataset \
     import \
     CorpusPreprocessor, \
     raise_dataset_directory_does_not_exist
