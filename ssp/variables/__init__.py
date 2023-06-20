@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-from ssp.variables.labels \
-    import              \
-    get_training_label, \
-    get_test_label,     \
+from ssp.variables.labels   \
+    import                  \
+    get_training_label,     \
+    get_test_label,         \
     get_entry_main_label
 
 from ssp.variables.environments \
@@ -22,6 +22,6 @@ from ssp.variables.constants \
     get_nine
 
 
-from ssp.variables.states \
-    import \
+from ssp.variables.states   \
+    import                  \
     is_int_zero
