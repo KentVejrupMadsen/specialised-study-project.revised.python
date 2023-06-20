@@ -117,7 +117,6 @@ class CounterObject:
     def __int__(self) -> int:
         return self.get_value()
 
-
     def reset(self):
         self.set_value(
             get_zero()
