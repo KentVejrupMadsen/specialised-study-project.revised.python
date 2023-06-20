@@ -1,4 +1,9 @@
 #!/usr/bin/env python
+from ssp.dataset.exceptions \
+    import \
+    raise_set_directory_does_not_exist, \
+    raise_dataset_directory_does_not_exist
+
 from ssp.dataset.preprocessor \
     import CorpusPreprocessor
 

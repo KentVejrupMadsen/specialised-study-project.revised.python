@@ -16,6 +16,9 @@ from os \
 from ssp.dataset \
     import CorpusPreprocessor
 
+from ssp.dataset\
+    import raise_set_directory_does_not_exist
+
 
 class CorpusSet:
     def __init__(
@@ -27,9 +30,7 @@ class CorpusSet:
         self.location: str = location
 
         if not self.exist_location_path():
-            raise Exception(
-                'set directory does not exist'
-            )
+            raise_set_directory_does_not_exist()
 
         self.processor = corpus_processor
 

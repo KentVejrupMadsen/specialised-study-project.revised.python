@@ -13,7 +13,9 @@ from ssp.variables \
     get_test_label
 
 from ssp.dataset \
-    import CorpusPreprocessor
+    import \
+    CorpusPreprocessor, \
+    raise_dataset_directory_does_not_exist
 
 
 class DataSetCorpus:
@@ -24,7 +26,7 @@ class DataSetCorpus:
         self.path_to_dataset: str = dataset_location
 
         if not self.exist_dataset_location():
-            raise Exception('dataset location path does not exist')
+            raise_dataset_directory_does_not_exist()
 
         self.preprocessor = CorpusPreprocessor()
 
