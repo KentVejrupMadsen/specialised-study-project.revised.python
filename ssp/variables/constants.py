@@ -58,6 +58,7 @@ def get_eight() -> int:
     global eight
     return eight
 
+
 def get_nine() -> int:
     global nine
     return nine
