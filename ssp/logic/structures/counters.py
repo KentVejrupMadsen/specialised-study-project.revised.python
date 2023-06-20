@@ -87,27 +87,29 @@ class CounterObject:
             self,
             other
     ) -> bool:
+        r_val: bool = False
+
         if is_instance_of_counter_object(other):
             o_co: CounterObject = other
-            rVal = bool(
+            r_val = bool(
                 self.get_value()
                 ==
                 o_co.get_value()
             )
 
-            return rVal
+            return r_val
 
         if is_instance_of_integer(other):
             o_int: int = other
-            rVal = bool(
+            r_val = bool(
                 self.get_value()
                 ==
                 o_int
             )
 
-            return rVal
+            return r_val
 
-        return False
+        return r_val
 
     def __str__(self) -> str:
         return str(
