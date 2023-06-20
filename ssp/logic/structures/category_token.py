@@ -15,3 +15,9 @@ class CategoryToken(Word):
             word=word,
             instances=instances
         )
+
+    def __del__(self):
+        del                 \
+            self.word,      \
+            self.counter,   \
+            self.hash

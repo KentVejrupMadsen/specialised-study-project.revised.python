@@ -16,3 +16,9 @@ class DocumentToken(Word):
             instances=instances
         )
 
+    def __del__(self):
+        del                 \
+            self.word,      \
+            self.counter,   \
+            self.hash
+
