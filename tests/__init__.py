@@ -22,6 +22,6 @@ from ssp.variables  \
     import get_environment_dataset_location
 
 from ssp    \
-    import on_entry_call
+    import on_entry_call, get_location_of_script
 
 
