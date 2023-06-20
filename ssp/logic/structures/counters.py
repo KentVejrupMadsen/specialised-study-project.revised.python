@@ -6,6 +6,20 @@ from ssp.variables \
     is_int_zero
 
 
+def is_instance_of_counter_object(value) -> bool:
+    return isinstance(
+        value,
+        CounterObject
+    )
+
+
+def is_instance_of_integer(value) -> bool:
+    return isinstance(
+        value,
+        int
+    )
+
+
 class CounterObject:
     def __init__(
             self,
@@ -19,6 +33,33 @@ class CounterObject:
         del \
             self.value, \
             self.move
+
+    def __add__(
+            self,
+            other
+    ):
+        if is_instance_of_counter_object(
+            other
+        ):
+            o_co: CounterObject = other
+            self.increase(
+                o_co.get_value()
+            )
+
+        if is_instance_of_integer(
+            other
+        ):
+            o_int: int = other
+            self.increase(
+                o_int
+            )
+
+        return self
+
+    def __eq__(self, other) -> bool:
+        rVal: bool = False
+
+        return rVal
 
     def reset(self):
         self.set_value(
