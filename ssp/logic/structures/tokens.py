@@ -1,4 +1,10 @@
-class Token:
+from abc            \
+    import          \
+    ABC,            \
+    abstractmethod
+
+
+class Token(ABC):
     def __init__(
         self,
         value: str
@@ -44,6 +50,13 @@ class Token:
     ):
         result: bool = False
 
+        if isinstance(other, Token):
+            result: bool = self.get_hash() == other.get_hash()
+
+            if result:
+                result = self.get_word() == other.get_word()
+                return result
+
         return result
 
     def __str__(self):
@@ -51,3 +64,8 @@ class Token:
 
     def __hash__(self) -> int:
         return self.get_hash()
+
+    def __int__(self):
+        return int(
+            self.word
+        )

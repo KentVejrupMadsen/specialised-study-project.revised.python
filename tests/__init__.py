@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 from ssp.logic.structures \
-    import CounterObject
+    import \
+    CounterObject, \
+    Token
 
 from ssp.variables  \
     import          \
