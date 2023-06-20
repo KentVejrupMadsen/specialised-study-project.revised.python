@@ -21,7 +21,7 @@ def test_work_length() -> None:
 
 
 def test_document_label() -> None:
-    test_label = 'abc_test'
+    test_label: str = 'abc_test'
     word = DocumentToken(test_label)
 
     assert str(word) == test_label
