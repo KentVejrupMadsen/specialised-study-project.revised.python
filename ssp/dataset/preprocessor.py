@@ -9,7 +9,7 @@ from ssp.variables \
     get_zero, \
     get_one
 
-from ssp.logic.structures.factories \
+from ssp.logic.tokens.factories \
     import \
     get_singleton_token_factory, \
     TokenFactory
