@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from ssp.logic.algorithms.function_class \
+from ssp.logic.templates \
     import FunctionClass
 
 from ssp.logic.algorithms.smoothing \

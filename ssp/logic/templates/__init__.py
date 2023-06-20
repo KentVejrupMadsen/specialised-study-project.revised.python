@@ -1,2 +1,2 @@
-from ssp.logic.algorithms \
+from ssp.logic.templates.function_class \
     import FunctionClass
