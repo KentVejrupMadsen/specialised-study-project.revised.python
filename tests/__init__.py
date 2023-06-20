@@ -18,20 +18,6 @@ from ssp.variables  \
     get_eight,      \
     get_nine
 
-from ssp.logic.structures.tokens.factories  \
-    import                                  \
-    get_singleton_token_factory,            \
-    TokenFactory
-
-from ssp.logic.structures.tokens    \
-    import                          \
-    TokenWord,                      \
-    CategoryToken,                  \
-    DocumentToken
-
-from ssp.logic.dataset  \
-    import DataSetCorpus
-
 from ssp.variables  \
     import get_environment_dataset_location
 
