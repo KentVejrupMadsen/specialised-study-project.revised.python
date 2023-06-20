@@ -53,3 +53,12 @@ def test_counter_substraction_by_integer() -> None:
     result = counter - get_one()
 
     assert int(result) == get_one()
+
+
+def test_counter_substraction_by_counter_object() -> None:
+    counter_a = CounterObject(get_two())
+    counter_b = CounterObject(get_two())
+
+    result = counter_a - counter_a
+
+    assert int(result) == get_zero()
