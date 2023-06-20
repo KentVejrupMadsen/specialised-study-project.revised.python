@@ -2,8 +2,10 @@
 from ssp.logic.structures \
     import CounterObject
 
-from ssp.frontend.environments \
-    import EnvironmentExports, get_export_singleton
+from ssp.frontend.environments  \
+    import                      \
+    EnvironmentExports,         \
+    get_export_singleton
 
 from ssp.variables  \
     import          \
@@ -21,7 +23,11 @@ from ssp.variables  \
 from ssp.variables  \
     import get_environment_dataset_location
 
-from ssp    \
-    import on_entry_call, get_location_of_script
+from ssp                        \
+    import                      \
+    on_entry_call,              \
+    get_location_of_script,     \
+    get_location_of_repository, \
+    get_location_of_dataset
 
 

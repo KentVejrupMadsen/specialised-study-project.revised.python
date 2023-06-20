@@ -7,6 +7,7 @@ from os.path    \
 
 location_of_script: str | None = None
 location_of_repository: str | None = None
+location_of_dataset: str | None = None
 
 
 def get_location_of_script() -> str:
@@ -54,3 +55,36 @@ def set_location_of_repository(
 ) -> None:
     global location_of_repository
     location_of_repository = value
+
+
+def get_location_of_dataset() -> str:
+    global location_of_dataset
+
+    if location_of_dataset is None:
+        location_to_dataset = join(
+            get_location_of_repository(),
+            'dataset'
+        )
+
+        location_to_dataset = join(
+            location_to_dataset,
+            'Reuters21578'
+        )
+
+        location_to_dataset = join(
+            location_to_dataset,
+            'dataset'
+        )
+
+        set_location_of_dataset(
+            location_to_dataset
+        )
+
+    return location_of_dataset
+
+
+def set_location_of_dataset(
+        value: str
+) -> None:
+    global location_of_dataset
+    location_of_dataset = value
