@@ -5,7 +5,8 @@ from ssp.variables \
 from ssp.logic.dataset \
     import \
     CorpusPreprocessor, \
-    Document
+    Document, \
+    isfile
 
 
 class Category:

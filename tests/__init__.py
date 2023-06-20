@@ -8,7 +8,9 @@ from ssp.logic.structures \
 from ssp.variables \
     import \
     get_zero, \
-    get_one
+    get_one, \
+    get_two,\
+    get_four
 
 from ssp.logic.structures.tokens.factories \
     import \

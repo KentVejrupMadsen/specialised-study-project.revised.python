@@ -1,18 +1,23 @@
 #!/usr/bin/env python
 # Import of packages
-from tests \
-    import \
-    CounterObject, \
-    get_zero, \
-    get_one
+from tests          \
+    import          \
+    CounterObject,  \
+    get_zero,       \
+    get_one,        \
+    get_two,        \
+    get_four
 
 
 # Test
 def test_get() -> None:
-    cobj = CounterObject(4, get_one())
+    cobj = CounterObject(
+        get_four(),
+        get_one()
+    )
 
     assert \
-        int(cobj) == 4 \
+        int(cobj) == get_four() \
         and \
         cobj.get_move_size() == get_one()
 
@@ -45,8 +50,8 @@ def test_counter_decrement() -> None:
 def test_counter_decrease() -> None:
     cobj = CounterObject()
 
-    cobj.decrease(2)
-    cobj.decrease(2)
+    cobj.decrease(get_two())
+    cobj.decrease(get_two())
 
     assert int(cobj) == -4
 
