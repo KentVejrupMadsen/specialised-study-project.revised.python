@@ -77,12 +77,12 @@ class CounterObject:
                 o_int
             )
 
+        return self
+
     def __eq__(
             self,
             other
     ) -> bool:
-        rVal: bool = False
-
         if is_instance_of_counter_object(other):
             o_co: CounterObject = other
             rVal = bool(
@@ -90,6 +90,8 @@ class CounterObject:
                 ==
                 o_co.get_value()
             )
+
+            return rVal
 
         if is_instance_of_integer(other):
             o_int: int = other
@@ -99,7 +101,9 @@ class CounterObject:
                 o_int
             )
 
-        return rVal
+            return rVal
+
+        return False
 
     def reset(self):
         self.set_value(

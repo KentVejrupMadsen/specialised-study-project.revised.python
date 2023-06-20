@@ -41,8 +41,15 @@ def test_counter_equal_to_counter_object() -> None:
     assert counter_a == counter_b
 
 
-def test_counter_equal_to_inter() -> None:
+def test_counter_equal_to_integer() -> None:
     counter_a = CounterObject(
         get_one()
     )
     assert counter_a == get_one()
+
+
+def test_counter_substraction_by_integer() -> None:
+    counter = CounterObject(get_two())
+    result = counter - get_one()
+
+    assert int(result) == get_one()
