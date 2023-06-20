@@ -2,29 +2,27 @@
 from ssp.logic.structures \
     import CounterObject
 
-from ssp.variables \
-    import \
-    get_zero, \
-    get_one
+from ssp.variables  \
+    import          \
+    get_zero,       \
+    get_one,        \
+    get_two,        \
+    get_three,      \
+    get_four,       \
+    get_five,       \
+    get_six,        \
+    get_seven,      \
+    get_eight,      \
+    get_nine
 
-from ssp.logic.tokens \
-    import \
-    TokenWord, \
-    CategoryToken, \
-    DocumentToken
-
-from ssp.logic.structures.factories \
-    import \
-    get_singleton_token_factory
-
-from ssp.dataset.corpus \
-    import DataSetCorpus
-
-from ssp.variables \
+from ssp.variables  \
     import get_environment_dataset_location
 
-
-from ssp \
-    import on_entry_call
+from ssp                        \
+    import                      \
+    on_entry_call,              \
+    get_location_of_script,     \
+    get_location_of_repository, \
+    get_location_of_dataset
 
 
