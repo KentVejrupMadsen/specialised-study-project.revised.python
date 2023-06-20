@@ -6,3 +6,6 @@ from ssp.logic.templates \
 class LaplaceSmoothing(FunctionClass):
     def __init__(self):
         super().__init__()
+
+    def compute(self) -> None:
+        pass
