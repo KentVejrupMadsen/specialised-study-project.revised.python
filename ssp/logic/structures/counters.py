@@ -33,6 +33,28 @@ class CounterObject:
         self.value: int = start_value
         self.move: int = move_by
 
+    def __invert__(self):
+        inverse_counter = CounterObject(
+            start_value=-self.get_value(),
+            move_by=-self.get_move_size()
+        )
+
+        return inverse_counter
+
+    def __lt__(
+            self,
+            other
+    ) -> bool:
+        compare_to: CounterObject = other
+        return self.get_value() < compare_to.get_value()
+
+    def __gt__(
+            self,
+            other
+    ) -> bool:
+        compare_to: CounterObject = other
+        return self.get_value() > compare_to.get_value()
+
     def __del__(self):
         del \
             self.value, \
