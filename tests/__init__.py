@@ -5,31 +5,37 @@ from ssp.adhoc \
 from ssp.logic.structures \
     import CounterObject
 
-from ssp.variables \
-    import \
-    get_zero, \
-    get_one, \
-    get_two,\
-    get_four
+from ssp.variables  \
+    import          \
+    get_zero,       \
+    get_one,        \
+    get_two,        \
+    get_three,      \
+    get_four,       \
+    get_five,       \
+    get_six,        \
+    get_seven,      \
+    get_eight,      \
+    get_nine
 
-from ssp.logic.structures.tokens.factories \
-    import \
-    get_singleton_token_factory, \
+from ssp.logic.structures.tokens.factories  \
+    import                                  \
+    get_singleton_token_factory,            \
     TokenFactory
 
-from ssp.logic.structures.tokens \
-    import \
-    TokenWord, \
-    CategoryToken, \
+from ssp.logic.structures.tokens    \
+    import                          \
+    TokenWord,                      \
+    CategoryToken,                  \
     DocumentToken
 
-from ssp.logic.dataset \
+from ssp.logic.dataset  \
     import DataSetCorpus
 
-from ssp.variables \
+from ssp.variables  \
     import get_environment_dataset_location
 
-from ssp \
+from ssp    \
     import on_entry_call
 
 
