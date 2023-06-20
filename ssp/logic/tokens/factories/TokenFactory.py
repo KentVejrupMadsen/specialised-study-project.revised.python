@@ -2,14 +2,19 @@
 from ssp.variables \
     import get_zero
 
+from ssp.logic.templates \
+    import Factory
+
 from ssp.logic.tokens.factories \
     import TokenWord
 
 
-class TokenFactory:
+class TokenFactory(Factory):
     def __init__(self):
+        super().__init__()
+
         self.corpus: list | None = None
-        self.size_of_corpus: int = 0
+        self.size_of_corpus: int = get_zero()
 
     def __del__(self):
         del \
