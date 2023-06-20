@@ -64,7 +64,7 @@ class CounterObject:
                 other
         ):
             o_co: CounterObject = other
-            self.increase(
+            self.decrease(
                 o_co.get_value()
             )
 
