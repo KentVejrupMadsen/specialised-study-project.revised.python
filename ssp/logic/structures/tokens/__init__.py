@@ -1,9 +1,9 @@
 #!/usr/bin/env python
-from ssp.logic.tokens.tokens \
+from ssp.logic.structures.tokens.tokens \
     import TokenWord
 
-from ssp.logic.tokens.documents \
+from ssp.logic.structures.tokens.documents \
     import DocumentToken
 
-from ssp.logic.tokens.categories \
+from ssp.logic.structures.tokens.categories \
     import CategoryToken

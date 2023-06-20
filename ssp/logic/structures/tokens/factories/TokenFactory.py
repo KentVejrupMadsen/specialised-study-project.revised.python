@@ -5,7 +5,7 @@ from ssp.variables \
 from ssp.logic.templates \
     import Factory
 
-from ssp.logic.tokens.factories \
+from ssp.logic.structures.tokens.factories \
     import TokenWord
 
 

@@ -1,4 +1,4 @@
-from ssp.logic.tokens \
+from ssp.logic.structures.tokens \
     import \
     DocumentToken, \
     TokenWord
@@ -9,7 +9,7 @@ from ssp.variables \
     get_zero, \
     get_one
 
-from ssp.logic.tokens.factories \
+from ssp.logic.structures.tokens.factories \
     import \
     get_singleton_token_factory, \
     TokenFactory

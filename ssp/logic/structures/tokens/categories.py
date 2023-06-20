@@ -2,7 +2,7 @@
 from ssp.logic.structures \
     import CounterObject
 
-from ssp.logic.tokens \
+from ssp.logic.structures.tokens \
     import TokenWord
 
 

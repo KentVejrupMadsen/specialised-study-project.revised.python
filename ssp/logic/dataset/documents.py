@@ -2,7 +2,7 @@
 from ssp.logic.dataset \
     import CorpusPreprocessor
 
-from ssp.logic.tokens \
+from ssp.logic.structures.tokens \
     import DocumentToken
 
 
