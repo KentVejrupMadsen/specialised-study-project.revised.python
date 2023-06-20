@@ -6,7 +6,9 @@ from ssp.variables.labels   \
     get_entry_main_label
 
 from ssp.variables.environments \
-    import get_environment_dataset_location
+    import \
+    get_environment_dataset_location, \
+    get_environment_dataset_labels
 
 from ssp.variables.constants \
     import      \

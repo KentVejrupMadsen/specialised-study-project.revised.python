@@ -1,12 +1,11 @@
 #!/usr/bin/env python
-from ssp \
-    import get_entry_main_label
+from ssp                    \
+    import                  \
+    get_entry_main_label,   \
+    Application
 
-from ssp.frontend \
-    import Application
 
-
-def on_entry_call():
+def on_entry_call() -> None:
     app = Application()
     app.run()
 

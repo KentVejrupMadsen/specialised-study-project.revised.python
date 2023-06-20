@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from ssp.frontend.environment \
+from ssp.frontend \
     import Environment
 
 

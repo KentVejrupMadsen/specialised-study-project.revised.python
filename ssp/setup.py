@@ -1,13 +1,17 @@
-from os.path    \
+from ssp.adhoc      \
     import      \
-    realpath,   \
+    listdir,    \
     dirname,    \
     pardir,     \
-    join
+    realpath,   \
+    join,       \
+    isdir
 
 location_of_script: str | None = None
 location_of_repository: str | None = None
 location_of_dataset: str | None = None
+
+dataset_categories: list | None = None
 
 
 def get_location_of_script() -> str:
@@ -88,3 +92,43 @@ def set_location_of_dataset(
 ) -> None:
     global location_of_dataset
     location_of_dataset = value
+
+
+def get_dataset_categories() -> list | None:
+    global dataset_categories
+
+    if dataset_categories is None:
+        setup_dataset_categories()
+
+    return dataset_categories
+
+
+def set_dataset_categories(
+        value: list
+) -> None:
+    global dataset_categories
+    dataset_categories = value
+
+
+def setup_dataset_categories() -> None:
+    global dataset_categories
+
+    set_dataset_categories(
+        list()
+    )
+
+    find = listdir(
+        get_location_of_dataset()
+    )
+
+    for found_entry in find:
+        full_path = join(
+            get_location_of_dataset(),
+            found_entry
+        )
+
+        if isdir(full_path):
+            get_dataset_categories().append(
+                found_entry
+            )
+
