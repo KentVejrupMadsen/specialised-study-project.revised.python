@@ -9,5 +9,8 @@ from ssp.setup                  \
     get_location_of_dataset,    \
     get_dataset_categories
 
+from ssp.frontend \
+    import Application
+
 from ssp.entry \
     import on_entry_call
