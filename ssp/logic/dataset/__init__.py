@@ -1,4 +1,12 @@
 #!/usr/bin/env python
+from ssp.adhoc \
+    import \
+    isfile, \
+    isdir, \
+    join, \
+    walk, \
+    listdir
+
 from ssp.logic.dataset.exceptions \
     import \
     raise_set_directory_does_not_exist, \
@@ -19,10 +27,3 @@ from ssp.logic.dataset.corpus_set \
 from ssp.logic.dataset.corpus \
     import DataSetCorpus
 
-from ssp.adhoc \
-    import \
-    isfile, \
-    isdir, \
-    join, \
-    walk, \
-    listdir
