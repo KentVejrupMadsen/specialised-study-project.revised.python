@@ -56,8 +56,48 @@ class CounterObject:
 
         return self
 
-    def __eq__(self, other) -> bool:
+    def __sub__(
+            self,
+            other
+    ):
+        if is_instance_of_counter_object(
+                other
+        ):
+            o_co: CounterObject = other
+            self.increase(
+                o_co.get_value()
+            )
+
+        if is_instance_of_integer(
+                other
+        ):
+            o_int: int = other
+
+            self.decrease(
+                o_int
+            )
+
+    def __eq__(
+            self,
+            other
+    ) -> bool:
         rVal: bool = False
+
+        if is_instance_of_counter_object(other):
+            o_co: CounterObject = other
+            rVal = bool(
+                self.get_value()
+                ==
+                o_co.get_value()
+            )
+
+        if is_instance_of_integer(other):
+            o_int: int = other
+            rVal = bool(
+                self.get_value()
+                ==
+                o_int
+            )
 
         return rVal
 

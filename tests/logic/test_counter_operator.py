@@ -28,3 +28,21 @@ def test_counter_add_counter_object() -> None:
     result = counter_a + counter_b
 
     assert int(result) == get_two()
+
+
+def test_counter_equal_to_counter_object() -> None:
+    counter_a = CounterObject(
+        get_two()
+    )
+    counter_b = CounterObject(
+        get_two()
+    )
+
+    assert counter_a == counter_b
+
+
+def test_counter_equal_to_inter() -> None:
+    counter_a = CounterObject(
+        get_one()
+    )
+    assert counter_a == get_one()
