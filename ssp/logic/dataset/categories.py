@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from os.path \
+from ssp.adhoc \
     import isfile
 
 from ssp.variables \

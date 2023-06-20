@@ -1,14 +1,10 @@
 #!/usr/bin/env python
-from os \
-    import walk
-
-from os.path \
+from ssp.adhoc \
     import \
+    walk, \
     isdir, \
-    join
-
-from os \
-    import listdir
+    join, \
+    listdir
 
 from ssp.logic.dataset \
     import \
