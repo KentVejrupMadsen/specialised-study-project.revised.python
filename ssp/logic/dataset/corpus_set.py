@@ -1,16 +1,13 @@
 #!/usr/bin/env python
-from ssp.adhoc \
-    import \
-    walk, \
-    isdir, \
-    join, \
-    listdir
-
 from ssp.logic.dataset \
     import \
     CorpusPreprocessor, \
     raise_set_directory_does_not_exist, \
-    Category
+    Category, \
+    isdir, \
+    listdir, \
+    join,\
+    walk
 
 
 class CorpusSet:

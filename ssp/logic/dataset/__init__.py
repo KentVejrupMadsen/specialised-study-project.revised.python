@@ -18,3 +18,11 @@ from ssp.logic.dataset.corpus_set \
 
 from ssp.logic.dataset.corpus \
     import DataSetCorpus
+
+from ssp.adhoc \
+    import \
+    isfile, \
+    isdir, \
+    join, \
+    walk, \
+    listdir

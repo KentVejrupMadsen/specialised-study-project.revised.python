@@ -1,21 +1,17 @@
 #!/usr/bin/env python
-from ssp.adhoc\
+from ssp.logic.dataset \
     import \
+    CorpusSet, \
+    CorpusPreprocessor,\
+    raise_dataset_directory_does_not_exist, \
     isdir, \
     join
 
-from ssp.logic.dataset \
-    import CorpusSet
 
 from ssp.variables \
     import \
     get_training_label, \
     get_test_label
-
-from ssp.logic.dataset \
-    import \
-    CorpusPreprocessor, \
-    raise_dataset_directory_does_not_exist
 
 
 class DataSetCorpus:

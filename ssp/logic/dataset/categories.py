@@ -1,7 +1,4 @@
 #!/usr/bin/env python
-from ssp.adhoc \
-    import isfile
-
 from ssp.variables \
     import is_int_zero
 
