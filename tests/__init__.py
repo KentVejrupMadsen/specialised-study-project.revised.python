@@ -2,11 +2,6 @@
 from ssp.logic.structures \
     import CounterObject
 
-from ssp.frontend.environments  \
-    import                      \
-    EnvironmentExports,         \
-    get_export_singleton
-
 from ssp.variables  \
     import          \
     get_zero,       \

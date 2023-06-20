@@ -1,6 +1,3 @@
-from ssp.frontend.environments \
-    import EnvironmentExports
-
 from ssp                        \
     import                      \
     get_dataset_categories,     \
@@ -11,7 +8,6 @@ from ssp                        \
 
 class Environment:
     def __init__(self):
-        self.exports: EnvironmentExports | None = EnvironmentExports()
         self.categories: list | None = None
 
         self.path_to_dataset: str | None = None
@@ -20,7 +16,6 @@ class Environment:
 
     def __del__(self):
         del                         \
-            self.exports,           \
             self.categories,        \
             self.path_to_dataset,   \
             self.path_to_script,    \
@@ -28,14 +23,9 @@ class Environment:
 
     def get_categories(self) -> list:
         if self.categories is None:
-            categories = self.get_exports().get_labels()
-
-            if categories is None:
-                categories = get_dataset_categories()
-            else:
-                categories = categories.split(',')
-
-            self.set_categories(categories)
+            self.set_categories(
+                get_dataset_categories()
+            )
 
         return self.categories
 
@@ -46,17 +36,10 @@ class Environment:
         self.categories = value
 
     def get_path_to_dataset(self) -> str:
-        if self.get_path_to_dataset() is None:
-            env_var = self.get_exports().get_dataset_location()
-
-            if not (env_var is None):
-                self.set_path_to_dataset(
-                    env_var
-                )
-            else:
-                self.set_path_to_dataset(
-                    get_location_of_dataset()
-                )
+        if self.path_to_dataset is None:
+            self.set_path_to_dataset(
+                get_location_of_dataset()
+            )
 
         return self.path_to_dataset
 
@@ -67,6 +50,11 @@ class Environment:
         self.path_to_dataset = value
 
     def get_path_to_repository(self) -> str:
+        if self.path_to_repository is None:
+            self.set_path_to_repository(
+                get_location_of_repository()
+            )
+
         return self.path_to_repository
 
     def set_path_to_repository(
@@ -76,6 +64,11 @@ class Environment:
         self.path_to_repository = value
 
     def get_path_to_script(self) -> str:
+        if self.path_to_script is None:
+            self.set_path_to_script(
+                get_location_of_script()
+            )
+
         return self.path_to_script
 
     def set_path_to_script(
@@ -83,12 +76,3 @@ class Environment:
             value: str
     ) -> None:
         self.path_to_script = value
-
-    def get_exports(self) -> EnvironmentExports | None:
-        return self.exports
-
-    def set_exports(
-            self,
-            value: EnvironmentExports
-    ) -> None:
-        self.exports = value
