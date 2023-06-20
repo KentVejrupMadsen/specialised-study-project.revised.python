@@ -61,7 +61,7 @@ class CounterObject:
             other
     ):
         if is_instance_of_counter_object(
-                other
+            other
         ):
             o_co: CounterObject = other
             self.decrease(
@@ -69,7 +69,7 @@ class CounterObject:
             )
 
         if is_instance_of_integer(
-                other
+            other
         ):
             o_int: int = other
 
