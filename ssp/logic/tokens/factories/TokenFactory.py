@@ -2,7 +2,7 @@
 from ssp.variables \
     import get_zero
 
-from ssp.logic.structures.factories \
+from ssp.logic.tokens.factories \
     import TokenWord
 
 

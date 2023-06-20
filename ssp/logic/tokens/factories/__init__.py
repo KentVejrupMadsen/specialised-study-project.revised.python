@@ -2,9 +2,10 @@
 from ssp.logic.tokens \
     import \
     TokenWord, \
-    DocumentToken
+    DocumentToken, \
+    CategoryToken
 
-from ssp.logic.structures.factories.TokenFactory \
+from ssp.logic.tokens.factories.TokenFactory \
     import \
     get_singleton_token_factory, \
     TokenFactory
