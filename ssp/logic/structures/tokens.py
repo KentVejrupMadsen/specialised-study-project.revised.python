@@ -50,7 +50,10 @@ class Token(ABC):
     ):
         result: bool = False
 
-        if isinstance(other, Token):
+        if isinstance(
+            other,
+            Token
+        ):
             result: bool = self.get_hash() == other.get_hash()
 
             if result:
