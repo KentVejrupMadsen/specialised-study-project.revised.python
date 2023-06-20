@@ -11,5 +11,9 @@ def on_entry_call() -> None:
 
 
 # calling main function
-if __name__ == get_entry_main_label():
-    on_entry_call()
+def main() -> None:
+    if __name__ == get_entry_main_label():
+        on_entry_call()
+
+
+main()

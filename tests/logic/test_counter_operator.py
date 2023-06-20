@@ -62,3 +62,12 @@ def test_counter_substraction_by_counter_object() -> None:
     result = counter_a - counter_b
 
     assert int(result) == get_zero()
+
+
+def test_counter_inverse() -> None:
+    counter_obj = CounterObject(get_two(), get_one())
+    counter_obj = ~counter_obj
+
+    print()
+    print('value: ', counter_obj.get_value())
+    print('move: ', counter_obj.get_move_size())
