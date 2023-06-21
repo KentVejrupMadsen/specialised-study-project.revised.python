@@ -9,6 +9,29 @@ class CategoryMap:
     ):
         self.name: str = name
         self.documents: list = []
+        self.hash: int | None = None
+
+    def __hash__(self) -> int:
+        return self.get_hash()
+
+    def set_hash(
+            self,
+            value: int
+    ) -> None:
+        self.hash = value
+
+    def get_hash(self) -> int:
+        if self.hash is None:
+            self.update_hash()
+
+        return self.hash
+
+    def update_hash(self):
+        self.set_hash(
+            hash(
+                self.get_name()
+            )
+        )
 
     def __del__(self):
         del \
@@ -57,6 +80,7 @@ class CategoryMap:
             value: str
     ) -> None:
         self.name = value
+        self.update_hash()
 
     def get_documents(
             self
