@@ -45,3 +45,23 @@ def test_dataset_map_do_not_have_element() -> None:
     has: bool = dm.has_category(label)
     assert not has
 
+
+def test_dataset_map_remove() -> None:
+    dm = DataSetMap()
+    label: str = 'label_c'
+
+    dm.create('test_a')
+    dm.create('test_b')
+    dm.create(label)
+    dm.create('test_d')
+    dm.create('test_e')
+    dm.create('test_f')
+    dm.create('test_g')
+
+    dm.remove_by_name(
+        label
+    )
+
+    has: bool = dm.has_category(label)
+    assert not has
+

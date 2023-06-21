@@ -9,6 +9,9 @@ class DataSetMap:
     def __del__(self):
         del self.categories
 
+    def __len__(self):
+        return len(self.categories)
+
     def get_categories(self) -> list:
         return self.categories
 
@@ -46,15 +49,28 @@ class DataSetMap:
             index
         )
 
+    def remove_by_name(
+            self,
+            value: str
+    ):
+        index_to_remove: int | None = None
+
+        for index in self.map_range():
+            cm = self.retrieve(index)
+
+            if cm.get_name() == value:
+                index_to_remove = index
+
+        if not(index_to_remove is None):
+            self.remove(
+                index_to_remove
+            )
+
     def has_category(
             self,
             category_name: str
     ) -> bool:
-        for index in range(
-            len(
-                self.categories
-            )
-        ):
+        for index in self.map_range():
             category = self.retrieve(
                 index
             )
@@ -64,3 +80,8 @@ class DataSetMap:
                     return True
 
         return False
+
+    def map_range(self):
+        return range(
+            len(self)
+        )
