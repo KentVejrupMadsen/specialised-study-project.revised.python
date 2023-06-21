@@ -13,13 +13,14 @@ def retrieve_files() -> list:
 
     env = Environment()
 
-    for \
-        root, \
-        dirs, \
-        files \
-            in walk(
-            env.get_path_to_dataset()
-    ):
+    for                                     \
+        root,                               \
+        dirs,                               \
+        files                               \
+        in                                  \
+            walk(
+                env.get_path_to_dataset()
+            ):
         for file_path in files:
             full_path = join(
                 root,
