@@ -1,4 +1,4 @@
-from ssp.frontend.io \
+from ssp.frontend.io        \
     import CategoryMap
 
 
