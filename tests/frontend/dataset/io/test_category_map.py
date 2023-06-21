@@ -5,16 +5,15 @@ from tests.frontend.dataset.io \
 
 
 def test_category_map() -> None:
-    map = CategoryMap('test')
+    print()
+
+    cm = CategoryMap('test')
 
     for f in retrieve_files():
-        map.insert(f)
-
-    print()
-    print(str(repr(map)))
+        cm.insert(f)
 
     assert isinstance(
-        map,
+        cm,
         CategoryMap
     )
 
