@@ -14,16 +14,21 @@ class DatasetDocument:
             location
         )
 
-    def __repr__(self) -> object:
-        return {
-            'location': self.get_location(),
-            'loaded': self.is_loaded()
-        }
+    def __repr__(self) -> str:
+        return str(
+            self.as_dictionary()
+        )
 
     def __del__(self):
         del \
             self.location, \
             self.loaded
+
+    def as_dictionary(self):
+        return {
+            'location': self.get_location(),
+            'loaded': self.is_loaded()
+        }
 
     def exist_file(self):
         if not isfile(
