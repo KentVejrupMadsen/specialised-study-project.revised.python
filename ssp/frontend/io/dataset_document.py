@@ -8,6 +8,8 @@ class DatasetDocument:
             location: str
     ):
         self.location: str | None = None
+        self.hash: int | None = None
+
         self.loaded: bool = False
 
         self.set_location(
@@ -20,9 +22,32 @@ class DatasetDocument:
         )
 
     def __del__(self) -> None:
-        del \
-            self.location, \
-            self.loaded
+        del                 \
+            self.location,  \
+            self.loaded,    \
+            self.hash
+
+    def __hash__(self) -> int:
+        return self.get_hash()
+
+    def set_hash(
+            self,
+            value: int
+    ):
+        self.hash = value
+
+    def get_hash(self) -> int:
+        if self.hash is None:
+            self.update_hash()
+
+        return self.hash
+
+    def update_hash(self):
+        self.set_hash(
+            hash(
+                self.location
+            )
+        )
 
     def as_dictionary(self) -> dict:
         return {

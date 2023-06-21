@@ -34,12 +34,15 @@ class CategoryMap:
         )
 
     def __del__(self):
-        del \
-            self.name, \
-            self.documents
+        del                     \
+            self.name,          \
+            self.documents,     \
+            self.hash
 
     def __len__(self) -> int:
-        return int(self)
+        return int(
+            self
+        )
 
     def __int__(self) -> int:
         return self.get_number_of_document()
@@ -51,11 +54,32 @@ class CategoryMap:
             self,
             location: str
     ) -> None:
-        self.documents.append(
-            DatasetDocument(
-                location
-            )
+        created_document = DatasetDocument(
+            location
         )
+
+        self.documents.append(
+            created_document
+        )
+
+    def is_location_in_set(
+            self,
+            location_path: str
+    ) -> bool:
+        location_path_hash: int = hash(location_path)
+
+        for index in range(
+            self.get_number_of_document()
+        ):
+            currently_selected_document: DatasetDocument = self.retrieve(
+                index
+            )
+
+            if hash(currently_selected_document) == location_path_hash:
+                if currently_selected_document.get_location() == location_path:
+                    return True
+
+        return False
 
     def retrieve(
             self,
