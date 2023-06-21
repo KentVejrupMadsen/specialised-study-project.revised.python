@@ -15,6 +15,15 @@ class CategoryMap:
             self.name, \
             self.documents
 
+    def __len__(self) -> int:
+        return self.get_number_of_document()
+
+    def __int__(self) -> int:
+        return self.get_number_of_document()
+
+    def __str__(self):
+        return self.name
+
     def insert(
             self,
             location: str
@@ -23,6 +32,21 @@ class CategoryMap:
             DatasetDocument(
                 location
             )
+        )
+
+    def retrieve(
+            self,
+            index: int
+    ) -> DatasetDocument:
+        return self.documents[index]
+
+    def remove(
+            self,
+            index: int
+    ) -> None:
+        documents: list = self.documents
+        documents.pop(
+            index
         )
 
     def get_name(self) -> str:
@@ -44,3 +68,8 @@ class CategoryMap:
             documents: list
     ) -> None:
         self.documents = documents
+
+    def get_number_of_document(self) -> int:
+        return len(
+            self.documents
+        )

@@ -42,6 +42,10 @@ def test_category_map() -> None:
     for f in retrieve_files():
         map.insert(f)
 
+    print()
+    print('category: ', str(map))
+    print('found: ', int(map))
+
     assert isinstance(
         map,
         CategoryMap

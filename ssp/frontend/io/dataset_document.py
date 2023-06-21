@@ -5,18 +5,33 @@ from os.path \
 class DatasetDocument:
     def __init__(
             self,
-            location
+            location: str
     ):
-        if not isfile(location):
-            raise Exception('File not found')
-
-        self.location: str = location
+        self.location: str | None = None
         self.loaded: bool = False
+
+        self.set_location(
+            location
+        )
+
+    def __repr__(self) -> object:
+        return {
+            'location': self.get_location(),
+            'loaded': self.is_loaded()
+        }
 
     def __del__(self):
         del \
             self.location, \
             self.loaded
+
+    def exist_file(self):
+        if not isfile(
+                self.get_location()
+        ):
+            raise Exception(
+                'File not found'
+            )
 
     def get_location(self) -> str:
         return self.location
@@ -26,11 +41,12 @@ class DatasetDocument:
             value: str
     ) -> None:
         self.location = value
+        self.exist_file()
 
-    def get_loaded(self) -> bool:
+    def is_loaded(self) -> bool:
         return self.loaded
 
-    def set_loaded(
+    def set_is_loaded(
             self,
             value: bool
     ) -> None:
