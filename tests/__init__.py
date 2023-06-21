@@ -29,6 +29,9 @@ from ssp                        \
     get_location_of_repository, \
     get_location_of_dataset
 
+from ssp.frontend \
+    import DataSet
+
 from tests.globals \
     import get_generator \
     as get_random_generator

@@ -11,7 +11,7 @@ class Application:
         pass
 
     def execute(self):
-        pass
+        self.controller.execute()
 
     def garbage_collection(self):
         pass
