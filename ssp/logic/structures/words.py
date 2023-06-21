@@ -34,8 +34,3 @@ class Word(Token):
         return int(
             self.get_counter()
         )
-
-    def __str__(self):
-        return str(
-            self.get_word()
-        )
