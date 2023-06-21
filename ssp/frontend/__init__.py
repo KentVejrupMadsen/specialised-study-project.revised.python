@@ -1,3 +1,6 @@
+from ssp.frontend.dataset \
+    import DataSet
+
 from ssp.frontend.environment \
     import Environment
 

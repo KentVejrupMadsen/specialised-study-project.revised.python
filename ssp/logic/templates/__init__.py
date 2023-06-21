@@ -1,5 +1,5 @@
 from abc \
-    import ABC
+    import ABC, abstractmethod
 
 from ssp.logic.templates.function_class \
     import FunctionClass
