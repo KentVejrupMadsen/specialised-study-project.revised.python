@@ -39,7 +39,7 @@ class CategoryMap:
             self.documents
 
     def __len__(self) -> int:
-        return self.get_number_of_document()
+        return int(self)
 
     def __int__(self) -> int:
         return self.get_number_of_document()

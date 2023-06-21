@@ -19,18 +19,18 @@ class DatasetDocument:
             self.as_dictionary()
         )
 
-    def __del__(self):
+    def __del__(self) -> None:
         del \
             self.location, \
             self.loaded
 
-    def as_dictionary(self):
+    def as_dictionary(self) -> dict:
         return {
             'location': self.get_location(),
             'loaded': self.is_loaded()
         }
 
-    def exist_file(self):
+    def exist_file(self) -> None:
         if not isfile(
                 self.get_location()
         ):

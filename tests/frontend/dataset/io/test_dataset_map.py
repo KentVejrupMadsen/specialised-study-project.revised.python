@@ -1,9 +1,6 @@
 from tests.frontend.dataset.io \
     import DataSetMap
 
-from tests.test_random \
-    import random_text
-
 
 def test_dataset_map_on_insert() -> None:
     dm = DataSetMap()

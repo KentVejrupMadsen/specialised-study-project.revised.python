@@ -10,7 +10,9 @@ class DataSetMap:
         del self.categories
 
     def __len__(self):
-        return len(self.categories)
+        return len(
+            self.categories
+        )
 
     def get_categories(self) -> list:
         return self.categories
@@ -25,6 +27,11 @@ class DataSetMap:
             self,
             category_name: str
     ) -> CategoryMap:
+        if self.has_category(
+            category_name
+        ):
+            raise Exception('category with the same name is already in the set')
+
         new_map = CategoryMap(
             category_name
         )
