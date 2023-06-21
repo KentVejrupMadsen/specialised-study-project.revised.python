@@ -1,3 +1,7 @@
+from ssp.frontend.io \
+    import DatasetDocument
+
+
 class CategoryMap:
     def __init__(
             self,
@@ -10,6 +14,16 @@ class CategoryMap:
         del \
             self.name, \
             self.documents
+
+    def insert(
+            self,
+            location: str
+    ) -> None:
+        self.documents.append(
+            DatasetDocument(
+                location
+            )
+        )
 
     def get_name(self) -> str:
         return self.name

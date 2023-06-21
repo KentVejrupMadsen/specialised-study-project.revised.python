@@ -1,8 +1,15 @@
+from os.path \
+    import isfile
+
+
 class DatasetDocument:
     def __init__(
             self,
             location
     ):
+        if not isfile(location):
+            raise Exception('File not found')
+
         self.location: str = location
         self.loaded: bool = False
 

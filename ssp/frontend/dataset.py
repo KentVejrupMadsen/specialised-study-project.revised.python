@@ -11,7 +11,7 @@ class DataSet:
         self.path_to_dataset: str = location_to_dataset
         self.categories: list = categories
 
-        self.complete: bool = False
+        self.complete: bool = True
 
         self._map = DataSetMap()
 
