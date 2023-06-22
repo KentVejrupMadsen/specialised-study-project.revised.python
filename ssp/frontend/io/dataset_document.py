@@ -1,3 +1,6 @@
+from io \
+    import TextIOWrapper
+
 from ssp.adhoc          \
     import isfile
 
@@ -9,6 +12,8 @@ class DatasetDocument:
     ):
         self.location: str | None = None
         self.hash: int | None = None
+
+        self.object: TextIOWrapper | None = None
 
         self.loaded: bool = False
 
@@ -27,8 +32,47 @@ class DatasetDocument:
             self.loaded,    \
             self.hash
 
+        self.close()
+
     def __hash__(self) -> int:
         return self.get_hash()
+
+    def open(self) -> None:
+        self.set_object(
+            open(
+                self.get_location(),
+                'rt'
+            )
+        )
+
+    def load_line(self) -> str:
+        line = self.get_object().readline()
+
+        if not line:
+            self.set_is_loaded(
+                True
+            )
+
+        return line
+
+    def close(self) -> None:
+        if not self.is_object_none():
+            self.object.close()
+
+    def is_object_none(self) -> bool:
+        return self.object is None
+
+    def get_object(self) -> TextIOWrapper:
+        if self.is_object_none():
+            self.open()
+
+        return self.object
+
+    def set_object(
+            self,
+            value: TextIOWrapper
+    ) -> None:
+        self.object = value
 
     def set_hash(
             self,
