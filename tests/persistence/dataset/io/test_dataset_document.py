@@ -4,7 +4,7 @@ from random \
 from ssp.persistence \
     import DatasetDocument
 
-from tests.frontend.dataset.io \
+from tests.persistence.dataset.io \
     import retrieve_files
 
 

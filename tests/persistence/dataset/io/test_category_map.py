@@ -1,6 +1,6 @@
-from tests.frontend.dataset.io \
-    import \
-    retrieve_files
+from tests.persistence.dataset.io \
+    import retrieve_files
+
 
 from ssp.persistence \
     import CategoryMap
