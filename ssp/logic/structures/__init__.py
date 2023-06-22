@@ -13,9 +13,3 @@ from ssp.logic.structures.category_token        \
 
 from ssp.logic.structures.document_tokens       \
     import DocumentToken
-
-from ssp.logic.structures.document              \
-    import Document
-
-from ssp.logic.structures.category              \
-    import Category
