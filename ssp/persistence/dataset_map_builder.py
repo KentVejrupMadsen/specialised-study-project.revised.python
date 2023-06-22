@@ -1,13 +1,12 @@
-from ssp.persistence \
-    import \
-    DataSetMap, \
-    CategoryMap
-
-from os \
-    import listdir, walk
-
-from os.path \
-    import isdir, isfile, join
+from ssp.persistence        \
+    import                  \
+    DataSetMap,             \
+    CategoryMap,            \
+    basename,               \
+    listdir,                \
+    isdir,                  \
+    join,                   \
+    walk
 
 
 class DataSetMapBuilder:
@@ -25,7 +24,15 @@ class DataSetMapBuilder:
         del self.location
 
     def run(self) -> DataSetMap:
-        self.set_dataset(DataSetMap())
+        self.set_dataset(
+            DataSetMap()
+        )
+
+        self.get_dataset().set_name(
+            basename(
+                self.get_location()
+            )
+        )
 
         self.generate_categories()
 

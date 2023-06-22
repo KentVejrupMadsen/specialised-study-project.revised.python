@@ -4,6 +4,7 @@ from ssp.persistence    \
 
 class DataSetMap:
     def __init__(self):
+        self.name: str | None = None
         self.categories: list = []
 
     def __del__(self):
@@ -13,6 +14,15 @@ class DataSetMap:
         return len(
             self.categories
         )
+
+    def get_name(self) -> str | None:
+        return self.name
+
+    def set_name(
+            self,
+            value: str
+    ):
+        self.name = value
 
     def get_categories(self) -> list:
         return self.categories
