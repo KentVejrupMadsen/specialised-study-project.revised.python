@@ -1,4 +1,4 @@
-from tests.frontend.dataset.io \
+from ssp.persistence \
     import DataSetMap
 
 

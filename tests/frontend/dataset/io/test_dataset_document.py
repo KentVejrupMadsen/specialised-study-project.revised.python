@@ -1,7 +1,7 @@
 from random \
     import randint
 
-from ssp.frontend.io \
+from ssp.persistence \
     import DatasetDocument
 
 from tests.frontend.dataset.io \
