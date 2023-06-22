@@ -1,4 +1,4 @@
-from os.path \
+from ssp.adhoc          \
     import isfile
 
 

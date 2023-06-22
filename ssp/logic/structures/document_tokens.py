@@ -1,7 +1,7 @@
-from ssp.variables \
+from ssp.variables          \
     import get_one
 
-from ssp.logic.structures \
+from ssp.logic.structures   \
     import Word
 
 

@@ -1,17 +1,14 @@
 #!/usr/bin/env python
-zero: int = 0
-
-one: int = 1
-two: int = 2
-three: int = 3
-four: int = 4
-
-five: int = 5
-
-six: int = 6
-seven: int = 7
-eight: int = 8
-nine: int = 9
+zero: int   = 0
+one: int    = 1
+two: int    = 2
+three: int  = 3
+four: int   = 4
+five: int   = 5
+six: int    = 6
+seven: int  = 7
+eight: int  = 8
+nine: int   = 9
 
 
 def get_zero() -> int:

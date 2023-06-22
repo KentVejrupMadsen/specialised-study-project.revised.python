@@ -32,6 +32,6 @@ from ssp                        \
 from ssp.frontend \
     import DataSet
 
-from tests.globals \
-    import get_generator \
-    as get_random_generator
+from HardenedSteel.facades \
+    import generate_label_by_size
+

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
-environment_dataset_location: str = 'dataset_location_at'
-environment_labels: str = 'dataset_labels'
+environment_dataset_location: str   = 'dataset_location_at'
+environment_labels: str             = 'dataset_labels'
 
 
 def get_environment_dataset_location() -> str:

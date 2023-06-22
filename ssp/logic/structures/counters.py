@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-from ssp.variables \
-    import \
-    get_zero,\
-    get_one, \
+from ssp.variables      \
+    import              \
+    get_zero,           \
+    get_one,            \
     is_int_zero
 
 
