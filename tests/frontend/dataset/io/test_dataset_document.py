@@ -8,7 +8,7 @@ from tests.frontend.dataset.io \
     import retrieve_files
 
 
-def test_document() -> None:
+def retrieve_random_file() -> DatasetDocument:
     files = retrieve_files()
     length: int = len(files) - 1
 
@@ -20,6 +20,12 @@ def test_document() -> None:
 
     document = DatasetDocument(extracted_from_set)
 
+    return document
+
+
+def test_document() -> None:
+    document = retrieve_random_file()
+
     print()
     print(repr(document))
 
@@ -27,3 +33,21 @@ def test_document() -> None:
         document,
         DatasetDocument
     )
+
+
+def test_document_open() -> None:
+    document = retrieve_random_file()
+
+    document.open()
+
+    while not (document.is_loaded()):
+        line: str = document.load_line()
+        print('loaded: ', line)
+
+    document.close()
+
+    assert isinstance(
+        document,
+        DatasetDocument
+    )
+
