@@ -1,4 +1,4 @@
-from ssp.frontend.io.dataset_map \
+from ssp.persistence \
     import DataSetMap
 
 

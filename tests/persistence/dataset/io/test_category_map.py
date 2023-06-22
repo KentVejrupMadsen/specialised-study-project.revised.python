@@ -1,7 +1,9 @@
-from tests.frontend.dataset.io \
-    import \
-    CategoryMap, \
-    retrieve_files
+from tests.persistence.dataset.io \
+    import retrieve_files
+
+
+from ssp.persistence \
+    import CategoryMap
 
 
 def test_category_map() -> None:
