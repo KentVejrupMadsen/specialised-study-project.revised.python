@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-training_label: str = 'training'
-test_label: str = 'test'
+training_label: str     = 'training'
+test_label: str         = 'test'
 
-entry_main_label: str = '__main__'
+entry_main_label: str   = '__main__'
 
 
 def get_training_label() -> str:

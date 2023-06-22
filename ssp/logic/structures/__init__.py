@@ -1,21 +1,21 @@
 #!/usr/bin/env python
-from ssp.logic.structures.counters \
+from ssp.logic.structures.counters              \
     import CounterObject
 
-from ssp.logic.structures.tokens \
+from ssp.logic.structures.tokens                \
     import Token
 
-from ssp.logic.structures.words \
+from ssp.logic.structures.words                 \
     import Word
 
-from ssp.logic.structures.category_token \
+from ssp.logic.structures.category_token        \
     import CategoryToken
 
-from ssp.logic.structures.document_tokens \
+from ssp.logic.structures.document_tokens       \
     import DocumentToken
 
-from ssp.logic.structures.document \
+from ssp.logic.structures.document              \
     import Document
 
-from ssp.logic.structures.category \
+from ssp.logic.structures.category              \
     import Category

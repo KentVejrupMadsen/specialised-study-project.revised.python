@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from ssp.variables \
+from ssp.variables              \
     import get_entry_main_label
 
 from ssp.setup                  \
@@ -9,8 +9,8 @@ from ssp.setup                  \
     get_location_of_dataset,    \
     get_dataset_categories
 
-from ssp.frontend \
+from ssp.frontend               \
     import Application
 
-from ssp.entry \
+from ssp.entry                  \
     import on_entry_call

@@ -3,6 +3,6 @@ from ssp.variables \
 
 
 def is_int_zero(
-        value: int
+    value: int
 ) -> bool:
     return value == get_zero()

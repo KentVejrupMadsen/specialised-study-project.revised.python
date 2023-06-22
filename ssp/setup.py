@@ -1,10 +1,10 @@
 from ssp.adhoc      \
-    import      \
-    listdir,    \
-    dirname,    \
-    pardir,     \
-    realpath,   \
-    join,       \
+    import          \
+    listdir,        \
+    dirname,        \
+    pardir,         \
+    realpath,       \
+    join,           \
     isdir
 
 location_of_script: str | None = None

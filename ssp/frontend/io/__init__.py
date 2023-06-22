@@ -1,8 +1,8 @@
-from ssp.frontend.io.dataset_document \
+from ssp.frontend.io.dataset_document   \
     import DatasetDocument
 
-from ssp.frontend.io.category_map \
+from ssp.frontend.io.category_map       \
     import CategoryMap
 
-from ssp.frontend.io.dataset_map \
+from ssp.frontend.io.dataset_map        \
     import DataSetMap
