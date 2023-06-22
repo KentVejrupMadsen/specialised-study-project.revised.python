@@ -57,3 +57,25 @@ def test_document_open_and_read_file() -> None:
         DatasetDocument
     )
 
+
+def test_document_has_empty_lines() -> None:
+    document = retrieve_random_file()
+
+    document.open()
+
+    while not(document.is_loaded()):
+        document.load_line()
+
+        if document.is_line_empty():
+            print(
+                'empty: ',
+                document.get_buffer()
+            )
+        else:
+            print(
+                'not empty: ',
+                document.get_buffer()
+            )
+
+    document.close()
+

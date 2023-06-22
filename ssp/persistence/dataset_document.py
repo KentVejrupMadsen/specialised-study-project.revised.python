@@ -21,6 +21,8 @@ class DatasetDocument:
             location
         )
 
+        self.buffer: str | None = None
+
     def __repr__(self) -> str:
         return str(
             self.as_dictionary()
@@ -45,19 +47,90 @@ class DatasetDocument:
             )
         )
 
+    def get_buffer(self) -> None | str:
+        return self.buffer
+
+    def set_buffer(
+            self,
+            value: str | None
+    ) -> None:
+        self.buffer = value
+
     def load_line(self) -> str:
         line = self.get_object().readline()
+        self.set_buffer(
+            line
+        )
 
         if not line:
             self.set_is_loaded(
                 True
             )
 
-        return line
+        return self.get_buffer()
+
+    def is_line_empty(self) -> bool:
+        if self.get_buffer() is None:
+            return True
+
+        if self.get_buffer().isspace():
+            return True
+
+        if(
+            not (self.__buffer_contains_letters())
+            and
+            not (self.__buffer_contains_numbers())
+        ):
+            return True
+
+        return False
+
+    def __buffer_contains_letters(self) -> bool:
+        if self.get_buffer() is None:
+            return False
+
+        for character in self.get_buffer():
+            integer_representation: int = ord(character)
+
+            if(
+                ord('a') <= integer_representation
+                and
+                integer_representation >= ord('z')
+            ):
+                return True
+
+            if(
+                ord('A') <= integer_representation
+                and
+                integer_representation >= ord('Z')
+            ):
+                return True
+
+        return False
+
+    def __buffer_contains_numbers(self) -> bool:
+        if self.get_buffer() is None:
+            return False
+
+        for character in self.get_buffer():
+            integer_representation: int = ord(character)
+
+            if(
+                ord('0') <= integer_representation
+                and
+                integer_representation >= ord('9')
+            ):
+                return True
+
+        return False
 
     def close(self) -> None:
         if not self.is_object_none():
             self.object.close()
+
+    def reset(self):
+        self.set_is_loaded(False)
+        self.set_buffer(None)
 
     def is_object_none(self) -> bool:
         return self.object is None
