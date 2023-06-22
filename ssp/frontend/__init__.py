@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from ssp.frontend.dataset       \
     import DataSet
 

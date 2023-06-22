@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from ssp.persistence \
     import DataSetMap
 
@@ -13,11 +14,11 @@ class DataSet:
 
         self.complete: bool = True
 
-        self._map = DataSetMap()
+        self.store: dict | None
 
     def __del__(self):
-        del \
-            self.path_to_dataset, \
+        del                         \
+            self.path_to_dataset,   \
             self.categories
 
     def stream(self):
@@ -34,12 +35,3 @@ class DataSet:
             value: bool
     ) -> None:
         self.complete = value
-
-    def get_map(self) -> DataSetMap:
-        return self._map
-
-    def set_map(
-            self,
-            value: DataSetMap
-    ) -> None:
-        self._map = value
