@@ -32,14 +32,23 @@ class DataSetMapBuilder:
         return self.get_dataset()
 
     def generate_categories(self):
-        found_items: list = listdir(self.get_location())
+        found_items: list = listdir(
+            self.get_location()
+        )
 
         for entry in found_items:
-            full_path: str = join(self.location, entry)
+            full_path: str = join(
+                self.location,
+                entry
+            )
 
             if isdir(full_path):
                 cm: CategoryMap = self.get_dataset().create(entry)
-                self.search_for_files(cm, full_path)
+
+                self.search_for_files(
+                    cm,
+                    full_path
+                )
 
     def search_for_files(
             self,
@@ -51,8 +60,14 @@ class DataSetMapBuilder:
                 topdown=False
         ):
             for selected_file in files:
-                path_to_file: str = join(root, selected_file)
-                cm.insert(path_to_file)
+                path_to_file: str = join(
+                    root,
+                    selected_file
+                )
+
+                cm.insert(
+                    path_to_file
+                )
 
     def get_location(self) -> str:
         return self.location
