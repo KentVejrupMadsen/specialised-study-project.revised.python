@@ -1,13 +1,42 @@
 from ssp.persistence    \
     import              \
     DataSetMap,         \
-    DataSetMapBuilder
+    DataSetMapBuilder,  \
+    CategoryMap
 
 from ssp.frontend.environment \
     import Environment
 
 from os.path \
     import join
+
+
+def test_build_dataset_retrieve_documents() -> None:
+    env = Environment()
+
+    dmb = DataSetMapBuilder(
+        join(
+            env.get_path_to_dataset(),
+            'training'
+        )
+    )
+
+    dataset = dmb.run()
+
+    for category in dataset.get_categories():
+        selected: CategoryMap = category
+
+        print(
+            'selected = category - size: ',
+            selected.get_name(),
+            ' - ',
+            len(selected)
+        )
+
+    assert isinstance(
+        dataset,
+        DataSetMap
+    )
 
 
 def test_build_dataset() -> None:
