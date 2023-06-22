@@ -85,6 +85,7 @@ class DatasetDocument:
 
         return False
 
+    # TODO: remove and make more effective later
     def __buffer_contains_letters(self) -> bool:
         if self.get_buffer() is None:
             return False
@@ -108,6 +109,7 @@ class DatasetDocument:
 
         return False
 
+    # TODO: remove and make more effective later
     def __buffer_contains_numbers(self) -> bool:
         if self.get_buffer() is None:
             return False
