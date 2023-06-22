@@ -7,3 +7,5 @@ from ssp.persistence.category_map \
 from ssp.persistence.dataset_map \
     import DataSetMap
 
+from ssp.persistence.dataset_map_builder\
+    import DataSetMapBuilder
