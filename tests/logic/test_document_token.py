@@ -1,12 +1,13 @@
 from tests \
     import DocumentToken
 
-from tests.strings import random_text
+from tests \
+    import generate_label_by_size
 
 
 def test_create_doc_token() -> None:
     token = DocumentToken(
-        word=random_text(25),
+        word=generate_label_by_size(25),
         instances=1
     )
 
@@ -15,7 +16,7 @@ def test_create_doc_token() -> None:
 
 def test_increase() -> None:
     token = DocumentToken(
-        word=random_text(25),
+        word=generate_label_by_size(25),
         instances=1
     )
 
@@ -27,7 +28,7 @@ def test_increase() -> None:
 
 def test_decrease() -> None:
     token = DocumentToken(
-        word=random_text(25),
+        word=generate_label_by_size(25),
         instances=4
     )
 
@@ -38,7 +39,7 @@ def test_decrease() -> None:
 
 
 def test_retrieve_token() -> None:
-    token = DocumentToken(word=random_text(5), instances=12)
+    token = DocumentToken(word=generate_label_by_size(5), instances=12)
 
     print({
         token.get_word(),

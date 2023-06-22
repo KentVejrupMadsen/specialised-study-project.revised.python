@@ -1,9 +1,9 @@
-from tests.strings \
-    import random_text
+from tests \
+    import generate_label_by_size
 
 
 def test() -> None:
-    rdr_txt: str = random_text(30)
+    rdr_txt: str = generate_label_by_size(20)
 
     print()
     print({'random_text': rdr_txt})
