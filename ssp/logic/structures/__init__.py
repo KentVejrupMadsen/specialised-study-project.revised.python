@@ -5,11 +5,11 @@ from ssp.variables                              \
     get_one,                                    \
     is_int_zero
 
-from ssp.logic.structures.counters              \
-    import CounterObject
-
 from ssp.logic.templates                        \
     import Token
+
+from ssp.logic.structures.counters              \
+    import CounterObject
 
 from ssp.logic.structures.words                 \
     import Word
