@@ -29,6 +29,12 @@ from ssp.variables                                          \
     get_ascii_number_range_start,                           \
     get_ascii_number_range_end
 
+from ssp.logic.structures                                   \
+    import CounterObject
+
+from ssp.persistence.exceptions                             \
+    import raise_category_already_exist
+
 from ssp.persistence.dataset_document                       \
     import DatasetDocumentStream
 

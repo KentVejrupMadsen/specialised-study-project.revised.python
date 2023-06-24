@@ -33,6 +33,89 @@ class CounterObject:
         self.value: int = start_value
         self.move: int = move_by
 
+    def reset(self):
+        self.set_value(
+            get_zero()
+        )
+
+    def get_move_size(self) -> int:
+        return self.move
+
+    def set_move_size(
+            self,
+            value: int
+    ) -> None:
+        self.move = value
+
+    def get_value(self) -> int:
+        return self.value
+
+    def set_value(
+            self,
+            value: int
+    ) -> None:
+        self.value = value
+
+    def increase(
+            self,
+            by_size: int
+    ) -> None:
+        self.set_value(
+            self.value
+            +
+            by_size
+        )
+
+    def increment(self):
+        self.increase(
+            self.get_move_size()
+        )
+
+    def decrease(
+            self,
+            by_size: int
+    ) -> None:
+        self.set_value(
+            self.value
+            -
+            by_size
+        )
+
+    def decrement(self):
+        self.decrease(
+            self.get_move_size()
+        )
+
+    def is_zero(self) -> bool:
+        return is_int_zero(
+            self.get_value()
+        )
+
+    def is_not_zero(self) -> bool:
+        return not is_int_zero(
+            self.get_value()
+        )
+
+    def __iter__(self) -> iter:
+        self.reset()
+
+        return self
+
+    def __next__(self) -> int:
+        self.increment()
+
+        return int(
+            self
+        )
+
+    def __str__(self) -> str:
+        return str(
+            self.get_value()
+        )
+
+    def __int__(self) -> int:
+        return self.get_value()
+
     def __invert__(self):
         inverse_counter = CounterObject(
             start_value=-self.get_value(),
@@ -111,7 +194,9 @@ class CounterObject:
     ) -> bool:
         r_val: bool = False
 
-        if is_instance_of_counter_object(other):
+        if is_instance_of_counter_object(
+                other
+        ):
             o_co: CounterObject = other
             r_val = bool(
                 self.get_value()
@@ -121,7 +206,9 @@ class CounterObject:
 
             return r_val
 
-        if is_instance_of_integer(other):
+        if is_instance_of_integer(
+                other
+        ):
             o_int: int = other
             r_val = bool(
                 self.get_value()
@@ -132,74 +219,3 @@ class CounterObject:
             return r_val
 
         return r_val
-
-    def __str__(self) -> str:
-        return str(
-            self.get_value()
-        )
-
-    def __int__(self) -> int:
-        return self.get_value()
-
-    def reset(self):
-        self.set_value(
-            get_zero()
-        )
-
-    def get_move_size(self) -> int:
-        return self.move
-
-    def set_move_size(
-            self,
-            value: int
-    ) -> None:
-        self.move = value
-
-    def get_value(self) -> int:
-        return self.value
-
-    def set_value(
-            self,
-            value: int
-    ) -> None:
-        self.value = value
-
-    def increase(
-            self,
-            by_size: int
-    ) -> None:
-        self.set_value(
-            self.value
-            +
-            by_size
-        )
-
-    def increment(self):
-        self.increase(
-            self.get_move_size()
-        )
-
-    def decrease(
-            self,
-            by_size: int
-    ) -> None:
-        self.set_value(
-            self.value
-            -
-            by_size
-        )
-
-    def decrement(self):
-        self.decrease(
-            self.get_move_size()
-        )
-
-    def is_zero(self) -> bool:
-        return is_int_zero(
-            self.get_value()
-        )
-
-    def is_not_zero(self) -> bool:
-        return not is_int_zero(
-            self.get_value()
-        )

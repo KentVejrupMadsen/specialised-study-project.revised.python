@@ -1,6 +1,9 @@
 #!/usr/bin/env python
-from ssp.persistence    \
-    import CategoryMapStream
+from ssp.persistence                \
+    import                          \
+    CategoryMapStream,              \
+    raise_category_already_exist,   \
+    CounterObject
 
 
 class DataSetMapStream:
@@ -8,8 +11,27 @@ class DataSetMapStream:
         self.name: str | None = None
         self.categories: list = []
 
+        self.selection_counter: CounterObject | None = None
+
     def __del__(self):
-        del self.categories
+        del                         \
+            self.name,              \
+            self.categories,        \
+            self.selection_counter
+
+    def get_selection_counter(self) -> CounterObject:
+        if self.selection_counter is None:
+            self.set_selection_counter(
+                CounterObject()
+            )
+
+        return self.selection_counter
+
+    def set_selection_counter(
+            self,
+            value: CounterObject
+    ) -> None:
+        self.selection_counter = value
 
     def __len__(self):
         return len(
@@ -41,7 +63,7 @@ class DataSetMapStream:
         if self.has_category(
             category_name
         ):
-            raise Exception('category with the same name is already in the set')
+            raise_category_already_exist()
 
         new_map = CategoryMapStream(
             category_name
@@ -73,22 +95,36 @@ class DataSetMapStream:
     ):
         index_to_remove: int | None = None
 
-        for index in self.map_range():
+        for index in iter(self):
             cm = self.retrieve(index)
 
             if cm.get_name() == value:
                 index_to_remove = index
 
-        if not(index_to_remove is None):
+        if self.is_variable_not_none(
+                index_to_remove
+        ):
             self.remove(
                 index_to_remove
             )
+
+    def is_variable_none(
+            self,
+            value
+    ) -> bool:
+        return value is None
+
+    def is_variable_not_none(
+            self,
+            value
+    ) -> bool:
+        return not self.is_variable_none(value)
 
     def has_category(
             self,
             category_name: str
     ) -> bool:
-        for index in self.map_range():
+        for index in iter(self):
             category = self.retrieve(
                 index
             )
@@ -99,7 +135,18 @@ class DataSetMapStream:
 
         return False
 
-    def map_range(self):
-        return range(
-            len(self)
-        )
+    def __iter__(self):
+        self.selection_counter: CounterObject()
+        return self
+
+    def __next__(self):
+        self.get_selection_counter().increment()
+
+        next_step: int = int(self.get_selection_counter())
+
+        if next_step <= len(self):
+            return int(
+                self.get_selection_counter()
+            )
+        else:
+            raise StopIteration
