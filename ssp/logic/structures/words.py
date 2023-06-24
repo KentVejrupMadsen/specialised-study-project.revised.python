@@ -1,10 +1,9 @@
-from ssp.variables          \
-    import get_one
-
+#!/usr/bin/env python
 from ssp.logic.structures   \
     import                  \
     Token,                  \
-    CounterObject
+    CounterObject,          \
+    get_one
 
 
 class Word(Token):

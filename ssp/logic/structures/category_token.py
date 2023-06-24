@@ -1,8 +1,8 @@
-from ssp.variables          \
-    import get_one
-
+#!/usr/bin/env python
 from ssp.logic.structures   \
-    import Word
+    import                  \
+    Word,                   \
+    get_one
 
 
 class CategoryToken(Word):

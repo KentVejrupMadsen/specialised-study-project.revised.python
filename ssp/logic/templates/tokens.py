@@ -1,6 +1,6 @@
-from abc            \
-    import          \
-    ABC
+#!/usr/bin/env python
+from ssp.logic.templates \
+    import ABC
 
 
 class Token(ABC):

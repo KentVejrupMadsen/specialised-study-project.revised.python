@@ -15,6 +15,20 @@ class Controller:
             self.environment, \
             self.dataset
 
+    def setup(self) -> None:
+        self.set_dataset(
+            DataSet(
+                self.get_environment().get_path_to_dataset(),
+                self.get_environment().get_categories()
+            )
+        )
+
+    def initialise(self):
+        self.setup()
+
+        for index in iter(self.get_dataset()):
+            ds_map = self.get_dataset().retrieve_map(index)
+
     def execute(self):
         pass
 

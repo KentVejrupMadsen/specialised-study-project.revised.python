@@ -1,8 +1,8 @@
-from ssp                        \
-    import                      \
-    get_dataset_categories,     \
-    get_location_of_dataset,    \
-    get_location_of_repository, \
+from ssp.frontend                   \
+    import                          \
+    get_dataset_categories,         \
+    get_location_of_dataset,        \
+    get_location_of_repository,     \
     get_location_of_script
 
 

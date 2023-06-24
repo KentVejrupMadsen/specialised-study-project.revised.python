@@ -1,4 +1,5 @@
-from ssp.adhoc      \
+#!/usr/bin/env python
+from ssp            \
     import          \
     listdir,        \
     dirname,        \
