@@ -1,11 +1,48 @@
-from ssp.persistence.dataset_document \
-    import DatasetDocument
+#!/usr/bin/env python
+from io                                                     \
+    import TextIOBase
 
-from ssp.persistence.category_map \
-    import CategoryMap
+from os                                                     \
+    import                                                  \
+    listdir,                                                \
+    walk
 
-from ssp.persistence.dataset_map \
-    import DataSetMap
+from os.path                                                \
+    import                                                  \
+    isfile,                                                 \
+    isdir,                                                  \
+    basename,                                               \
+    join
 
-from ssp.persistence.dataset_map_builder\
+from HardenedSteel.facades.texts.characters.ranges          \
+    import                                                  \
+    ascii_uppercase_begin,                                  \
+    ascii_uppercase_end
+
+from HardenedSteel.facades.texts.characters.ranges          \
+    import                                                  \
+    ascii_lowercase_begin,                                  \
+    ascii_lowercase_end
+
+from ssp.variables                                          \
+    import                                                  \
+    get_ascii_number_range_start,                           \
+    get_ascii_number_range_end
+
+from ssp.logic.structures                                   \
+    import CounterObject
+
+from ssp.persistence.exceptions                             \
+    import raise_category_already_exist
+
+from ssp.persistence.dataset_document                       \
+    import DatasetDocumentStream
+
+from ssp.persistence.category_map                           \
+    import CategoryMapStream
+
+from ssp.persistence.dataset_map                            \
+    import DataSetMapStream
+
+from ssp.persistence.dataset_map_builder                    \
     import DataSetMapBuilder

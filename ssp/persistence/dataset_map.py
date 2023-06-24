@@ -1,18 +1,51 @@
-from ssp.persistence    \
-    import CategoryMap
+#!/usr/bin/env python
+from ssp.persistence                \
+    import                          \
+    CategoryMapStream,              \
+    raise_category_already_exist,   \
+    CounterObject
 
 
-class DataSetMap:
+class DataSetMapStream:
     def __init__(self):
+        self.name: str | None = None
         self.categories: list = []
 
+        self.selection_counter: CounterObject | None = None
+
     def __del__(self):
-        del self.categories
+        del                         \
+            self.name,              \
+            self.categories,        \
+            self.selection_counter
+
+    def get_selection_counter(self) -> CounterObject:
+        if self.selection_counter is None:
+            self.set_selection_counter(
+                CounterObject()
+            )
+
+        return self.selection_counter
+
+    def set_selection_counter(
+            self,
+            value: CounterObject
+    ) -> None:
+        self.selection_counter = value
 
     def __len__(self):
         return len(
             self.categories
         )
+
+    def get_name(self) -> str | None:
+        return self.name
+
+    def set_name(
+            self,
+            value: str
+    ):
+        self.name = value
 
     def get_categories(self) -> list:
         return self.categories
@@ -26,13 +59,13 @@ class DataSetMap:
     def create(
             self,
             category_name: str
-    ) -> CategoryMap:
+    ) -> CategoryMapStream:
         if self.has_category(
             category_name
         ):
-            raise Exception('category with the same name is already in the set')
+            raise_category_already_exist()
 
-        new_map = CategoryMap(
+        new_map = CategoryMapStream(
             category_name
         )
 
@@ -45,7 +78,7 @@ class DataSetMap:
     def retrieve(
             self,
             index: int
-    ) -> CategoryMap:
+    ) -> CategoryMapStream:
         return self.categories[index]
 
     def remove(
@@ -62,22 +95,36 @@ class DataSetMap:
     ):
         index_to_remove: int | None = None
 
-        for index in self.map_range():
+        for index in iter(self):
             cm = self.retrieve(index)
 
             if cm.get_name() == value:
                 index_to_remove = index
 
-        if not(index_to_remove is None):
+        if self.is_variable_not_none(
+                index_to_remove
+        ):
             self.remove(
                 index_to_remove
             )
+
+    def is_variable_none(
+            self,
+            value
+    ) -> bool:
+        return value is None
+
+    def is_variable_not_none(
+            self,
+            value
+    ) -> bool:
+        return not self.is_variable_none(value)
 
     def has_category(
             self,
             category_name: str
     ) -> bool:
-        for index in self.map_range():
+        for index in iter(self):
             category = self.retrieve(
                 index
             )
@@ -88,7 +135,18 @@ class DataSetMap:
 
         return False
 
-    def map_range(self):
-        return range(
-            len(self)
-        )
+    def __iter__(self):
+        self.selection_counter: CounterObject()
+        return self
+
+    def __next__(self):
+        self.get_selection_counter().increment()
+
+        next_step: int = int(self.get_selection_counter())
+
+        if next_step <= len(self):
+            return int(
+                self.get_selection_counter()
+            )
+        else:
+            raise StopIteration

@@ -1,11 +1,62 @@
-from io \
-    import TextIOWrapper
+#!/usr/bin/env python
+from ssp.persistence                \
+    import                          \
+    TextIOBase,                     \
+    isfile,                         \
+    ascii_lowercase_begin,          \
+    ascii_lowercase_end,            \
+    ascii_uppercase_begin,          \
+    ascii_uppercase_end,            \
+    get_ascii_number_range_start,   \
+    get_ascii_number_range_end
 
-from ssp.adhoc          \
-    import isfile
+
+def detect_is_character_in_uppercase_letter_range(
+        character: chr
+) -> bool:
+    character_index: int = ord(character)
+
+    if(
+        (ascii_uppercase_begin <= character_index)
+        and
+        (character_index >= ascii_uppercase_end)
+    ):
+        return True
+
+    return False
 
 
-class DatasetDocument:
+def detect_is_character_in_lowercase_letter_range(
+        character: chr
+) -> bool:
+    character_index: int = ord(character)
+
+    if(
+        (ascii_lowercase_begin <= character_index)
+        and
+        (character_index >= ascii_lowercase_end)
+    ):
+        return True
+
+    return False
+
+
+def detect_is_character_in_number_range(
+        character: chr
+) -> bool:
+    character_index: int = ord(character)
+
+    if(
+        (get_ascii_number_range_start() <= character_index)
+        and
+        (character_index >= get_ascii_number_range_end())
+    ):
+        return True
+
+    return False
+
+
+class DatasetDocumentStream:
     def __init__(
             self,
             location: str
@@ -13,7 +64,7 @@ class DatasetDocument:
         self.location: str | None = None
         self.hash: int | None = None
 
-        self.object: TextIOWrapper | None = None
+        self.object: TextIOBase | None = None
 
         self.loaded: bool = False
 
@@ -57,6 +108,9 @@ class DatasetDocument:
         self.buffer = value
 
     def load_line(self) -> str:
+        if self.is_object_none():
+            self.open()
+
         line = self.get_object().readline()
         self.set_buffer(
             line
@@ -76,51 +130,26 @@ class DatasetDocument:
         if self.get_buffer().isspace():
             return True
 
-        if(
-            not (self.__buffer_contains_letters())
-            and
-            not (self.__buffer_contains_numbers())
-        ):
+        if not self.has_line_valid_characters():
             return True
 
         return False
 
-    # TODO: remove and make more effective later (preferablely another package)
-    def __buffer_contains_letters(self) -> bool:
-        if self.get_buffer() is None:
-            return False
-
+    # makes sure that the line in the buffer has valid character values in it.
+    def has_line_valid_characters(self) -> bool:
         for character in self.get_buffer():
-            integer_representation: int = ord(character)
-
-            if(
-                ord('a') <= integer_representation
-                and
-                integer_representation >= ord('z')
+            if detect_is_character_in_uppercase_letter_range(
+                character
             ):
                 return True
 
-            if(
-                ord('A') <= integer_representation
-                and
-                integer_representation >= ord('Z')
+            if detect_is_character_in_lowercase_letter_range(
+                character
             ):
                 return True
 
-        return False
-
-    # TODO: remove and make more effective later (preferablely another package)
-    def __buffer_contains_numbers(self) -> bool:
-        if self.get_buffer() is None:
-            return False
-
-        for character in self.get_buffer():
-            integer_representation: int = ord(character)
-
-            if(
-                ord('0') <= integer_representation
-                and
-                integer_representation >= ord('9')
+            if detect_is_character_in_number_range(
+                character
             ):
                 return True
 
@@ -137,7 +166,7 @@ class DatasetDocument:
     def is_object_none(self) -> bool:
         return self.object is None
 
-    def get_object(self) -> TextIOWrapper:
+    def get_object(self) -> TextIOBase:
         if self.is_object_none():
             self.open()
 
@@ -145,7 +174,7 @@ class DatasetDocument:
 
     def set_object(
             self,
-            value: TextIOWrapper
+            value: TextIOBase
     ) -> None:
         self.object = value
 
@@ -194,6 +223,11 @@ class DatasetDocument:
 
     def is_loaded(self) -> bool:
         return self.loaded
+
+    def is_not_loaded(self) -> bool:
+        return not(
+            self.is_loaded()
+        )
 
     def set_is_loaded(
             self,

@@ -10,6 +10,19 @@ seven: int  = 7
 eight: int  = 8
 nine: int   = 9
 
+ascii_number_range_start: int = ord('0')
+ascii_number_range_end: int = ord('9')
+
+
+def get_ascii_number_range_start() -> int:
+    global ascii_number_range_start
+    return ascii_number_range_start
+
+
+def get_ascii_number_range_end() -> int:
+    global ascii_number_range_end
+    return ascii_number_range_end
+
 
 def get_zero() -> int:
     global zero

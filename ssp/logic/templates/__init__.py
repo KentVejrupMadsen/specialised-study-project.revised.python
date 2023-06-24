@@ -1,7 +1,11 @@
+#!/usr/bin/env python
 from abc                                    \
     import                                  \
     ABC,                                    \
     abstractmethod
+
+from ssp.logic.templates.tokens             \
+    import Token
 
 from ssp.logic.templates.function_class     \
     import FunctionClass
