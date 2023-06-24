@@ -14,7 +14,6 @@ from os.path                                                \
     basename,                                               \
     join
 
-
 from HardenedSteel.facades.texts.characters.ranges          \
     import                                                  \
     ascii_uppercase_begin,                                  \

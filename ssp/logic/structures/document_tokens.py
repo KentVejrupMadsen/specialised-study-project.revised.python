@@ -1,9 +1,8 @@
 #!/usr/bin/env python
-from ssp.variables          \
-    import get_one
-
 from ssp.logic.structures   \
-    import Word
+    import                  \
+    Word,                   \
+    get_one
 
 
 class DocumentToken(Word):
