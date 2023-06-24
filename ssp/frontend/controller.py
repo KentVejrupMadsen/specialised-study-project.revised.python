@@ -15,6 +15,17 @@ class Controller:
             self.environment, \
             self.dataset
 
+    def setup(self) -> None:
+        self.set_dataset(
+            DataSet(
+                self.get_environment().get_path_to_dataset(),
+                self.get_environment().get_categories()
+            )
+        )
+
+    def initialise(self):
+        pass
+
     def execute(self):
         pass
 

@@ -7,11 +7,14 @@ class Application:
     def __init__(self):
         self.controller = Controller()
 
+    def __del__(self):
+        del self.controller
+
     def initialise(self):
-        pass
+        self.get_controller().initialise()
 
     def execute(self):
-        self.controller.execute()
+        self.get_controller().execute()
 
     def garbage_collection(self):
         pass
