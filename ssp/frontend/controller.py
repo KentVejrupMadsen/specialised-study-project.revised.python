@@ -26,8 +26,8 @@ class Controller:
     def initialise(self):
         self.setup()
 
-        while self.get_dataset().is_running():
-            self.get_dataset().stream()
+        for index in iter(self.get_dataset()):
+            ds_map = self.get_dataset().retrieve_map(index)
 
     def execute(self):
         pass
