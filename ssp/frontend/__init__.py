@@ -1,4 +1,12 @@
 #!/usr/bin/env python
+from ssp                        \
+    import                      \
+    get_dataset_categories,     \
+    get_location_of_dataset,    \
+    get_location_of_repository, \
+    get_location_of_script
+
+
 from ssp.frontend.dataset       \
     import DataSet
 
