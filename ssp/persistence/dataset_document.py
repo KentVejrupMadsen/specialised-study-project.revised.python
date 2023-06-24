@@ -1,12 +1,14 @@
 #!/usr/bin/env python
-from ssp.persistence        \
-    import                  \
-    TextIOBase,             \
-    isfile,                 \
-    ascii_lowercase_begin,  \
-    ascii_lowercase_end,    \
-    ascii_uppercase_begin,  \
-    ascii_uppercase_end
+from ssp.persistence                \
+    import                          \
+    TextIOBase,                     \
+    isfile,                         \
+    ascii_lowercase_begin,          \
+    ascii_lowercase_end,            \
+    ascii_uppercase_begin,          \
+    ascii_uppercase_end,            \
+    get_ascii_number_range_start,   \
+    get_ascii_number_range_end
 
 
 def detect_is_character_in_uppercase_letter_range(
@@ -39,23 +41,15 @@ def detect_is_character_in_lowercase_letter_range(
     return False
 
 
-ascii_number_begin: int = ord('0')
-ascii_number_end: int = ord('9')
-
-
 def detect_is_character_in_number_range(
         character: chr
 ) -> bool:
-    global \
-        ascii_number_begin, \
-        ascii_number_end
-
     character_index: int = ord(character)
 
     if(
-        (ascii_number_begin <= character_index)
+        (get_ascii_number_range_start() <= character_index)
         and
-        (character_index >= ascii_number_end)
+        (character_index >= get_ascii_number_range_end())
     ):
         return True
 
