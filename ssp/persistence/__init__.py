@@ -33,7 +33,10 @@ from ssp.logic.structures                                   \
     import CounterObject
 
 from ssp.persistence.exceptions                             \
-    import raise_category_already_exist
+    import                                                  \
+    raise_category_already_exist,                           \
+    raise_location_not_found,                               \
+    raise_file_not_found
 
 from ssp.persistence.dataset_document                       \
     import DatasetDocumentStream

@@ -8,7 +8,8 @@ from ssp.persistence                \
     ascii_uppercase_begin,          \
     ascii_uppercase_end,            \
     get_ascii_number_range_start,   \
-    get_ascii_number_range_end
+    get_ascii_number_range_end,     \
+    raise_file_not_found
 
 
 def detect_is_character_in_uppercase_letter_range(
@@ -174,7 +175,7 @@ class DatasetDocumentStream:
 
     def set_object(
             self,
-            value: TextIOBase
+            value
     ) -> None:
         self.object = value
 
@@ -207,9 +208,7 @@ class DatasetDocumentStream:
         if not isfile(
                 self.get_location()
         ):
-            raise Exception(
-                'File not found'
-            )
+            raise_file_not_found()
 
     def get_location(self) -> str:
         return self.location

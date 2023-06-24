@@ -181,6 +181,19 @@ class DataSet:
     ) -> None:
         self.store = value
 
+    def is_in_range(
+            self,
+            position: int
+    ) -> bool:
+        return position < len(
+            self.get_store()
+        )
+
+    def is_position_within_range(self) -> bool:
+        return self.is_in_range(
+            self.get_selection()
+        )
+
     def __len__(self) -> int:
         if self.is_store_none():
             return get_zero()
@@ -188,3 +201,15 @@ class DataSet:
         return len(
             self.store
         )
+
+    def __iter__(self):
+        self.reset_selection()
+        return self
+
+    def __next__(self) -> int:
+        self.next_selection()
+
+        if self.is_position_within_range():
+            return self.get_selection()
+        else:
+            raise StopIteration
