@@ -24,7 +24,10 @@ class Controller:
         )
 
     def initialise(self):
-        pass
+        self.setup()
+
+        while self.get_dataset().is_running():
+            self.get_dataset().stream()
 
     def execute(self):
         pass
