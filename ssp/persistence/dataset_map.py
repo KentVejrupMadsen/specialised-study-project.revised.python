@@ -29,9 +29,14 @@ class DataSetMapStream:
 
     def set_selection_counter(
             self,
-            value: CounterObject
+            value: CounterObject | None
     ) -> None:
         self.selection_counter = value
+
+    def delete_selection_counter(self):
+        self.set_selection_counter(
+            None
+        )
 
     def __len__(self):
         return len(
@@ -136,17 +141,18 @@ class DataSetMapStream:
         return False
 
     def __iter__(self):
-        self.selection_counter: CounterObject()
+        self.selection_counter: CounterObject = self.get_selection_counter()
         return self
 
     def __next__(self):
         self.get_selection_counter().increment()
 
-        next_step: int = int(self.get_selection_counter())
+        next_step = int(
+            self.get_selection_counter()
+        )
 
-        if next_step <= len(self):
-            return int(
-                self.get_selection_counter()
-            )
+        if next_step < len(self):
+            return next_step
         else:
+            self.delete_selection_counter()
             raise StopIteration

@@ -1,13 +1,14 @@
 #!/usr/bin/env python
-from ssp.persistence        \
-    import                  \
-    DataSetMapStream,             \
-    CategoryMapStream,            \
-    basename,               \
-    listdir,                \
-    isdir,                  \
-    join,                   \
-    walk
+from ssp.persistence            \
+    import                      \
+    DataSetMapStream,           \
+    CategoryMapStream,          \
+    basename,                   \
+    listdir,                    \
+    isdir,                      \
+    join,                       \
+    walk,                       \
+    raise_location_not_found
 
 
 class DataSetMapBuilder:
@@ -19,7 +20,7 @@ class DataSetMapBuilder:
         self.dataset: None | DataSetMapStream = None
 
         if not isdir(self.location):
-            raise Exception('location not found')
+            raise_location_not_found()
 
     def __del__(self):
         del self.location
