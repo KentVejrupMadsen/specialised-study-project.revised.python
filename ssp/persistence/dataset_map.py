@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 from ssp.persistence    \
-    import CategoryMap
+    import CategoryMapStream
 
 
-class DataSetMap:
+class DataSetMapStream:
     def __init__(self):
         self.name: str | None = None
         self.categories: list = []
@@ -37,13 +37,13 @@ class DataSetMap:
     def create(
             self,
             category_name: str
-    ) -> CategoryMap:
+    ) -> CategoryMapStream:
         if self.has_category(
             category_name
         ):
             raise Exception('category with the same name is already in the set')
 
-        new_map = CategoryMap(
+        new_map = CategoryMapStream(
             category_name
         )
 
@@ -56,7 +56,7 @@ class DataSetMap:
     def retrieve(
             self,
             index: int
-    ) -> CategoryMap:
+    ) -> CategoryMapStream:
         return self.categories[index]
 
     def remove(

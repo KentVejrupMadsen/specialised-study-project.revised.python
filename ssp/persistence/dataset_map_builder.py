@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 from ssp.persistence        \
     import                  \
-    DataSetMap,             \
-    CategoryMap,            \
+    DataSetMapStream,             \
+    CategoryMapStream,            \
     basename,               \
     listdir,                \
     isdir,                  \
@@ -16,7 +16,7 @@ class DataSetMapBuilder:
             dataset_location: str
     ):
         self.location: str = dataset_location
-        self.dataset: None | DataSetMap = None
+        self.dataset: None | DataSetMapStream = None
 
         if not isdir(self.location):
             raise Exception('location not found')
@@ -24,9 +24,9 @@ class DataSetMapBuilder:
     def __del__(self):
         del self.location
 
-    def run(self) -> DataSetMap:
+    def run(self) -> DataSetMapStream:
         self.set_dataset(
-            DataSetMap()
+            DataSetMapStream()
         )
 
         self.get_dataset().set_name(
@@ -51,7 +51,7 @@ class DataSetMapBuilder:
             )
 
             if isdir(full_path):
-                cm: CategoryMap = self.get_dataset().create(entry)
+                cm: CategoryMapStream = self.get_dataset().create(entry)
 
                 self.search_for_files(
                     cm,
@@ -60,7 +60,7 @@ class DataSetMapBuilder:
 
     def search_for_files(
             self,
-            cm: CategoryMap,
+            cm: CategoryMapStream,
             full_path
     ):
         for root, dirs, files in walk(
@@ -86,11 +86,11 @@ class DataSetMapBuilder:
     ) -> None:
         self.location = value
 
-    def get_dataset(self) -> DataSetMap | None:
+    def get_dataset(self) -> DataSetMapStream | None:
         return self.dataset
 
     def set_dataset(
             self,
-            value: DataSetMap | None
+            value: DataSetMapStream | None
     ) -> None:
         self.dataset = value

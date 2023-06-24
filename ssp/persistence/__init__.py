@@ -25,13 +25,13 @@ from HardenedSteel.facades.texts.characters.ranges          \
     ascii_lowercase_end
 
 from ssp.persistence.dataset_document                       \
-    import DatasetDocument
+    import DatasetDocumentStream
 
 from ssp.persistence.category_map                           \
-    import CategoryMap
+    import CategoryMapStream
 
 from ssp.persistence.dataset_map                            \
-    import DataSetMap
+    import DataSetMapStream
 
 from ssp.persistence.dataset_map_builder                    \
     import DataSetMapBuilder

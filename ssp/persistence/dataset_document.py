@@ -62,7 +62,7 @@ def detect_is_character_in_number_range(
     return False
 
 
-class DatasetDocument:
+class DatasetDocumentStream:
     def __init__(
             self,
             location: str

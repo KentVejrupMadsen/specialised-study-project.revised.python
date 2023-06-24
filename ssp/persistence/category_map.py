@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 from ssp.persistence \
-    import DatasetDocument
+    import DatasetDocumentStream
 
 
-class CategoryMap:
+class CategoryMapStream:
     def __init__(
             self,
             name: str
@@ -55,7 +55,7 @@ class CategoryMap:
             self,
             location: str
     ) -> None:
-        created_document = DatasetDocument(
+        created_document = DatasetDocumentStream(
             location
         )
 
@@ -72,7 +72,7 @@ class CategoryMap:
         for index in range(
             self.get_number_of_document()
         ):
-            currently_selected_document: DatasetDocument = self.retrieve(
+            currently_selected_document: DatasetDocumentStream = self.retrieve(
                 index
             )
 
@@ -85,7 +85,7 @@ class CategoryMap:
     def retrieve(
             self,
             index: int
-    ) -> DatasetDocument:
+    ) -> DatasetDocumentStream:
         return self.documents[index]
 
     def remove(

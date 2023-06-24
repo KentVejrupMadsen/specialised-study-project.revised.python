@@ -5,7 +5,7 @@ from os.path \
 from ssp.persistence    \
     import              \
     DataSetMapBuilder,  \
-    DataSetMap
+    DataSetMapStream
 
 
 class DataSet:
