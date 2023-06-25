@@ -13,7 +13,7 @@ from ssp.persistence        \
     DatasetDocumentStream
 
 
-class DataSet:
+class DataSetBuildByDirectory:
     def __init__(
             self,
             location_to_dataset: str,
