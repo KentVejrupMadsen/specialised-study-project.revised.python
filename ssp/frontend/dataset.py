@@ -137,8 +137,11 @@ class DataSet:
         while not document.is_loaded():
             buffer: str = document.load_line()
 
-            print(buffer)
+            if not document.is_line_empty():
+                pass
 
+        document.close()
+        
     def is_position_at_beginning(self) -> bool:
         return self.is_at_beginning(
             self.get_selection()
