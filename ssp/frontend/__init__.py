@@ -17,6 +17,12 @@ from ssp                        \
 from ssp.logic.structures       \
     import CounterObject
 
+from ssp.frontend.documents     \
+    import Document
+
+from ssp.frontend.categories    \
+    import Category
+
 from ssp.frontend.dataset       \
     import DataSet
 
