@@ -1,14 +1,14 @@
 #!/usr/bin/env python
-from ssp.frontend   \
-    import          \
-    Environment,    \
-    DataSet
+from ssp.frontend                   \
+    import                          \
+    Environment,                    \
+    DataSetBuildByDirectory
 
 
 class Controller:
     def __init__(self):
         self.environment = Environment()
-        self.dataset: DataSet | None = None
+        self.dataset: DataSetBuildByDirectory | None = None
 
     def __del__(self):
         del                   \
@@ -17,7 +17,7 @@ class Controller:
 
     def setup(self) -> None:
         self.set_dataset(
-            DataSet(
+            DataSetBuildByDirectory(
                 self.get_environment().get_path_to_dataset(),
                 self.get_environment().get_categories()
             )
@@ -26,11 +26,18 @@ class Controller:
     def initialise(self):
         self.setup()
 
-        for index in iter(self.get_dataset()):
-            ds_map = self.get_dataset().retrieve_map(index)
+        ds = self.get_dataset()
+        while ds.is_running():
+            ds.stream()
 
     def execute(self):
-        pass
+        ds = self.get_dataset()
+
+        print(
+            repr(
+                ds.get_events()
+            )
+        )
 
     def get_environment(self) -> Environment:
         return self.environment
@@ -41,11 +48,11 @@ class Controller:
     ) -> None:
         self.environment = value
 
-    def get_dataset(self) -> None | DataSet:
+    def get_dataset(self) -> None | DataSetBuildByDirectory:
         return self.dataset
 
     def set_dataset(
             self,
-            value: None | DataSet
+            value: None | DataSetBuildByDirectory
     ) -> None:
         self.dataset = value

@@ -1,12 +1,18 @@
 #!/usr/bin/env python
-from ssp            \
-    import          \
-    listdir,        \
-    dirname,        \
-    pardir,         \
-    realpath,       \
-    join,           \
+from ssp                            \
+    import                          \
+    listdir,                        \
+    dirname,                        \
+    pardir,                         \
+    realpath,                       \
+    join,                           \
     isdir
+
+from ssp.variables                  \
+    import                          \
+    get_dataset_label,              \
+    get_reuters_dataset_label
+
 
 location_of_script: str | None = None
 location_of_repository: str | None = None
@@ -68,17 +74,17 @@ def get_location_of_dataset() -> str:
     if location_of_dataset is None:
         location_to_dataset = join(
             get_location_of_repository(),
-            'dataset'
+            get_dataset_label()
         )
 
         location_to_dataset = join(
             location_to_dataset,
-            'Reuters21578'
+            get_reuters_dataset_label()
         )
 
         location_to_dataset = join(
             location_to_dataset,
-            'dataset'
+            get_dataset_label()
         )
 
         set_location_of_dataset(

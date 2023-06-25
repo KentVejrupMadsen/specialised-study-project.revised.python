@@ -8,7 +8,7 @@ from ssp.variables                              \
 from ssp.logic.templates                        \
     import Token
 
-from ssp.logic.structures.counters              \
+from HardenedSteel                              \
     import CounterObject
 
 from ssp.logic.structures.words                 \
