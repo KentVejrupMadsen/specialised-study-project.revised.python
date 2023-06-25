@@ -12,6 +12,10 @@ from ssp.persistence        \
     CategoryMapStream,      \
     DatasetDocumentStream
 
+from ssp.frontend.events    \
+    import                  \
+    DataSetEvents
+
 
 class DataSetBuildByDirectory:
     def __init__(
@@ -21,6 +25,8 @@ class DataSetBuildByDirectory:
     ):
         self.path_to_dataset: str = location_to_dataset
         self.categories: list = categories
+
+        self.data_event: DataSetEvents | None = None
 
         self.complete: bool = False
 
@@ -35,7 +41,28 @@ class DataSetBuildByDirectory:
             self.categories,        \
             self.complete,          \
             self.store,             \
-            self.selection
+            self.selection,         \
+            self.data_event
+
+    def is_data_event_none(self) -> bool:
+        return self.data_event is None
+
+    def get_events(self) -> DataSetEvents:
+        if self.is_data_event_none():
+            self.set_events(
+                DataSetEvents()
+            )
+
+        return self.data_event
+
+    def set_events(
+            self,
+            value: DataSetEvents
+    ) -> None:
+        self.data_event = value
+
+    def remove_events(self):
+        self.data_event = None
 
     def reset_selection(self) -> None:
         self.selection.reset()

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
-from ssp.frontend   \
-    import          \
-    Environment,    \
+from ssp.frontend                   \
+    import                          \
+    Environment,                    \
     DataSetBuildByDirectory
 
 
