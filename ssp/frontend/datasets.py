@@ -136,6 +136,10 @@ class DataSetBuildByDirectory:
 
     def stream(self) -> None:
         selected: DataSetMapStream = self.currently_selected_map()
+        self.get_events().create_label_event(
+            selected.get_name()
+        )
+
         self.stream_dataset_map(
             selected
         )

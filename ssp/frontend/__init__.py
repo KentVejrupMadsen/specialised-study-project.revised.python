@@ -19,6 +19,7 @@ from ssp.logic.structures           \
 
 from ssp.frontend.events            \
     import                          \
+    DataSetEvents,                  \
     DataSetLabelEvent,              \
     CategoryEvent,                  \
     DocumentEvent

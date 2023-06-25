@@ -1,3 +1,6 @@
+from HardenedSteel.objects.counters        \
+    import CounterObject
+
 from ssp.frontend.events.documents         \
     import DocumentEvent
 
@@ -7,5 +10,5 @@ from ssp.frontend.events.categories        \
 from ssp.frontend.events.dataset_labels    \
     import DataSetLabelEvent
 
-from ssp.frontend.events.datasets           \
+from ssp.frontend.events.datasets          \
     import DataSetEvents
