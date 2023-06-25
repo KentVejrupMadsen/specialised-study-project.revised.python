@@ -1,3 +1,9 @@
+from HardenedSteel.objects  \
+    import CounterObject
+
+from ssp.frontend.events \
+    import CategoryEvent
+
 
 class DataSetLabelEvent:
     def __init__(
@@ -6,8 +12,31 @@ class DataSetLabelEvent:
     ):
         self.label_name: str = name
 
+        self.position: CounterObject | None = None
+        self.category_events: list | None = None
+
     def __del__(self):
-        del self.label_name
+        del                         \
+            self.label_name,        \
+            self.position,          \
+            self.category_events
+
+    def get_category_events(self) -> list:
+        if self.is_category_events_none():
+            self.set_category_events(
+                list()
+            )
+
+        return self.category_events
+
+    def set_category_events(
+            self,
+            value: list
+    ) -> None:
+        self.category_events = value
+
+    def is_category_events_none(self) -> bool:
+        return self.category_events is None
 
     def get_label_name(self) -> str:
         return self.label_name
