@@ -10,18 +10,67 @@ from HardenedSteel.globals  \
 class DataSetEvents:
     def __init__(self):
         self.labels: list | None = None
+
         self.iterator: CounterObject | None = None
+        self.position: CounterObject | None = None
 
     def __del__(self):
         del                 \
             self.labels,    \
-            self.iterator
+            self.iterator,  \
+            self.position
 
     def __repr__(self):
         return str({
             'iterator': self.get_iterator().get_value(),
             'labels': self.get_event_labels()
         })
+
+    def get_position(self) -> CounterObject:
+        if self.is_position_none():
+            self.set_position(
+                CounterObject()
+            )
+
+        return self.position
+
+    def set_position(
+            self,
+            value: CounterObject
+    ) -> None:
+        self.position = value
+
+    def is_position_none(self) -> bool:
+        return self.position is None
+
+    def move_to_next_index(self):
+        self.get_position().increment()
+
+    def move_to_previous_index(self):
+        self.get_position().decrement()
+
+    def current_index(self):
+        return self.get_position().get_value()
+
+    def set_position_by_label(
+            self,
+            value: str
+    ) -> bool:
+        normalised_input_value: str = value.lower()
+
+        for index in iter(self):
+            label: DataSetLabelEvent = self.retrieve_label_event(
+                index
+            )
+
+            if label.get_label_name_normalised() == normalised_input_value:
+                self.get_position().set_value(
+                    index
+                )
+                
+                return True
+
+        return False
 
     def is_iterator_none(self) -> bool:
         return self.iterator is None
