@@ -33,10 +33,21 @@ class CounterObject:
         self.value: int = start_value
         self.move: int = move_by
 
+    def __del__(self):
+        del \
+            self.value, \
+            self.move
+
     def reset(self):
         self.set_value(
             get_zero()
         )
+
+    def previous(self) -> int:
+        return self.get_value() - get_one()
+
+    def after(self) -> int:
+        return self.get_value() + get_one()
 
     def get_move_size(self) -> int:
         return self.move
@@ -137,11 +148,6 @@ class CounterObject:
     ) -> bool:
         compare_to: CounterObject = other
         return self.get_value() > compare_to.get_value()
-
-    def __del__(self):
-        del \
-            self.value, \
-            self.move
 
     def __add__(
             self,

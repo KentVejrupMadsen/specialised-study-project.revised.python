@@ -103,6 +103,7 @@ class DataSet:
         )
 
         self.next_selection()
+
         if self.is_position_at_end():
             self.set_is_complete(
                 True
