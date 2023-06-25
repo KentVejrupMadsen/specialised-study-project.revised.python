@@ -1,14 +1,16 @@
 #!/usr/bin/env python
-from ssp.frontend       \
-    import              \
-    CounterObject,      \
-    join,               \
+from ssp.frontend           \
+    import                  \
+    CounterObject,          \
+    join,                   \
     get_zero
 
-from ssp.persistence    \
-    import              \
-    DataSetMapBuilder,  \
-    DataSetMapStream
+from ssp.persistence        \
+    import                  \
+    DataSetMapBuilder,      \
+    DataSetMapStream,       \
+    CategoryMapStream,      \
+    DatasetDocumentStream
 
 
 class DataSet:
@@ -40,8 +42,17 @@ class DataSet:
 
     def get_selection(self) -> int:
         return int(
-            self.selection
+            self.get_selection_counter()
         )
+
+    def get_selection_counter(self) -> CounterObject:
+        return self.selection
+
+    def set_selection_counter(
+            self,
+            value: CounterObject
+    ) -> None:
+        self.selection = value
 
     def next_selection(self) -> None:
         self.selection.increment()
@@ -113,9 +124,20 @@ class DataSet:
             self,
             dsm: DataSetMapStream
     ) -> None:
-        print(
-            dsm.get_name()
-        )
+        for selected_category in dsm.get_categories():
+            category_label: CategoryMapStream = selected_category
+
+            for selected_document in category_label.get_documents():
+                self.stream_dataset_document(selected_document)
+
+    def stream_dataset_document(
+            self,
+            document: DatasetDocumentStream
+    ):
+        while not document.is_loaded():
+            buffer: str = document.load_line()
+
+            print(buffer)
 
     def is_position_at_beginning(self) -> bool:
         return self.is_at_beginning(
