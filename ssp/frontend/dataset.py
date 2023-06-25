@@ -13,6 +13,14 @@ from ssp.persistence        \
     DatasetDocumentStream
 
 
+def filter_characters_in_string(
+        string: str
+) -> str:
+    replace: str = string
+    replace = replace.replace('\n', '')
+    return replace
+
+
 class DataSet:
     def __init__(
             self,
@@ -128,20 +136,56 @@ class DataSet:
             category_label: CategoryMapStream = selected_category
 
             for selected_document in category_label.get_documents():
-                self.stream_dataset_document(selected_document)
+                self.stream_dataset_document(
+                    selected_document
+                )
 
     def stream_dataset_document(
             self,
             document: DatasetDocumentStream
     ):
+        document.set_is_to_normalise(True)
+
         while not document.is_loaded():
             buffer: str = document.load_line()
 
             if not document.is_line_empty():
-                pass
+                tokens = self.stream_tokens(
+                    buffer
+                )
 
         document.close()
-        
+
+    def stream_tokens(
+            self,
+            line: str
+    ) -> list:
+        tokens: list = line.split(' ')
+        filter_tokens: list = list()
+
+        for index in range(
+            len(
+                tokens
+            )
+        ):
+            token: str = tokens[index]
+            tokens[index] = filter_characters_in_string(token)
+
+            if len(token) == 0:
+                filter_tokens.append(
+                    index
+                )
+
+        # Removes tokens that are below a certain limit
+        filter_tokens.reverse()
+
+        for remove_token_by_index in filter_tokens:
+            tokens.pop(
+                remove_token_by_index
+            )
+
+        return tokens
+
     def is_position_at_beginning(self) -> bool:
         return self.is_at_beginning(
             self.get_selection()

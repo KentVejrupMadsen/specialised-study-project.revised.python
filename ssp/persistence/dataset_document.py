@@ -73,7 +73,7 @@ class DatasetDocumentStream:
             location
         )
 
-        self.normalise: bool = True
+        self.normalise: bool = False
 
         self.buffer: str | None = None
 
