@@ -3,8 +3,8 @@ from ssp.variables \
 
 from ssp.logic.structures   \
     import                  \
-    CounterObject,          \
-    DocumentToken
+    DocumentToken,          \
+    CounterObject
 
 
 class Document:
