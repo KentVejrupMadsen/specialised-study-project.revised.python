@@ -1,4 +1,4 @@
-class Document:
+class DocumentEvent:
     def __init__(self):
         pass
 

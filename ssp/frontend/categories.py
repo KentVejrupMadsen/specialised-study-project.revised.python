@@ -1,4 +1,4 @@
-class Category:
+class CategoryEvent:
     def __init__(self):
         pass
 

@@ -18,10 +18,10 @@ from ssp.logic.structures       \
     import CounterObject
 
 from ssp.frontend.documents     \
-    import Document
+    import DocumentEvent
 
 from ssp.frontend.categories    \
-    import Category
+    import CategoryEvent
 
 from ssp.frontend.dataset       \
     import DataSet
