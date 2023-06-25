@@ -10,8 +10,16 @@ seven: int  = 7
 eight: int  = 8
 nine: int   = 9
 
-ascii_number_range_start: int = ord('0')
-ascii_number_range_end: int = ord('9')
+ascii_number_range_start: int = ord(
+    str(
+        zero
+    )
+)
+ascii_number_range_end: int = ord(
+    str(
+        nine
+    )
+)
 
 
 def get_ascii_number_range_start() -> int:

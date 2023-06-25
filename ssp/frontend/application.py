@@ -19,11 +19,6 @@ class Application:
     def garbage_collection(self):
         pass
 
-    def run(self):
-        self.initialise()
-        self.execute()
-        self.garbage_collection()
-
     def get_controller(self) -> None | Controller:
         return self.controller
 
@@ -32,3 +27,8 @@ class Application:
             value: Controller | None
     ):
         self.controller = value
+
+    def run(self):
+        self.initialise()
+        self.execute()
+        self.garbage_collection()

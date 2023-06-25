@@ -14,6 +14,9 @@ from os.path                                                \
     basename,                                               \
     join
 
+from HardenedSteel \
+    import CounterObject
+
 from HardenedSteel.facades.texts.characters.ranges          \
     import                                                  \
     ascii_uppercase_begin,                                  \
@@ -28,9 +31,6 @@ from ssp.variables                                          \
     import                                                  \
     get_ascii_number_range_start,                           \
     get_ascii_number_range_end
-
-from ssp.logic.structures                                   \
-    import CounterObject
 
 from ssp.persistence.exceptions                             \
     import                                                  \

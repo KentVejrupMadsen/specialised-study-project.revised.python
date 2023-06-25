@@ -73,7 +73,18 @@ class DatasetDocumentStream:
             location
         )
 
+        self.normalise: bool = False
+
         self.buffer: str | None = None
+
+    def is_to_normalise(self) -> bool:
+        return self.normalise
+
+    def set_is_to_normalise(
+            self,
+            value: bool
+    ) -> None:
+        self.normalise = value
 
     def __repr__(self) -> str:
         return str(
@@ -122,7 +133,18 @@ class DatasetDocumentStream:
                 True
             )
 
-        return self.get_buffer()
+        return self.___output_line(
+            self.get_buffer()
+        )
+
+    def ___output_line(
+            self,
+            line: str
+    ):
+        if self.is_to_normalise():
+            return line.lower()
+        else:
+            return line
 
     def is_line_empty(self) -> bool:
         if self.get_buffer() is None:

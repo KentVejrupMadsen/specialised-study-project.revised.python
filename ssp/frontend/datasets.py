@@ -1,17 +1,23 @@
 #!/usr/bin/env python
-from ssp.frontend       \
-    import              \
-    CounterObject,      \
-    join,               \
+from ssp.frontend           \
+    import                  \
+    CounterObject,          \
+    join,                   \
     get_zero
 
-from ssp.persistence    \
-    import              \
-    DataSetMapBuilder,  \
-    DataSetMapStream
+from ssp.persistence        \
+    import                  \
+    DataSetMapBuilder,      \
+    DataSetMapStream,       \
+    CategoryMapStream,      \
+    DatasetDocumentStream
+
+from ssp.frontend.events    \
+    import                  \
+    DataSetEvents
 
 
-class DataSet:
+class DataSetBuildByDirectory:
     def __init__(
             self,
             location_to_dataset: str,
@@ -19,6 +25,8 @@ class DataSet:
     ):
         self.path_to_dataset: str = location_to_dataset
         self.categories: list = categories
+
+        self.data_event: DataSetEvents | None = None
 
         self.complete: bool = False
 
@@ -33,15 +41,45 @@ class DataSet:
             self.categories,        \
             self.complete,          \
             self.store,             \
-            self.selection
+            self.selection,         \
+            self.data_event
+
+    def is_data_event_none(self) -> bool:
+        return self.data_event is None
+
+    def get_events(self) -> DataSetEvents:
+        if self.is_data_event_none():
+            self.set_events(
+                DataSetEvents()
+            )
+
+        return self.data_event
+
+    def set_events(
+            self,
+            value: DataSetEvents
+    ) -> None:
+        self.data_event = value
+
+    def remove_events(self):
+        self.data_event = None
 
     def reset_selection(self) -> None:
         self.selection.reset()
 
     def get_selection(self) -> int:
         return int(
-            self.selection
+            self.get_selection_counter()
         )
+
+    def get_selection_counter(self) -> CounterObject:
+        return self.selection
+
+    def set_selection_counter(
+            self,
+            value: CounterObject
+    ) -> None:
+        self.selection = value
 
     def next_selection(self) -> None:
         self.selection.increment()
@@ -98,11 +136,16 @@ class DataSet:
 
     def stream(self) -> None:
         selected: DataSetMapStream = self.currently_selected_map()
+        self.get_events().create_label_event(
+            selected.get_name()
+        )
+
         self.stream_dataset_map(
             selected
         )
 
         self.next_selection()
+
         if self.is_position_at_end():
             self.set_is_complete(
                 True
@@ -112,9 +155,28 @@ class DataSet:
             self,
             dsm: DataSetMapStream
     ) -> None:
-        print(
-            dsm.get_name()
+        for selected_category \
+                in dsm.get_categories():
+            category_label: CategoryMapStream = selected_category
+
+            for selected_document \
+                    in category_label.get_documents():
+                self.stream_dataset_document(
+                    selected_document
+                )
+
+    def stream_dataset_document(
+            self,
+            document: DatasetDocumentStream
+    ):
+        document.set_is_to_normalise(
+            True
         )
+
+        while not document.is_loaded():
+            document.load_line()
+
+        document.close()
 
     def is_position_at_beginning(self) -> bool:
         return self.is_at_beginning(
