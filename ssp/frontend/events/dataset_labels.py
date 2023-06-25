@@ -22,3 +22,8 @@ class DataSetLabelEvent:
             value: str
     ) -> None:
         self.label_name = value
+
+    def __repr__(self):
+        return str({
+            'label': self.label_name
+        })

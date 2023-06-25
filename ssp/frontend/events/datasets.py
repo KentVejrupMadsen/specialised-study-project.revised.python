@@ -3,6 +3,9 @@ from ssp.frontend.events    \
     CounterObject,          \
     DataSetLabelEvent
 
+from HardenedSteel.globals  \
+    import get_integer_zero
+
 
 class DataSetEvents:
     def __init__(self):
@@ -13,6 +16,12 @@ class DataSetEvents:
         del                 \
             self.labels,    \
             self.iterator
+
+    def __repr__(self):
+        return str({
+            'iterator': self.get_iterator().get_value(),
+            'labels': self.get_event_labels()
+        })
 
     def is_iterator_none(self) -> bool:
         return self.iterator is None
@@ -56,18 +65,33 @@ class DataSetEvents:
             index
         ]
 
+    def retrieve_label_event_by_name(
+            self,
+            value: str
+    ):
+        normalised_input = value.lower()
+
+        for index in iter(self):
+            events: DataSetLabelEvent = self.retrieve_label_event(
+                index
+            )
+
+            if events.get_label_name_normalised() == normalised_input:
+                return events
+
     def exist_label_event(
             self,
             value: str
     ) -> bool:
-        if int(self) == 0:
+        if int(self) == get_integer_zero():
             return False
         else:
             normalised_input: str = value.lower()
 
             for index in iter(self):
-                print(index)
-                label: DataSetLabelEvent = self.retrieve_label_event(index)
+                label: DataSetLabelEvent = self.retrieve_label_event(
+                    index
+                )
 
                 if label.get_label_name_normalised() == normalised_input:
                     return True
@@ -93,7 +117,7 @@ class DataSetEvents:
 
     def __int__(self) -> int:
         if self.is_event_labels_none():
-            return 0
+            return get_integer_zero()
         else:
             return len(
                 self.labels
@@ -113,7 +137,7 @@ class DataSetEvents:
         if self.get_iterator() < int(self):
             self.get_iterator().increment()
 
-            return self.get_iterator().get_value()
+            return self.get_iterator().previous()
         else:
 
             raise StopIteration

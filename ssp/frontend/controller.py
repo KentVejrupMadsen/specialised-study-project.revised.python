@@ -31,7 +31,13 @@ class Controller:
             ds.stream()
 
     def execute(self):
-        pass
+        ds = self.get_dataset()
+
+        print(
+            repr(
+                ds.get_events()
+            )
+        )
 
     def get_environment(self) -> Environment:
         return self.environment
