@@ -17,11 +17,11 @@ from ssp                            \
 from ssp.logic.structures           \
     import CounterObject
 
-from ssp.frontend.documents         \
-    import DocumentEvent
-
-from ssp.frontend.categories        \
-    import CategoryEvent
+from ssp.frontend.events            \
+    import                          \
+    DataSetLabelEvent,              \
+    CategoryEvent,                  \
+    DocumentEvent
 
 from ssp.frontend.datasets          \
     import DataSetBuildByDirectory

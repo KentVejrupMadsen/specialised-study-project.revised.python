@@ -143,7 +143,7 @@ class DataSetBuildByDirectory:
         )
 
         while not document.is_loaded():
-            pass
+            document.load_line()
 
         document.close()
 
