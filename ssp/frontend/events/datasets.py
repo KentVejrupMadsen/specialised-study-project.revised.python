@@ -22,7 +22,8 @@ class DataSetEvents:
 
     def __repr__(self):
         return str({
-            'iterator': self.get_iterator().get_value(),
+            'iterator': int(self.get_iterator()),
+            'position': int(self.get_position()),
             'labels': self.get_event_labels()
         })
 
@@ -67,7 +68,7 @@ class DataSetEvents:
                 self.get_position().set_value(
                     index
                 )
-                
+
                 return True
 
         return False
@@ -185,7 +186,6 @@ class DataSetEvents:
     def __next__(self):
         if self.get_iterator() < int(self):
             self.get_iterator().increment()
-
             return self.get_iterator().previous()
         else:
 
