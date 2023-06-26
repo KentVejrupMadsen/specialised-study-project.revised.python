@@ -23,7 +23,7 @@ class DataSetLabelEvent:
             self.position,          \
             self.category_events
 
-    def __int__(self):
+    def __len__(self):
         if self.is_category_events_none():
             return get_integer_zero()
 
@@ -53,7 +53,7 @@ class DataSetLabelEvent:
         if(
             self.is_category_events_none()
             or
-            int(self) == get_integer_zero()
+            len(self) == get_integer_zero()
         ):
             return None
 
@@ -71,10 +71,7 @@ class DataSetLabelEvent:
             return None
         normalised_category_name: str = category_name.lower()
 
-        for index in range(
-                    len(
-                        self.category_events
-                    )
+        for index in range(len(self)
                 ):
             current_category_event: CategoryEvent = self.retrieve_category_event(
                 index
