@@ -2,6 +2,9 @@
 .idea/*
 .venv/*
 .pytest_cache/*
+dist/*
+
+*.egg-info
 
 # extensions
 *.pyc
