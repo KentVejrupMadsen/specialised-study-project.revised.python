@@ -38,6 +38,11 @@ class CategoryEvent:
             self.document_events
         )
 
+    def __int__(self) -> int:
+        return int(
+            self.get_position()
+        )
+
     def retrieve_selected_document(self) -> DocumentEvent | None:
         if(
             self.is_document_events_none()
@@ -46,9 +51,7 @@ class CategoryEvent:
         ):
             return None
         return self.get_event_at(
-            int(
-                self.get_position()
-            )
+            int(self)
         )
 
     def set_position_by_document(

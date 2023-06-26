@@ -27,10 +27,10 @@ class DataSetBuildByDirectory:
     ):
         self.path_to_dataset: str = location_to_dataset
         self.categories: list = categories
+        self.selection: CounterObject | None = None
         self.data_event: DataSetEvents | None = None
         self.complete: bool = False
         self.store: list | None = None
-        self.selection: CounterObject = CounterObject()
 
         self.initialise()
 
@@ -71,7 +71,15 @@ class DataSetBuildByDirectory:
             self.get_selection_counter()
         )
 
+    def is_selection_none(self) -> bool:
+        return self.selection is None
+
     def get_selection_counter(self) -> CounterObject:
+        if self.is_selection_none():
+            self.set_selection_counter(
+                CounterObject()
+            )
+
         return self.selection
 
     def set_selection_counter(
@@ -183,7 +191,9 @@ class DataSetBuildByDirectory:
         if category_event is None:
             return None
 
-        currently_selected_document: DocumentEvent | None = category_event.retrieve_selected_document()
+        currently_selected_document: DocumentEvent | None = \
+            category_event.retrieve_selected_document()
+
         if currently_selected_document is None:
             return None
 
