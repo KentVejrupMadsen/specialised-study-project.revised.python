@@ -205,16 +205,17 @@ class DataSetBuildByDirectory:
                 document_stream.get_location()
             )
 
+    def run_stream(self):
+        for index in iter(self):
+            self.stream_map_by_index(
+                index
+            )
+
     def stream(self) -> None:
         self.stream_map_by_index(
             self.get_selection()
         )
-
         self.next_selection()
-        if self.is_position_at_end():
-            self.set_is_complete(
-                True
-            )
 
     def stream_map_by_index(
             self,
@@ -231,6 +232,11 @@ class DataSetBuildByDirectory:
         self.stream_dataset_map(
             selected
         )
+
+        if self.is_position_at_end():
+            self.set_is_complete(
+                True
+            )
 
     def stream_dataset_map(
             self,

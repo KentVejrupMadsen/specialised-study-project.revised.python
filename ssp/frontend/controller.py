@@ -25,12 +25,10 @@ class Controller:
 
     def initialise(self) -> None:
         self.setup()
-
-        for index in iter(self.get_dataset()):
-            self.get_dataset().stream_map_by_index(index)
+        self.get_dataset().run_stream()
 
     def execute(self) -> None:
-        ds = self.get_dataset()
+        pass
 
     def get_environment(self) -> Environment:
         return self.environment
