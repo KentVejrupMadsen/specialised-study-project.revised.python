@@ -10,7 +10,8 @@ from ssp.persistence        \
     DataSetMapBuilder,      \
     DataSetMapStream,       \
     CategoryMapStream,      \
-    DatasetDocumentStream
+    DatasetDocumentStream,  \
+    DocumentLoader
 
 from ssp.frontend.events    \
     import                  \
@@ -25,11 +26,8 @@ class DataSetBuildByDirectory:
     ):
         self.path_to_dataset: str = location_to_dataset
         self.categories: list = categories
-
         self.data_event: DataSetEvents | None = None
-
         self.complete: bool = False
-
         self.store: list | None = None
         self.selection: CounterObject = CounterObject()
 
@@ -107,14 +105,14 @@ class DataSetBuildByDirectory:
 
     def initialise(self) -> None:
         for category in self.categories:
-            self.insert(
+            self.insert_build_dataset_label(
                 join(
                     self.path_to_dataset,
                     category
                 )
             )
 
-    def insert(
+    def insert_build_dataset_label(
             self,
             full_path: str
     ) -> None:
@@ -122,7 +120,7 @@ class DataSetBuildByDirectory:
             full_path
         )
 
-        self.get_store().append(
+        self.insert_label(
             builder.run()
         )
 
@@ -134,8 +132,55 @@ class DataSetBuildByDirectory:
             position
         )
 
+    def insert_label(
+            self,
+            value: DataSetMapStream
+    ):
+        self.get_store().append(
+            value
+        )
+
+    def synchronise_events_stream_labels(
+            self,
+            map_stream: DataSetMapStream
+    ) -> None:
+        events = self.get_events()
+
+        if not (
+            events.get_selection_label_name()
+            ==
+            map_stream.get_name()
+        ):
+            events.set_position_by_label(
+                map_stream.get_name()
+            )
+
+    def synchronise_events_stream_category(
+            self,
+            category_stream: CategoryMapStream
+    ) -> None:
+        events = self.get_events()
+        label_events = events.retrieve_selection()
+
+        if not(
+            category_stream.get_name()
+            ==
+            label_events.get_label_name_normalised()
+        ):
+            events.set_position_by_label(
+                category_stream.get_name()
+            )
+
+    def synchronise_events_stream_document(
+            self,
+            document_stream: DatasetDocumentStream
+    ) -> None:
+        events = self.get_events()
+
     def stream(self) -> None:
-        selected: DataSetMapStream = self.currently_selected_map()
+        selected: DataSetMapStream =            \
+            self.currently_selected_map()
+
         self.get_events().create_label_event(
             selected.get_name()
         )
@@ -145,7 +190,6 @@ class DataSetBuildByDirectory:
         )
 
         self.next_selection()
-
         if self.is_position_at_end():
             self.set_is_complete(
                 True
@@ -155,28 +199,42 @@ class DataSetBuildByDirectory:
             self,
             dsm: DataSetMapStream
     ) -> None:
+        self.synchronise_events_stream_labels(
+            dsm
+        )
+
         for selected_category \
                 in dsm.get_categories():
             category_label: CategoryMapStream = selected_category
+            self.synchronise_events_stream_category(
+                category_label
+            )
+            self.stream_dataset_category(
+                category_label
+            )
 
-            for selected_document \
-                    in category_label.get_documents():
-                self.stream_dataset_document(
-                    selected_document
-                )
+    def stream_dataset_category(
+            self,
+            cms: CategoryMapStream
+    ) -> None:
+        for document in cms.get_documents():
+            selected_document: DatasetDocumentStream = document
+            self.synchronise_events_stream_document(
+                selected_document
+            )
+            self.stream_dataset_document(
+                selected_document
+            )
 
     def stream_dataset_document(
             self,
             document: DatasetDocumentStream
     ):
-        document.set_is_to_normalise(
-            True
+        loader = DocumentLoader(
+            document
         )
 
-        while not document.is_loaded():
-            document.load_line()
-
-        document.close()
+        loader.load()
 
     def is_position_at_beginning(self) -> bool:
         return self.is_at_beginning(

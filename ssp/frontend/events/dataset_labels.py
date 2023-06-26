@@ -11,7 +11,6 @@ class DataSetLabelEvent:
             name: str
     ):
         self.label_name: str = name
-
         self.position: CounterObject | None = None
         self.category_events: list | None = None
 
@@ -36,6 +35,26 @@ class DataSetLabelEvent:
             index: int
     ) -> CategoryEvent:
         return self.get_category_events()[index]
+
+    def set_position_by_label(
+            self,
+            category_name: str
+    ) -> None:
+        if self.is_category_events_none():
+            return None
+
+        normalised_category_name: str = category_name.lower()
+
+        for index in range(
+                    len(
+                        self.category_events
+                    )
+                ):
+            category_event: CategoryEvent = self.retrieve_category_event(index)
+
+            if normalised_category_name == category_event.get_category_name().lower():
+                self.get_position().set_value(index)
+                return None
 
     def delete_category_event(
             self,
@@ -93,9 +112,7 @@ class DataSetLabelEvent:
     def __repr__(self):
         return str({
             'label': self.label_name,
-
             'categories': self.get_category_events(),
-
             'position': int(
                 self.get_position()
             )

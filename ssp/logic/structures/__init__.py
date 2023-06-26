@@ -27,5 +27,5 @@ from ssp.logic.structures.documents             \
     import Document
 
 from ssp.logic.structures.datasets              \
-    import DataSet
+    import DataSetWrapper
 
