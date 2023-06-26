@@ -42,7 +42,6 @@ class DataSetLabelEvent:
     ) -> None:
         if self.is_category_events_none():
             return None
-
         normalised_category_name: str = category_name.lower()
 
         for index in range(
@@ -50,10 +49,15 @@ class DataSetLabelEvent:
                         self.category_events
                     )
                 ):
-            category_event: CategoryEvent = self.retrieve_category_event(index)
+            current_category_event: CategoryEvent = self.retrieve_category_event(
+                index
+            )
+            current_category_event_name: str = current_category_event.get_category_name().lower()
 
-            if normalised_category_name == category_event.get_category_name().lower():
-                self.get_position().set_value(index)
+            if normalised_category_name == current_category_event_name:
+                self.get_position().set_value(
+                    index
+                )
                 return None
 
     def delete_category_event(

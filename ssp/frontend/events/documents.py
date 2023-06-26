@@ -7,7 +7,7 @@ class DocumentEvent:
         self.entity: Document | None = None
 
     def __del__(self):
-        del \
+        del                 \
             self.entity
 
     def get_entity(self) -> Document | None:

@@ -16,12 +16,31 @@ class CategoryEvent:
         self.category: str = category_name
         self.document_events: list | None = None
         self.entity: Category | None = None
+        self.position: None | CounterObject = None
 
     def __del__(self):
         del                         \
             self.category,          \
             self.document_events,   \
-            self.entity
+            self.entity,            \
+            self.position
+
+    def get_position(self) -> CounterObject:
+        if self.is_position_none():
+            self.set_position(
+                CounterObject()
+            )
+            
+        return self.position
+
+    def set_position(
+            self,
+            value: CounterObject
+    ) -> None:
+        self.position = value
+
+    def is_position_none(self) -> bool:
+        return self.position is None
 
     def get_entity(self) -> Category | None:
         return self.entity
