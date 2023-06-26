@@ -107,14 +107,14 @@ class DataSetBuildByDirectory:
 
     def initialise(self) -> None:
         for category in self.categories:
-            self.insert(
+            self.insert_build_dataset_label(
                 join(
                     self.path_to_dataset,
                     category
                 )
             )
 
-    def insert(
+    def insert_build_dataset_label(
             self,
             full_path: str
     ) -> None:
@@ -122,7 +122,7 @@ class DataSetBuildByDirectory:
             full_path
         )
 
-        self.get_store().append(
+        self.insert_label(
             builder.run()
         )
 
@@ -133,6 +133,15 @@ class DataSetBuildByDirectory:
         self.get_store().pop(
             position
         )
+
+    def insert_label(
+            self,
+            value: DataSetMapStream
+    ):
+        self.get_store().append(
+            value
+        )
+
 
     def stream(self) -> None:
         selected: DataSetMapStream = self.currently_selected_map()
