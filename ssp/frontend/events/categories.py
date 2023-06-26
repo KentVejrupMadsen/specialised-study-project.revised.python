@@ -23,6 +23,15 @@ class CategoryEvent:
             self.document_events,   \
             self.entity
 
+    def get_entity(self) -> Category | None:
+        return self.entity
+
+    def set_entity(
+            self,
+            value: Category | None
+    ) -> None:
+        self.entity = value
+
     def get_category_name(self) -> str:
         return self.category
 

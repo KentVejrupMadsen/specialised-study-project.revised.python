@@ -33,7 +33,7 @@ class DataSetEvents:
             'labels': self.get_event_labels()
         })
 
-    def get_entity(self) -> DataSet:
+    def get_entity(self) -> DataSet | None:
         return self.entity
 
     def set_entity(
