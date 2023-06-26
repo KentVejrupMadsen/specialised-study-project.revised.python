@@ -190,6 +190,21 @@ class CategoryEvent:
     def select_by_location(
             self,
             value: str
-    ):
-        pass
+    ) -> None:
+        normalise_input: str = value.lower()
+
+        for index in iter(self):
+            document_event: DocumentEvent = self.get_event_at(
+                index
+            )
+
+            normalised_document_path: str = str(
+                document_event.get_stream().get_location()
+            ).lower()
+            
+            if normalise_input == normalised_document_path:
+                self.get_position().set_value(
+                    index
+                )
+                return None
 
