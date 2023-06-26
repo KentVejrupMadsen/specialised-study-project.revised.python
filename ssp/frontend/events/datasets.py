@@ -87,7 +87,6 @@ class DataSetEvents:
             label: DataSetLabelEvent = self.retrieve_label_event(
                 index
             )
-
             if label.get_label_name_normalised() == normalised_input_value:
                 self.get_position().set_value(
                     index
