@@ -140,18 +140,43 @@ class DataSetBuildByDirectory:
             value
         )
 
-    def synchronise_events_stream_map(
+    def synchronise_events_stream_labels(
             self,
             map_stream: DataSetMapStream
-    ):
+    ) -> None:
         events = self.get_events()
 
-        if not (events.get_selection_label_name() == map_stream.get_name()):
+        if not (
+            events.get_selection_label_name()
+            ==
+            map_stream.get_name()
+        ):
             events.set_position_by_label(
                 map_stream.get_name()
             )
 
-    #TODO: Stream ------------------------------------------------------------------------------------------------------
+    def synchronise_events_stream_category(
+            self,
+            category_stream: CategoryMapStream
+    ) -> None:
+        events = self.get_events()
+        label_events = events.retrieve_selection()
+
+        if not(
+            category_stream.get_name()
+            ==
+            label_events.get_label_name_normalised()
+        ):
+            events.set_position_by_label(
+                category_stream.get_name()
+            )
+
+    def synchronise_events_stream_document(
+            self,
+            document_stream: DatasetDocumentStream
+    ) -> None:
+        events = self.get_events()
+
     def stream(self) -> None:
         selected: DataSetMapStream =            \
             self.currently_selected_map()
@@ -174,12 +199,16 @@ class DataSetBuildByDirectory:
             self,
             dsm: DataSetMapStream
     ) -> None:
-        self.synchronise_events_stream_map(
+        self.synchronise_events_stream_labels(
             dsm
         )
 
-        for selected_category in dsm.get_categories():
+        for selected_category \
+                in dsm.get_categories():
             category_label: CategoryMapStream = selected_category
+            self.synchronise_events_stream_category(
+                category_label
+            )
             self.stream_dataset_category(
                 category_label
             )
@@ -190,6 +219,9 @@ class DataSetBuildByDirectory:
     ) -> None:
         for document in cms.get_documents():
             selected_document: DatasetDocumentStream = document
+            self.synchronise_events_stream_document(
+                selected_document
+            )
             self.stream_dataset_document(
                 selected_document
             )

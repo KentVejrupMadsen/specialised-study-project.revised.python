@@ -36,6 +36,26 @@ class DataSetLabelEvent:
     ) -> CategoryEvent:
         return self.get_category_events()[index]
 
+    def set_position_by_label(
+            self,
+            category_name: str
+    ) -> None:
+        if self.is_category_events_none():
+            return None
+
+        normalised_category_name: str = category_name.lower()
+
+        for index in range(
+                    len(
+                        self.category_events
+                    )
+                ):
+            category_event: CategoryEvent = self.retrieve_category_event(index)
+
+            if normalised_category_name == category_event.get_category_name().lower():
+                self.get_position().set_value(index)
+                return None
+
     def delete_category_event(
             self,
             index: int
@@ -49,6 +69,7 @@ class DataSetLabelEvent:
             self.set_category_events(
                 list()
             )
+
         return self.category_events
 
     def set_category_events(
