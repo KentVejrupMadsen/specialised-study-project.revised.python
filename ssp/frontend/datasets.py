@@ -139,20 +139,21 @@ class DataSetBuildByDirectory:
             value
         )
 
-    def synchronise_event_stream(
+    def synchronise_events_stream_map(
             self,
             map_stream: DataSetMapStream
     ):
         events = self.get_events()
 
-        print(events.get_event_labels())
+        if not (events.get_selection_label_name() == map_stream.get_name()):
+            events.set_position_by_label(
+                map_stream.get_name()
+            )
 
     #TODO: Stream ------------------------------------------------------------------------------------------------------
     def stream(self) -> None:
-        selected: DataSetMapStream = self.currently_selected_map()
-        self.synchronise_event_stream(
-            selected
-        )
+        selected: DataSetMapStream =            \
+            self.currently_selected_map()
 
         self.get_events().create_label_event(
             selected.get_name()
@@ -172,15 +173,25 @@ class DataSetBuildByDirectory:
             self,
             dsm: DataSetMapStream
     ) -> None:
-        for selected_category \
-                in dsm.get_categories():
-            category_label: CategoryMapStream = selected_category
+        self.synchronise_events_stream_map(
+            dsm
+        )
 
-            for selected_document \
-                    in category_label.get_documents():
-                self.stream_dataset_document(
-                    selected_document
-                )
+        for selected_category in dsm.get_categories():
+            category_label: CategoryMapStream = selected_category
+            self.stream_dataset_category(
+                category_label
+            )
+
+    def stream_dataset_category(
+            self,
+            cms: CategoryMapStream
+    ) -> None:
+        for document in cms.get_documents():
+            selected_document: DatasetDocumentStream = document
+            self.stream_dataset_document(
+                selected_document
+            )
 
     def stream_dataset_document(
             self,
