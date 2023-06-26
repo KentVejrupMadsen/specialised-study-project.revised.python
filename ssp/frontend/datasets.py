@@ -3,14 +3,13 @@ from ssp.frontend                       \
     import                              \
     CounterObject,                      \
     join,                               \
-    get_zero,                           \
-    DataSetLabelEvent,                  \
-    CategoryEvent,                      \
-    DocumentEvent
+    get_zero
 
 from ssp.frontend.events                \
     import                              \
     DataSetEvents,                      \
+    DataSetLabelEvent,                  \
+    CategoryEvent,                      \
     DocumentEvent
 
 from ssp.persistence                    \
