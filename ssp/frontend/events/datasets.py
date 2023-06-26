@@ -144,7 +144,7 @@ class DataSetEvents:
             self,
             position_index: int
     ) -> bool:
-        return position_index < int(self)
+        return position_index < len(self)
 
     def retrieve_label_event_by_name(
             self,
@@ -162,7 +162,7 @@ class DataSetEvents:
             self,
             value: str
     ) -> bool:
-        if int(self) == get_integer_zero():
+        if len(self) == get_integer_zero():
             return False
         else:
             normalised_input: str = value.lower()
@@ -191,7 +191,7 @@ class DataSetEvents:
     ) -> None:
         self.labels = value
 
-    def __int__(self) -> int:
+    def __len__(self) -> int:
         if self.is_event_labels_none():
             return get_integer_zero()
         else:
@@ -213,7 +213,7 @@ class DataSetEvents:
         if (
             self.iterator_as_integer()
             <
-            int(self)
+            len(self)
         ):
             self.get_iterator().increment()
             return self.iterator_as_index()
