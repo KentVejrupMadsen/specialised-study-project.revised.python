@@ -60,7 +60,7 @@ class DataSetBuildByDirectory:
     ) -> None:
         self.data_event = value
 
-    def remove_events(self):
+    def remove_events(self) -> None:
         self.data_event = None
 
     def reset_selection(self) -> None:
@@ -144,7 +144,7 @@ class DataSetBuildByDirectory:
     def insert_label(
             self,
             value: DataSetMapStream
-    ):
+    ) -> None:
         self.get_store().append(
             value
         )
@@ -259,7 +259,7 @@ class DataSetBuildByDirectory:
     def stream_dataset_document(
             self,
             document: DatasetDocumentStream
-    ):
+    ) -> None:
         loader = DocumentLoader(
             document
         )

@@ -10,13 +10,13 @@ class Application:
     def __del__(self):
         del self.controller
 
-    def initialise(self):
+    def initialise(self) -> None:
         self.get_controller().initialise()
 
-    def execute(self):
+    def execute(self) -> None:
         self.get_controller().execute()
 
-    def garbage_collection(self):
+    def garbage_collection(self) -> None:
         pass
 
     def get_controller(self) -> None | Controller:
@@ -25,10 +25,10 @@ class Application:
     def set_controller(
             self,
             value: Controller | None
-    ):
+    ) -> None:
         self.controller = value
 
-    def run(self):
+    def run(self) -> None:
         self.initialise()
         self.execute()
         self.garbage_collection()

@@ -191,6 +191,11 @@ class DataSetEvents:
     ) -> None:
         self.labels = value
 
+    def __int__(self) -> int:
+        return int(
+            self.get_position()
+        )
+
     def __len__(self) -> int:
         if self.is_event_labels_none():
             return get_integer_zero()
