@@ -7,7 +7,7 @@ from HardenedSteel.globals  \
     import get_integer_zero
 
 from ssp.logic.structures   \
-    import DataSet
+    import DataSetWrapper
 
 
 class DataSetEvents:
@@ -16,8 +16,6 @@ class DataSetEvents:
 
         self.iterator: CounterObject | None = None
         self.position: CounterObject | None = None
-
-        self.entity: DataSet | None = None
 
     def __del__(self):
         del                 \
@@ -33,14 +31,8 @@ class DataSetEvents:
             'labels': self.get_event_labels()
         })
 
-    def get_entity(self) -> DataSet | None:
-        return self.entity
-
-    def set_entity(
-            self,
-            value: DataSet | None
-    ) -> None:
-        self.entity = value
+    def get_name_of_selection(self):
+        return
 
     def get_position(self) -> CounterObject:
         if self.is_position_none():

@@ -139,8 +139,16 @@ class DataSetBuildByDirectory:
             value
         )
 
+    def synchronise_event_stream(
+            self,
+            map_stream: DataSetMapStream
+    ):
+        pass
+
+    #TODO: Stream ------------------------------------------------------------------------------------------------------
     def stream(self) -> None:
         selected: DataSetMapStream = self.currently_selected_map()
+
         self.get_events().create_label_event(
             selected.get_name()
         )
