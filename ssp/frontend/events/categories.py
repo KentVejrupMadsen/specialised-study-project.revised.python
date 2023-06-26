@@ -21,8 +21,8 @@ class CategoryEvent:
     ):
         self.category: str = category_name
         self.document_events: list | None = None
-        self.entity: Category | None = None
         self.position: None | CounterObject = None
+        self.entity: Category | None = None
 
     def __del__(self):
         del                         \
@@ -31,10 +31,9 @@ class CategoryEvent:
             self.entity,            \
             self.position
 
-    def __int__(self) -> int:
+    def __len__(self) -> int:
         if self.is_document_events_none():
             return get_integer_zero()
-
         return len(
             self.document_events
         )
@@ -43,25 +42,34 @@ class CategoryEvent:
         if(
             self.is_document_events_none()
             or
-            int(self) == get_integer_zero()
+            len(self) == get_integer_zero()
         ):
             return None
         return self.get_event_at(
-            self.get_position().get_value()
+            int(
+                self.get_position()
+            )
         )
 
     def set_position_by_document(
             self,
             value: DatasetDocumentStream
     ):
-        range_iterator = range(int(self))
+        range_iterator = range(
+            len(self)
+        )
+        normalised_input_var_location: str = \
+            value.get_location().lower()
 
         for index in range_iterator:
             document_event: DocumentEvent = self.get_event_at(
                 index
             )
 
-            if value.get_location() == document_event.get_stream().get_location():
+            document_location_normalised: str = \
+                document_event.get_stream().get_location().lower()
+
+            if normalised_input_var_location == document_location_normalised:
                 self.get_position().set_value(
                     index
                 )
@@ -147,3 +155,4 @@ class CategoryEvent:
             value: str
     ):
         pass
+

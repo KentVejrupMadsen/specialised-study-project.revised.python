@@ -26,8 +26,8 @@ class DataSetEvents:
 
     def __repr__(self):
         return str({
-            'iterator': self.get_iterator().get_value(),
-            'position': self.get_position().get_value(),
+            'iterator': int(self.get_iterator()),
+            'position': int(self.get_position()),
             'labels': self.get_event_labels()
         })
 
