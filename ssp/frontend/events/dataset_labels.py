@@ -58,13 +58,16 @@ class DataSetLabelEvent:
         if(
             self.is_category_events_none()
             or
-            len(self) == get_integer_zero()
+            self.is_categories_empty()
         ):
             return None
 
         return self.retrieve_category_event(
             int(self)
         )
+
+    def is_categories_empty(self) -> bool:
+        return len(self) == get_integer_zero()
 
     def set_position_by_label(
             self,

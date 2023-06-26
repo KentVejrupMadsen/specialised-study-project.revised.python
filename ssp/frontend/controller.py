@@ -26,9 +26,8 @@ class Controller:
     def initialise(self) -> None:
         self.setup()
 
-        ds = self.get_dataset()
-        while ds.is_running():
-            ds.stream()
+        for index in iter(self.get_dataset()):
+            self.get_dataset().stream()
 
     def execute(self) -> None:
         ds = self.get_dataset()
