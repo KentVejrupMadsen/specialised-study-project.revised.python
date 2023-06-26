@@ -11,6 +11,7 @@ class CategoryEvent:
             category_name: str
     ):
         self.category: str = category_name
+        self.document_events: list | None = None
 
     def __del__(self):
         del self.category
@@ -23,3 +24,20 @@ class CategoryEvent:
             value: str
     ):
         self.category = value
+
+    def is_document_events_none(self) -> bool:
+        return self.document_events is None
+
+    def get_document_events(self) -> list:
+        if self.is_document_events_none():
+            self.set_document_events(
+                list()
+            )
+
+        return self.document_events
+
+    def set_document_events(
+            self,
+            value: list
+    ) -> None:
+        self.document_events = value
