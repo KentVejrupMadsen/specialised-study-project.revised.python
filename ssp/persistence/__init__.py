@@ -49,3 +49,6 @@ from ssp.persistence.dataset_map                            \
 
 from ssp.persistence.dataset_map_builder                    \
     import DataSetMapBuilder
+
+from ssp.persistence.document_loader                        \
+    import DocumentLoader

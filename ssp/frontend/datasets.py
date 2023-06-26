@@ -10,7 +10,8 @@ from ssp.persistence        \
     DataSetMapBuilder,      \
     DataSetMapStream,       \
     CategoryMapStream,      \
-    DatasetDocumentStream
+    DatasetDocumentStream,  \
+    DocumentLoader
 
 from ssp.frontend.events    \
     import                  \
@@ -197,14 +198,11 @@ class DataSetBuildByDirectory:
             self,
             document: DatasetDocumentStream
     ):
-        document.set_is_to_normalise(
-            True
+        loader = DocumentLoader(
+            document
         )
 
-        while not document.is_loaded():
-            document.load_line()
-
-        document.close()
+        loader.load()
 
     def is_position_at_beginning(self) -> bool:
         return self.is_at_beginning(
