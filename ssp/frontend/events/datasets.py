@@ -17,6 +17,8 @@ class DataSetEvents:
         self.iterator: CounterObject | None = None
         self.position: CounterObject | None = None
 
+        self.entity: DataSetWrapper | None = None
+
     def __del__(self):
         del                 \
             self.labels,    \
@@ -26,13 +28,33 @@ class DataSetEvents:
 
     def __repr__(self):
         return str({
-            'iterator': int(self.get_iterator()),
-            'position': int(self.get_position()),
+            'iterator': self.get_iterator().get_value(),
+            'position': self.get_position().get_value(),
             'labels': self.get_event_labels()
         })
 
-    def get_name_of_selection(self):
-        return
+    def retrieve_selection(self) -> DataSetLabelEvent:
+        return self.retrieve_label_event(
+            self.get_position().get_value()
+        )
+
+    def is_entity_none(self) -> bool:
+        return self.entity is None
+
+    def get_entity(self) -> DataSetWrapper | None:
+        return self.entity
+
+    def set_entity(
+            self,
+            value: DataSetWrapper
+    ):
+        self.entity = value
+
+    def get_selection_label_name(self) -> str | None:
+        if self.is_event_labels_none():
+            return None
+
+        return self.retrieve_selection().get_label_name()
 
     def get_position(self) -> CounterObject:
         if self.is_position_none():
@@ -61,8 +83,8 @@ class DataSetEvents:
         return self.get_position().get_value()
 
     def set_position_by_label(
-            self,
-            value: str
+        self,
+        value: str
     ) -> bool:
         normalised_input_value: str = value.lower()
 
@@ -118,9 +140,22 @@ class DataSetEvents:
             self,
             index: int
     ):
-        return self.labels[
-            index
-        ]
+        if self.is_position_within_range(
+                index
+        ):
+            return self.labels[
+                index
+            ]
+
+        raise Exception(
+            'out of bounds'
+        )
+
+    def is_position_within_range(
+            self,
+            position_index: int
+    ) -> bool:
+        return position_index < int(self)
 
     def retrieve_label_event_by_name(
             self,
@@ -191,9 +226,18 @@ class DataSetEvents:
         return self
 
     def __next__(self):
-        if self.get_iterator() < int(self):
+        if (
+            self.iterator_as_integer()
+            <
+            int(self)
+        ):
             self.get_iterator().increment()
-            return self.get_iterator().previous()
+            return self.iterator_as_index()
         else:
-
             raise StopIteration
+
+    def iterator_as_integer(self) -> int:
+        return self.get_iterator().get_value()
+
+    def iterator_as_index(self) -> int:
+        return self.get_iterator().previous()
