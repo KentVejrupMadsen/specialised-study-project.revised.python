@@ -12,5 +12,14 @@ class DocumentLoader:
     def __del__(self):
         del self.stream
 
-    def load(self):
-        pass
+    def load(self) -> None:
+        stream: DatasetDocumentStream = self.stream
+
+        stream.set_is_to_normalise(
+            True
+        )
+
+        while not stream.is_loaded():
+            line: str = stream.load_line()
+
+        stream.close()
