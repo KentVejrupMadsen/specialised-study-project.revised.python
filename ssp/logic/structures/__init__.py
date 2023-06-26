@@ -20,8 +20,12 @@ from ssp.logic.structures.category_token        \
 from ssp.logic.structures.document_tokens       \
     import DocumentToken
 
-from ssp.logic.structures.categories \
+from ssp.logic.structures.categories            \
     import Category
 
-from ssp.logic.structures.documents \
+from ssp.logic.structures.documents             \
     import Document
+
+from ssp.logic.structures.datasets              \
+    import DataSet
+

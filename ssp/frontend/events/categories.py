@@ -15,9 +15,13 @@ class CategoryEvent:
     ):
         self.category: str = category_name
         self.document_events: list | None = None
+        self.entity: Category | None = None
 
     def __del__(self):
-        del self.category
+        del                         \
+            self.category,          \
+            self.document_events,   \
+            self.entity
 
     def get_category_name(self) -> str:
         return self.category

@@ -4,7 +4,8 @@ from ssp.logic.structures \
 
 class DocumentEvent:
     def __init__(self):
-        pass
+        self.entity: Document | None = None
 
     def __del__(self):
-        pass
+        del \
+            self.entity
