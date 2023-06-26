@@ -25,11 +25,8 @@ class DataSetBuildByDirectory:
     ):
         self.path_to_dataset: str = location_to_dataset
         self.categories: list = categories
-
         self.data_event: DataSetEvents | None = None
-
         self.complete: bool = False
-
         self.store: list | None = None
         self.selection: CounterObject = CounterObject()
 
@@ -141,7 +138,6 @@ class DataSetBuildByDirectory:
         self.get_store().append(
             value
         )
-
 
     def stream(self) -> None:
         selected: DataSetMapStream = self.currently_selected_map()

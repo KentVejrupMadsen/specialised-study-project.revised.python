@@ -33,8 +33,6 @@ class Controller:
     def execute(self):
         ds = self.get_dataset()
 
-
-
     def get_environment(self) -> Environment:
         return self.environment
 
