@@ -11,7 +11,6 @@ class DataSetLabelEvent:
             name: str
     ):
         self.label_name: str = name
-
         self.position: CounterObject | None = None
         self.category_events: list | None = None
 
@@ -50,7 +49,6 @@ class DataSetLabelEvent:
             self.set_category_events(
                 list()
             )
-
         return self.category_events
 
     def set_category_events(
@@ -93,9 +91,7 @@ class DataSetLabelEvent:
     def __repr__(self):
         return str({
             'label': self.label_name,
-
             'categories': self.get_category_events(),
-
             'position': int(
                 self.get_position()
             )
