@@ -25,13 +25,10 @@ class Controller:
 
     def initialise(self) -> None:
         self.setup()
-
-        ds = self.get_dataset()
-        while ds.is_running():
-            ds.stream()
+        self.get_dataset().run_stream()
 
     def execute(self) -> None:
-        ds = self.get_dataset()
+        pass
 
     def get_environment(self) -> Environment:
         return self.environment

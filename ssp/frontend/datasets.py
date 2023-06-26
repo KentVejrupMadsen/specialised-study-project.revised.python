@@ -1,22 +1,22 @@
 #!/usr/bin/env python
-from ssp.frontend           \
-    import                  \
-    CounterObject,          \
-    join,                   \
+from ssp.frontend                       \
+    import                              \
+    CounterObject,                      \
+    join,                               \
     get_zero
 
-from ssp.persistence        \
-    import                  \
-    DataSetMapBuilder,      \
-    DataSetMapStream,       \
-    CategoryMapStream,      \
-    DatasetDocumentStream,  \
-    DocumentLoader
-
-from ssp.frontend.events    \
-    import                  \
-    DataSetEvents,          \
+from ssp.frontend.events                \
+    import                              \
+    DataSetEvents,                      \
     DocumentEvent
+
+from ssp.persistence                    \
+    import                              \
+    DataSetMapBuilder,                  \
+    DataSetMapStream,                   \
+    CategoryMapStream,                  \
+    DatasetDocumentStream,              \
+    DocumentLoader
 
 
 class DataSetBuildByDirectory:
@@ -64,12 +64,10 @@ class DataSetBuildByDirectory:
         self.data_event = None
 
     def reset_selection(self) -> None:
-        self.selection.reset()
+        self.get_selection_counter().reset()
 
     def get_selection(self) -> int:
-        return int(
-            self.get_selection_counter()
-        )
+        return self.get_selection_counter().previous()
 
     def is_selection_none(self) -> bool:
         return self.selection is None
@@ -207,9 +205,25 @@ class DataSetBuildByDirectory:
                 document_stream.get_location()
             )
 
+    def run_stream(self):
+        for index in iter(self):
+            self.stream_map_by_index(
+                index
+            )
+
     def stream(self) -> None:
-        selected: DataSetMapStream =            \
-            self.currently_selected_map()
+        self.stream_map_by_index(
+            self.get_selection()
+        )
+        self.next_selection()
+
+    def stream_map_by_index(
+            self,
+            index: int
+    ) -> None:
+        selected: DataSetMapStream = self.retrieve_map(
+            index
+        )
 
         self.get_events().create_label_event(
             selected.get_name()
@@ -219,7 +233,6 @@ class DataSetBuildByDirectory:
             selected
         )
 
-        self.next_selection()
         if self.is_position_at_end():
             self.set_is_complete(
                 True
@@ -236,9 +249,7 @@ class DataSetBuildByDirectory:
         for selected_category \
                 in dsm.get_categories():
             category_label: CategoryMapStream = selected_category
-            self.synchronise_events_stream_category(
-                category_label
-            )
+
             self.stream_dataset_category(
                 category_label
             )
@@ -247,11 +258,12 @@ class DataSetBuildByDirectory:
             self,
             cms: CategoryMapStream
     ) -> None:
+        self.synchronise_events_stream_category(
+            cms
+        )
+
         for document in cms.get_documents():
             selected_document: DatasetDocumentStream = document
-            self.synchronise_events_stream_document(
-                selected_document
-            )
             self.stream_dataset_document(
                 selected_document
             )
@@ -260,6 +272,10 @@ class DataSetBuildByDirectory:
             self,
             document: DatasetDocumentStream
     ) -> None:
+        self.synchronise_events_stream_document(
+            document
+        )
+
         loader = DocumentLoader(
             document
         )
@@ -341,6 +357,11 @@ class DataSetBuildByDirectory:
 
     def is_position_within_range(self) -> bool:
         return self.is_in_range(
+            self.get_selection()
+        )
+
+    def __int__(self):
+        return int(
             self.get_selection()
         )
 
