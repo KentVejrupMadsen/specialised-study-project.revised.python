@@ -1,6 +1,9 @@
 from HardenedSteel.objects  \
     import CounterObject
 
+from ssp.persistence \
+    import DatasetDocumentStream
+
 from ssp.frontend.events    \
     import DocumentEvent
 
@@ -25,12 +28,61 @@ class CategoryEvent:
             self.entity,            \
             self.position
 
+    def __int__(self) -> int:
+        if self.is_document_events_none():
+            return 0
+
+        return len(
+            self.document_events
+        )
+
+    def set_position_by_document(
+            self,
+            value: DatasetDocumentStream
+    ):
+        for index in \
+                range(
+                    int(self)
+                ):
+            document_event: DocumentEvent = self.get_event_at(
+                index
+            )
+
+            if value.get_location() == document_event.get_stream().get_location():
+                self.get_position().set_value(
+                    index
+                )
+
+    def insert_event(
+            self,
+            event: DocumentEvent
+    ):
+        self.get_document_events().append(
+            event
+        )
+
+    def get_event_at(
+            self,
+            index: int
+    ):
+        return self.get_document_events()[
+            index
+        ]
+
+    def remove_at(
+            self,
+            index: int
+    ) -> None:
+        self.get_document_events().pop(
+            index
+        )
+
     def get_position(self) -> CounterObject:
         if self.is_position_none():
             self.set_position(
                 CounterObject()
             )
-            
+
         return self.position
 
     def set_position(
