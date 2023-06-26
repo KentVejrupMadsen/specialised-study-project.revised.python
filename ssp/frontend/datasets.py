@@ -143,7 +143,9 @@ class DataSetBuildByDirectory:
             self,
             map_stream: DataSetMapStream
     ):
-        pass
+        events = self.get_events()
+
+        print(events.get_event_labels())
 
     #TODO: Stream ------------------------------------------------------------------------------------------------------
     def stream(self) -> None:
