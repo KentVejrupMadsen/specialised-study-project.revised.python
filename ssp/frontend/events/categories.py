@@ -4,6 +4,9 @@ from HardenedSteel.objects  \
 from ssp.frontend.events    \
     import DocumentEvent
 
+from ssp.logic.structures \
+    import Category
+
 
 class CategoryEvent:
     def __init__(
