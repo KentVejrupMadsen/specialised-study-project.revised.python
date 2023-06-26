@@ -27,7 +27,7 @@ class Controller:
         self.setup()
 
         for index in iter(self.get_dataset()):
-            self.get_dataset().stream()
+            self.get_dataset().stream_map_by_index(index)
 
     def execute(self) -> None:
         ds = self.get_dataset()

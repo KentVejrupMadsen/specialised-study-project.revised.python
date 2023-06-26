@@ -206,8 +206,23 @@ class DataSetBuildByDirectory:
             )
 
     def stream(self) -> None:
-        selected: DataSetMapStream =            \
-            self.currently_selected_map()
+        self.stream_map_by_index(
+            self.get_selection()
+        )
+
+        self.next_selection()
+        if self.is_position_at_end():
+            self.set_is_complete(
+                True
+            )
+
+    def stream_map_by_index(
+            self,
+            index: int
+    ) -> None:
+        selected: DataSetMapStream = self.retrieve_map(
+            index
+        )
 
         self.get_events().create_label_event(
             selected.get_name()
@@ -216,12 +231,6 @@ class DataSetBuildByDirectory:
         self.stream_dataset_map(
             selected
         )
-
-        self.next_selection()
-        if self.is_position_at_end():
-            self.set_is_complete(
-                True
-            )
 
     def stream_dataset_map(
             self,
