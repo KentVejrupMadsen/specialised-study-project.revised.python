@@ -15,3 +15,11 @@ class CategoryEvent:
     def __del__(self):
         del self.category
 
+    def get_category_name(self) -> str:
+        return self.category
+
+    def set_category_name(
+            self,
+            value: str
+    ):
+        self.category = value

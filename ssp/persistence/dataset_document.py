@@ -106,7 +106,9 @@ class DatasetDocumentStream:
         self.set_object(
             open(
                 self.get_location(),
-                'rt'
+                'rt',
+                encoding='utf8',
+                errors='ignore'
             )
         )
 
