@@ -205,13 +205,7 @@ class DataSetEvents:
             )
 
     def __iter__(self):
-        if self.is_iterator_none():
-            self.set_iterator(
-                CounterObject()
-            )
-        else:
-            self.get_iterator().reset()
-
+        self.get_iterator().reset()
         return self
 
     def __next__(self):
