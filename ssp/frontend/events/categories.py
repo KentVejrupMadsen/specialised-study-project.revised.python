@@ -1,13 +1,16 @@
-from HardenedSteel.objects  \
+from HardenedSteel.objects          \
     import CounterObject
 
-from ssp.persistence \
+from HardenedSteel.globals          \
+    import get_integer_zero
+
+from ssp.persistence                \
     import DatasetDocumentStream
 
-from ssp.frontend.events    \
+from ssp.frontend.events            \
     import DocumentEvent
 
-from ssp.logic.structures \
+from ssp.logic.structures           \
     import Category
 
 
@@ -30,20 +33,30 @@ class CategoryEvent:
 
     def __int__(self) -> int:
         if self.is_document_events_none():
-            return 0
+            return get_integer_zero()
 
         return len(
             self.document_events
+        )
+
+    def retrieve_selected_document(self) -> DocumentEvent | None:
+        if(
+            self.is_document_events_none()
+            or
+            int(self) == get_integer_zero()
+        ):
+            return None
+        return self.get_event_at(
+            self.get_position().get_value()
         )
 
     def set_position_by_document(
             self,
             value: DatasetDocumentStream
     ):
-        for index in \
-                range(
-                    int(self)
-                ):
+        range_iterator = range(int(self))
+
+        for index in range_iterator:
             document_event: DocumentEvent = self.get_event_at(
                 index
             )
@@ -128,3 +141,9 @@ class CategoryEvent:
             value: list
     ) -> None:
         self.document_events = value
+
+    def select_by_location(
+            self,
+            value: str
+    ):
+        pass

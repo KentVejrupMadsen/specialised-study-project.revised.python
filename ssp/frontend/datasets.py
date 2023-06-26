@@ -15,7 +15,8 @@ from ssp.persistence        \
 
 from ssp.frontend.events    \
     import                  \
-    DataSetEvents
+    DataSetEvents,          \
+    DocumentEvent
 
 
 class DataSetBuildByDirectory:
@@ -176,6 +177,25 @@ class DataSetBuildByDirectory:
             document_stream: DatasetDocumentStream
     ) -> None:
         events = self.get_events()
+        label_events = events.retrieve_selection()
+
+        category_event = label_events.retrieve_selected_category_event()
+        if category_event is None:
+            return None
+
+        currently_selected_document: DocumentEvent | None = category_event.retrieve_selected_document()
+        if currently_selected_document is None:
+            return None
+
+        # Check that the document is matching with the stream
+        if not(
+            document_stream.get_location()
+            ==
+            currently_selected_document.get_stream().get_location()
+        ):
+            category_event.select_by_location(
+                document_stream.get_location()
+            )
 
     def stream(self) -> None:
         selected: DataSetMapStream =            \

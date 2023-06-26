@@ -1,7 +1,10 @@
 from HardenedSteel.objects  \
     import CounterObject
 
-from ssp.frontend.events \
+from HardenedSteel.globals  \
+    import get_integer_zero
+
+from ssp.frontend.events    \
     import CategoryEvent
 
 
@@ -20,6 +23,14 @@ class DataSetLabelEvent:
             self.position,          \
             self.category_events
 
+    def __int__(self):
+        if self.is_category_events_none():
+            return get_integer_zero()
+
+        return len(
+            self.category_events
+        )
+
     def create_category(
             self,
             value: str
@@ -35,6 +46,22 @@ class DataSetLabelEvent:
             index: int
     ) -> CategoryEvent:
         return self.get_category_events()[index]
+
+    def retrieve_selected_category_event(
+            self
+    ) -> CategoryEvent | None:
+        if(
+            self.is_category_events_none()
+            or
+            int(self) == get_integer_zero()
+        ):
+            return None
+
+        return self.retrieve_category_event(
+            int(
+                self.get_position()
+            )
+        )
 
     def set_position_by_label(
             self,
