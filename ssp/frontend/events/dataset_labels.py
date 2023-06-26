@@ -93,6 +93,10 @@ class DataSetLabelEvent:
     def __repr__(self):
         return str({
             'label': self.label_name,
+
             'categories': self.get_category_events(),
-            'position': int(self.get_position())
+
+            'position': int(
+                self.get_position()
+            )
         })
