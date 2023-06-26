@@ -13,10 +13,8 @@ from ssp.logic.structures   \
 class DataSetEvents:
     def __init__(self):
         self.labels: list | None = None
-
         self.iterator: CounterObject | None = None
         self.position: CounterObject | None = None
-
         self.entity: DataSetWrapper | None = None
 
     def __del__(self):
@@ -53,7 +51,6 @@ class DataSetEvents:
     def get_selection_label_name(self) -> str | None:
         if self.is_event_labels_none():
             return None
-
         return self.retrieve_selection().get_label_name()
 
     def get_position(self) -> CounterObject:
@@ -61,7 +58,6 @@ class DataSetEvents:
             self.set_position(
                 CounterObject()
             )
-
         return self.position
 
     def set_position(
@@ -87,7 +83,6 @@ class DataSetEvents:
         value: str
     ) -> bool:
         normalised_input_value: str = value.lower()
-
         for index in iter(self):
             label: DataSetLabelEvent = self.retrieve_label_event(
                 index
@@ -97,9 +92,7 @@ class DataSetEvents:
                 self.get_position().set_value(
                     index
                 )
-
                 return True
-
         return False
 
     def is_iterator_none(self) -> bool:
@@ -110,7 +103,6 @@ class DataSetEvents:
             self.set_iterator(
                 CounterObject()
             )
-
         return self.iterator
 
     def set_iterator(
@@ -131,9 +123,7 @@ class DataSetEvents:
                     value
                 )
             )
-
             return True
-
         return False
 
     def retrieve_label_event(
@@ -162,12 +152,10 @@ class DataSetEvents:
             value: str
     ):
         normalised_input = value.lower()
-
         for index in iter(self):
             events: DataSetLabelEvent = self.retrieve_label_event(
                 index
             )
-
             if events.get_label_name_normalised() == normalised_input:
                 return events
 
@@ -179,15 +167,12 @@ class DataSetEvents:
             return False
         else:
             normalised_input: str = value.lower()
-
             for index in iter(self):
                 label: DataSetLabelEvent = self.retrieve_label_event(
                     index
                 )
-
                 if label.get_label_name_normalised() == normalised_input:
                     return True
-
         return False
 
     def is_event_labels_none(self) -> bool:
