@@ -32,7 +32,7 @@ class Environment:
     def set_categories(
             self,
             value: list
-    ):
+    ) -> None:
         self.categories = value
 
     def get_path_to_dataset(self) -> str:

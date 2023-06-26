@@ -1,7 +1,10 @@
 from HardenedSteel.objects  \
     import CounterObject
 
-from ssp.frontend.events \
+from HardenedSteel.globals  \
+    import get_integer_zero
+
+from ssp.frontend.events    \
     import CategoryEvent
 
 
@@ -20,6 +23,19 @@ class DataSetLabelEvent:
             self.position,          \
             self.category_events
 
+    def __int__(self):
+        return int(
+            self.get_position()
+        )
+
+    def __len__(self):
+        if self.is_category_events_none():
+            return get_integer_zero()
+
+        return len(
+            self.category_events
+        )
+
     def create_category(
             self,
             value: str
@@ -36,24 +52,38 @@ class DataSetLabelEvent:
     ) -> CategoryEvent:
         return self.get_category_events()[index]
 
+    def retrieve_selected_category_event(
+            self
+    ) -> CategoryEvent | None:
+        if(
+            self.is_category_events_none()
+            or
+            len(self) == get_integer_zero()
+        ):
+            return None
+
+        return self.retrieve_category_event(
+            int(self)
+        )
+
     def set_position_by_label(
             self,
             category_name: str
     ) -> None:
         if self.is_category_events_none():
             return None
-
         normalised_category_name: str = category_name.lower()
 
-        for index in range(
-                    len(
-                        self.category_events
-                    )
-                ):
-            category_event: CategoryEvent = self.retrieve_category_event(index)
+        for index in range(len(self)):
+            current_category_event: CategoryEvent = self.retrieve_category_event(
+                index
+            )
+            current_category_event_name: str = current_category_event.get_category_name().lower()
 
-            if normalised_category_name == category_event.get_category_name().lower():
-                self.get_position().set_value(index)
+            if normalised_category_name == current_category_event_name:
+                self.get_position().set_value(
+                    index
+                )
                 return None
 
     def delete_category_event(
@@ -69,7 +99,6 @@ class DataSetLabelEvent:
             self.set_category_events(
                 list()
             )
-
         return self.category_events
 
     def set_category_events(

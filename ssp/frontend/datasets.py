@@ -15,7 +15,8 @@ from ssp.persistence        \
 
 from ssp.frontend.events    \
     import                  \
-    DataSetEvents
+    DataSetEvents,          \
+    DocumentEvent
 
 
 class DataSetBuildByDirectory:
@@ -26,10 +27,10 @@ class DataSetBuildByDirectory:
     ):
         self.path_to_dataset: str = location_to_dataset
         self.categories: list = categories
+        self.selection: CounterObject | None = None
         self.data_event: DataSetEvents | None = None
         self.complete: bool = False
         self.store: list | None = None
-        self.selection: CounterObject = CounterObject()
 
         self.initialise()
 
@@ -59,7 +60,7 @@ class DataSetBuildByDirectory:
     ) -> None:
         self.data_event = value
 
-    def remove_events(self):
+    def remove_events(self) -> None:
         self.data_event = None
 
     def reset_selection(self) -> None:
@@ -70,7 +71,15 @@ class DataSetBuildByDirectory:
             self.get_selection_counter()
         )
 
+    def is_selection_none(self) -> bool:
+        return self.selection is None
+
     def get_selection_counter(self) -> CounterObject:
+        if self.is_selection_none():
+            self.set_selection_counter(
+                CounterObject()
+            )
+
         return self.selection
 
     def set_selection_counter(
@@ -135,7 +144,7 @@ class DataSetBuildByDirectory:
     def insert_label(
             self,
             value: DataSetMapStream
-    ):
+    ) -> None:
         self.get_store().append(
             value
         )
@@ -176,6 +185,27 @@ class DataSetBuildByDirectory:
             document_stream: DatasetDocumentStream
     ) -> None:
         events = self.get_events()
+        label_events = events.retrieve_selection()
+
+        category_event = label_events.retrieve_selected_category_event()
+        if category_event is None:
+            return None
+
+        currently_selected_document: DocumentEvent | None = \
+            category_event.retrieve_selected_document()
+
+        if currently_selected_document is None:
+            return None
+
+        # Check that the document is matching with the stream
+        if not(
+            document_stream.get_location()
+            ==
+            currently_selected_document.get_stream().get_location()
+        ):
+            category_event.select_by_location(
+                document_stream.get_location()
+            )
 
     def stream(self) -> None:
         selected: DataSetMapStream =            \
@@ -229,7 +259,7 @@ class DataSetBuildByDirectory:
     def stream_dataset_document(
             self,
             document: DatasetDocumentStream
-    ):
+    ) -> None:
         loader = DocumentLoader(
             document
         )
