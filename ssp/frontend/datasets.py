@@ -3,7 +3,10 @@ from ssp.frontend                       \
     import                              \
     CounterObject,                      \
     join,                               \
-    get_zero
+    get_zero,                           \
+    DataSetLabelEvent,                  \
+    CategoryEvent,                      \
+    DocumentEvent
 
 from ssp.frontend.events                \
     import                              \
@@ -237,6 +240,15 @@ class DataSetBuildByDirectory:
             self.set_is_complete(
                 True
             )
+
+    def get_currently_selected_label(self) -> DataSetLabelEvent:
+        return self.get_events().retrieve_selection()
+
+    def get_currently_selected_category(self) -> CategoryEvent:
+        return self.get_currently_selected_label().retrieve_selected_category_event()
+
+    def get_currently_selected_document(self) -> DocumentEvent:
+        return self.get_currently_selected_category().retrieve_selected_document()
 
     def stream_dataset_map(
             self,
