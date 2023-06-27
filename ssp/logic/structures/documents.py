@@ -3,8 +3,10 @@ from ssp.logic.templates    \
 
 from ssp.logic.structures   \
     import                  \
-    DocumentToken,          \
-    CounterObject
+    DocumentToken
+
+from HardenedSteel.objects  \
+    import CounterObject
 
 from HardenedSteel.facades  \
     import is_integer_zero

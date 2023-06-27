@@ -24,3 +24,4 @@ class CategoryToken(Word):
             self.word,      \
             self.counter,   \
             self.hash
+

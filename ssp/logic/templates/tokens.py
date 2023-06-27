@@ -1,6 +1,8 @@
 #!/usr/bin/env python
-from ssp.logic.templates \
-    import ABC
+from ssp.logic.templates    \
+    import                  \
+    ABC,                    \
+    abstractmethod
 
 
 class Token(ABC):
@@ -10,6 +12,11 @@ class Token(ABC):
     ):
         self.word: str = value
         self.hash: int | None = None
+
+    def __del__(self):
+        del             \
+            self.word,  \
+            self.hash
 
     def get_word(self) -> str:
         return self.word
@@ -43,23 +50,37 @@ class Token(ABC):
     def is_hash_none(self) -> bool:
         return self.hash is None
 
+    @abstractmethod
+    def is_instance_of_implementation(self, other):
+        return False
+
     def __eq__(
         self,
         other
     ):
-        result: bool = False
-
-        if isinstance(
-            other,
-            Token
+        if self.is_instance_of_implementation(
+                other=other
         ):
-            result: bool = self.get_hash() == other.get_hash()
+            return True
 
+        if is_instance_of_token(other):
+            result: bool = self.get_hash() == other.get_hash()
             if result:
                 result = self.get_word() == other.get_word()
                 return result
 
-        return result
+        if is_instance_of_string(other):
+            hash_of_other: int = hash(
+                str(
+                    other
+                ).lower()
+            )
+            result: bool = self.get_hash() == hash_of_other
+            if result:
+                result = self.get_word() == other
+                return result
+
+        return False
 
     def __str__(self):
         return self.get_word()
@@ -71,3 +92,17 @@ class Token(ABC):
         return int(
             self.word
         )
+
+
+def is_instance_of_token(value) -> bool:
+    return isinstance(
+        value,
+        Token
+    )
+
+
+def is_instance_of_string(value) -> bool:
+    return isinstance(
+        value,
+        str
+    )

@@ -2,9 +2,6 @@
 from ssp.logic.templates                        \
     import Token
 
-from HardenedSteel                              \
-    import CounterObject
-
 from ssp.logic.structures.words                 \
     import Word
 
