@@ -7,7 +7,7 @@ from HardenedSteel.globals          \
 from ssp.persistence                \
     import DatasetDocumentStream
 
-from ssp.frontend.events            \
+from ssp.factories.events            \
     import DocumentEvent
 
 from ssp.logic.structures           \
@@ -23,20 +23,54 @@ class CategoryEvent:
         self.document_events: list | None = None
         self.position: None | CounterObject = None
         self.entity: Category | None = None
+        self.iterator: None | CounterObject = None
 
     def __del__(self):
         del                         \
             self.category,          \
             self.document_events,   \
             self.entity,            \
-            self.position
+            self.position,          \
+            self.iterator
 
     def __len__(self) -> int:
         if self.is_document_events_none():
             return get_integer_zero()
+
         return len(
             self.document_events
         )
+
+    def get_iterator(self) -> CounterObject:
+        if self.is_iterator_none():
+            self.set_iterator(
+                CounterObject()
+            )
+        return self.iterator
+
+    def set_iterator(
+            self,
+            value: CounterObject
+    ):
+        self.iterator = value
+
+    def is_iterator_none(self) -> bool:
+        return self.iterator is None
+
+    def __iter__(self):
+        self.get_position().reset()
+        return self
+
+    def __next__(self) -> int:
+        if(
+            self.get_iterator().previous()
+            <
+            len(self)
+        ):
+            self.get_iterator().increment()
+            return self.get_iterator().previous()
+        else:
+            raise StopIteration
 
     def __int__(self) -> int:
         return int(
@@ -156,6 +190,21 @@ class CategoryEvent:
     def select_by_location(
             self,
             value: str
-    ):
-        pass
+    ) -> None:
+        normalise_input: str = value.lower()
+
+        for index in iter(self):
+            document_event: DocumentEvent = self.get_event_at(
+                index
+            )
+
+            normalised_document_path: str = str(
+                document_event.get_stream().get_location()
+            ).lower()
+            
+            if normalise_input == normalised_document_path:
+                self.get_position().set_value(
+                    index
+                )
+                return None
 

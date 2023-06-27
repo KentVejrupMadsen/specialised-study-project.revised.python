@@ -1,12 +1,4 @@
 #!/usr/bin/env python
-from os.path                        \
-    import join
-
-from ssp.variables                  \
-    import                          \
-    get_zero,                       \
-    get_one
-
 from ssp                            \
     import                          \
     get_dataset_categories,         \
@@ -16,16 +8,6 @@ from ssp                            \
 
 from ssp.logic.structures           \
     import CounterObject
-
-from ssp.frontend.events            \
-    import                          \
-    DataSetEvents,                  \
-    DataSetLabelEvent,              \
-    CategoryEvent,                  \
-    DocumentEvent
-
-from ssp.frontend.datasets          \
-    import DataSetBuildByDirectory
 
 from ssp.frontend.environment       \
     import Environment

@@ -1,15 +1,18 @@
 #!/usr/bin/env python
 from ssp.logic.structures   \
     import                  \
-    Word,                   \
-    get_one
+    Word
+
+from HardenedSteel.globals  \
+    import                  \
+    get_integer_one
 
 
 class CategoryToken(Word):
     def __init__(
         self,
         word: str,
-        instances: int = get_one()
+        instances: int = get_integer_one()
     ):
         super().__init__(
             word=word,

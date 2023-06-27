@@ -1,8 +1,10 @@
 #!/usr/bin/env python
+from ssp.factories                  \
+    import DataSetBuildByDirectory
+
 from ssp.frontend                   \
     import                          \
-    Environment,                    \
-    DataSetBuildByDirectory
+    Environment
 
 
 class Controller:

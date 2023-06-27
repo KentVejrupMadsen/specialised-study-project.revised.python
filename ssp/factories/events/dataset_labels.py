@@ -4,7 +4,7 @@ from HardenedSteel.objects  \
 from HardenedSteel.globals  \
     import get_integer_zero
 
-from ssp.frontend.events    \
+from ssp.factories.events    \
     import CategoryEvent
 
 
@@ -81,12 +81,9 @@ class DataSetLabelEvent:
             current_category_event: CategoryEvent = self.retrieve_category_event(
                 index
             )
-            current_category_event_name: str = current_category_event.get_category_name().lower()
 
-            if normalised_category_name == current_category_event_name:
-                self.get_position().set_value(
-                    index
-                )
+            if normalised_category_name == current_category_event.get_category_name():
+                self.get_position().set_value(index)
                 return None
 
     def delete_category_event(

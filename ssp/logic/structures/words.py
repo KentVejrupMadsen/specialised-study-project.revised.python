@@ -2,15 +2,17 @@
 from ssp.logic.structures   \
     import                  \
     Token,                  \
-    CounterObject,          \
-    get_one
+    CounterObject
+
+from HardenedSteel.globals  \
+    import get_integer_one
 
 
 class Word(Token):
     def __init__(
         self,
         word: str,
-        instances: int = get_one()
+        instances: int = get_integer_one()
     ):
         super().__init__(
             value=word
