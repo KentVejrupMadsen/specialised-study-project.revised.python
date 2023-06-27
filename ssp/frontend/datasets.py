@@ -235,8 +235,6 @@ class DataSetBuildByDirectory:
                 document_stream.get_location()
             )
 
-        print(category_event.retrieve_selected_document().get_stream().get_location())
-
     def run_stream(self):
         for index in iter(self):
             self.stream_map_by_index(
