@@ -176,8 +176,6 @@ class DocumentLoader:
         )
 
         if is_valid:
-            print(token)
-
             self.trigger_event(
                 value=token
             )
@@ -225,7 +223,6 @@ class DocumentLoader:
         begins_at: int = get_line_start(result)
         ends_at: int = get_line_end(result)
         result = result[begins_at: ends_at]
-
         return result
 
 
@@ -261,7 +258,9 @@ def get_line_end(
 
     position: CounterObject = \
         CounterObject(
-            start_value=len(line)
+            start_value=len(
+                line
+            )
         )
 
     while position.get_value() > get_integer_zero():
@@ -296,6 +295,10 @@ def get_word_begin(line: str) -> int:
             begins_at.increment()
         elif numerical == ord(','):
             begins_at.increment()
+        elif numerical == ord('\''):
+            begins_at.increment()
+        elif numerical == ord('-'):
+            begins_at.increment()
         else:
             break
 
@@ -305,7 +308,9 @@ def get_word_begin(line: str) -> int:
 def get_word_end(line: str) -> int:
     ends_at: CounterObject = CounterObject()
     position: CounterObject = CounterObject(
-        start_value=len(line)
+        start_value=len(
+            line
+        )
     )
 
     while position.get_value() > get_integer_zero():
@@ -316,6 +321,10 @@ def get_word_end(line: str) -> int:
         if numeric_character == ord('.'):
             ends_at.increment()
         elif numeric_character == ord(','):
+            ends_at.increment()
+        elif numeric_character == ord('-'):
+            ends_at.increment()
+        elif numeric_character == ord('\''):
             ends_at.increment()
         else:
             break
