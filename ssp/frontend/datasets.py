@@ -5,6 +5,9 @@ from ssp.frontend                       \
     join,                               \
     get_zero
 
+from ssp.logic.structures               \
+    import Document
+
 from ssp.frontend.events                \
     import                              \
     DataSetEvents,                      \
@@ -265,14 +268,30 @@ class DataSetBuildByDirectory:
                 True
             )
 
-    def get_currently_selected_label(self) -> DataSetLabelEvent:
-        return self.get_events().retrieve_selection()
+    def add_event_for_category(
+            self,
+            value: str
+    ):
+        label = self.get_currently_selected_label()
+        label.create_category(
+            value
+        )
 
-    def get_currently_selected_category(self) -> CategoryEvent:
-        return self.get_currently_selected_label().retrieve_selected_category_event()
-
-    def get_currently_selected_document(self) -> DocumentEvent:
-        return self.get_currently_selected_category().retrieve_selected_document()
+    def add_event_for_document(
+            self,
+            value: DatasetDocumentStream
+    ):
+        category: CategoryEvent = self.get_currently_selected_category()
+        event: DocumentEvent = DocumentEvent()
+        event.set_entity(
+            Document()
+        )
+        event.set_stream(
+            value
+        )
+        category.insert_event(
+            event
+        )
 
     def stream_dataset_map(
             self,
@@ -285,6 +304,9 @@ class DataSetBuildByDirectory:
         for selected_category \
                 in dsm.get_categories():
             category_label: CategoryMapStream = selected_category
+            self.add_event_for_category(
+                category_label.get_name()
+            )
 
             self.stream_dataset_category(
                 category_label
@@ -300,6 +322,11 @@ class DataSetBuildByDirectory:
 
         for document in cms.get_documents():
             selected_document: DatasetDocumentStream = document
+
+            self.add_event_for_document(
+                selected_document
+            )
+            
             self.stream_dataset_document(
                 selected_document
             )
@@ -395,6 +422,15 @@ class DataSetBuildByDirectory:
         return self.is_in_range(
             self.get_iterator().previous()
         )
+
+    def get_currently_selected_label(self) -> DataSetLabelEvent:
+        return self.get_events().retrieve_selection()
+
+    def get_currently_selected_category(self) -> CategoryEvent:
+        return self.get_currently_selected_label().retrieve_selected_category_event()
+
+    def get_currently_selected_document(self) -> DocumentEvent:
+        return self.get_currently_selected_category().retrieve_selected_document()
 
     def __int__(self):
         return int(
