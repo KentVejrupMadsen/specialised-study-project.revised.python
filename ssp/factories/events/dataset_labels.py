@@ -4,7 +4,7 @@ from HardenedSteel.objects  \
 from HardenedSteel.globals  \
     import get_integer_zero
 
-from ssp.frontend.events    \
+from ssp.factories.events    \
     import CategoryEvent
 
 

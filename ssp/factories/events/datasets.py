@@ -1,4 +1,4 @@
-from ssp.frontend.events    \
+from ssp.factories.events    \
     import                  \
     CounterObject,          \
     DataSetLabelEvent
