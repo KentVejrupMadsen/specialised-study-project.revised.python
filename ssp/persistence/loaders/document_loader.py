@@ -136,11 +136,73 @@ class DocumentLoader:
 
             if not stream.is_line_empty():
                 line: str = stream.get_buffer()
-                line: str = self.filter_padding(line)
+                line: str = self.filter_padding(
+                    line
+                )
 
-                print(line)
+                self.map(
+                    line
+                )
 
         stream.close()
+
+    def map(
+            self,
+            line
+    ):
+        tokens: list | None = line.split(' ')
+
+        for index in range(len(tokens)):
+            selected_token = tokens[index]
+
+            self.map_token(
+                selected_token
+            )
+
+    def map_token(
+            self,
+            token: str
+    ):
+        token = self.filter_token_for_invalid_chars(
+            token
+        )
+
+        is_valid = self.is_valid_token(
+            token
+        )
+
+        if is_valid:
+            print(token)
+            self.trigger_event(
+                value=token
+            )
+
+    def is_valid_token(
+            self,
+            line: str
+    ) -> bool:
+        is_valid: bool = False
+        is_valid = len(line) > 3
+        return is_valid
+
+    def filter_token_for_invalid_chars(
+            self,
+            line: str
+    ):
+        result: str = line
+
+        result = result.replace(',', '')
+        result = result.replace('<', '')
+        result = result.replace('>', '')
+        result = result.replace('(', '')
+        result = result.replace(')', '')
+        result = result.replace('"', '')
+        result = result.replace('#', '')
+        result = result.replace('&', '')
+        result = result.replace(':', '')
+        result = result.replace(';', '')
+
+        return result
 
     def filter_padding(
             self,
