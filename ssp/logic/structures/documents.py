@@ -1,10 +1,10 @@
-from ssp.variables \
-    import get_zero
-
 from ssp.logic.structures   \
     import                  \
     DocumentToken,          \
     CounterObject
+
+from HardenedSteel.globals  \
+    import get_integer_zero
 
 
 class Document:
@@ -121,7 +121,7 @@ class Document:
 
     def __int__(self):
         if self.is_tokens_none():
-            return get_zero()
+            return get_integer_zero()
 
         return len(
             self.tokens
