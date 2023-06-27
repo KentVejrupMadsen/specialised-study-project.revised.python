@@ -82,6 +82,9 @@ class DatasetDocumentStream:
 
         self.event: None | DocumentEvent = None
 
+    def is_event_none(self) -> bool:
+        return self.event is None
+
     def get_event(self):
         return self.event
 

@@ -16,12 +16,22 @@ class DataSetLabelEvent:
         self.label_name: str = name
         self.position: CounterObject | None = None
         self.category_events: list | None = None
+        self.stream: None = None
 
     def __del__(self):
         del                         \
             self.label_name,        \
             self.position,          \
             self.category_events
+
+    def get_stream(self):
+        return self.stream
+
+    def set_stream(
+            self,
+            value
+    ) -> None:
+        self.stream = value
 
     def __int__(self):
         return int(

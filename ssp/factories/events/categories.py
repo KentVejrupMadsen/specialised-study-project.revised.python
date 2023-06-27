@@ -24,6 +24,7 @@ class CategoryEvent:
         self.position: None | CounterObject = None
         self.entity: Category | None = None
         self.iterator: None | CounterObject = None
+        self.stream = None
 
     def __del__(self):
         del                         \
@@ -40,6 +41,15 @@ class CategoryEvent:
         return len(
             self.document_events
         )
+
+    def get_stream(self):
+        return self.stream
+
+    def set_stream(
+            self,
+            value
+    ):
+        self.stream = value
 
     def get_iterator(self) -> CounterObject:
         if self.is_iterator_none():

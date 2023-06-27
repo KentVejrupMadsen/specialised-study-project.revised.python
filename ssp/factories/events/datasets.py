@@ -18,6 +18,7 @@ class DataSetEvents:
         self.iterator: CounterObject | None = None
         self.position: CounterObject | None = None
         self.entity: DataSetWrapper | None = None
+        self.stream = None
 
     def __del__(self):
         del                 \
@@ -25,6 +26,15 @@ class DataSetEvents:
             self.iterator,  \
             self.position,  \
             self.entity
+
+    def get_stream(self):
+        return self.stream
+
+    def set_stream(
+            self,
+            value
+    ) -> None:
+        self.stream = value
 
     def __repr__(self):
         return str({

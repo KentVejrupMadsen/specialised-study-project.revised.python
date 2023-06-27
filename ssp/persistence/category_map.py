@@ -25,6 +25,9 @@ class CategoryMapStream:
     ) -> None:
         self.event = value
 
+    def is_event_none(self) -> bool:
+        return self.event is None
+
     def __hash__(self) -> int:
         return self.get_hash()
 

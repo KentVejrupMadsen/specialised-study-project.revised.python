@@ -31,4 +31,7 @@ class DocumentEvent:
             self,
             value: DatasetDocumentStream
     ) -> None:
+        if value.is_event_none():
+            value.set_event(self)
+
         self.stream = value
