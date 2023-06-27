@@ -1,9 +1,15 @@
 #!/usr/bin/env python
-from ssp.frontend                       \
-    import                              \
-    CounterObject,                      \
-    join,                               \
-    get_zero
+from HardenedSteel.objects              \
+    import CounterObject
+
+from HardenedSteel.globals              \
+    import get_integer_zero
+
+from HardenedSteel.facades              \
+    import is_integer_zero
+
+from os.path                            \
+    import join
 
 from ssp.logic.structures               \
     import Document
@@ -360,7 +366,9 @@ class DataSetBuildByDirectory:
             self,
             position: int
     ) -> bool:
-        return position == get_zero()
+        return is_integer_zero(
+            position
+        )
 
     def is_at_end(
             self,
@@ -440,7 +448,7 @@ class DataSetBuildByDirectory:
 
     def __len__(self) -> int:
         if self.is_store_none():
-            return get_zero()
+            return get_integer_zero()
 
         return len(
             self.store

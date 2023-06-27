@@ -1,7 +1,4 @@
 #!/usr/bin/env python
-from os.path                        \
-    import join
-
 from ssp.variables                  \
     import                          \
     get_zero,                       \
