@@ -1,13 +1,15 @@
-from ssp.factories.events    \
-    import                  \
-    CounterObject,          \
+from ssp.factories.events       \
+    import                      \
     DataSetLabelEvent
 
-from HardenedSteel.globals  \
+from HardenedSteel.globals      \
     import get_integer_zero
 
-from ssp.logic.structures   \
+from ssp.logic.structures       \
     import DataSetWrapper
+
+from HardenedSteel.objects      \
+    import CounterObject
 
 
 class DataSetEvents:
@@ -16,13 +18,24 @@ class DataSetEvents:
         self.iterator: CounterObject | None = None
         self.position: CounterObject | None = None
         self.entity: DataSetWrapper | None = None
+        self.stream = None
 
     def __del__(self):
         del                 \
             self.labels,    \
             self.iterator,  \
             self.position,  \
-            self.entity
+            self.entity,    \
+            self.stream
+
+    def get_stream(self):
+        return self.stream
+
+    def set_stream(
+            self,
+            value
+    ) -> None:
+        self.stream = value
 
     def __repr__(self):
         return str({

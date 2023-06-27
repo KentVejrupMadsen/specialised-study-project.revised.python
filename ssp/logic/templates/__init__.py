@@ -12,3 +12,6 @@ from ssp.logic.templates.function_class     \
 
 from ssp.logic.templates.factory_pattern    \
     import Factory
+
+from ssp.logic.templates.fire_event         \
+    import OnFire

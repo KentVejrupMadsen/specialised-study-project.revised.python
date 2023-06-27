@@ -7,21 +7,53 @@ from HardenedSteel.globals  \
 from ssp.factories.events    \
     import CategoryEvent
 
+from ssp.logic.structures \
+    import DataSetLabel
+
 
 class DataSetLabelEvent:
     def __init__(
             self,
             name: str
     ):
-        self.label_name: str = name
+        self.entity: None | DataSetLabel = None
+        self.set_entity(
+            DataSetLabel(
+                name
+            )
+        )
+
         self.position: CounterObject | None = None
         self.category_events: list | None = None
+        self.stream: None = None
 
     def __del__(self):
         del                         \
-            self.label_name,        \
+            self.entity,            \
             self.position,          \
-            self.category_events
+            self.category_events,   \
+            self.stream
+
+    def get_entity(self) -> DataSetLabel:
+        return self.entity
+
+    def set_entity(
+            self,
+            value: DataSetLabel
+    ) -> None:
+        self.entity = value
+
+    def is_entity_none(self) -> bool:
+        return self.entity is None
+
+    def get_stream(self):
+        return self.stream
+
+    def set_stream(
+            self,
+            value
+    ) -> None:
+        self.stream = value
 
     def __int__(self):
         return int(
@@ -111,18 +143,20 @@ class DataSetLabelEvent:
         return self.category_events is None
 
     def get_label_name(self) -> str:
-        return self.label_name
+        return self.get_entity().get_name()
 
     def get_label_name_normalised(self) -> str:
         return str(
-            self.label_name
+            self.get_entity().get_name()
         ).lower()
 
     def set_label_name(
             self,
             value: str
     ) -> None:
-        self.label_name = value
+        self.get_entity().set_name(
+            value
+        )
 
     def get_position(self) -> CounterObject:
         if self.position is None:

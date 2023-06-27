@@ -29,6 +29,15 @@ class DocumentEvent:
 
     def set_stream(
             self,
-            value: DatasetDocumentStream
+            stream: DatasetDocumentStream
     ) -> None:
-        self.stream = value
+        if stream.is_event_none():
+            stream.set_event(self)
+
+        self.stream = stream
+
+    def is_stream_none(self) -> bool:
+        return self.stream is None
+
+    def is_entity_none(self) -> bool:
+        return self.stream is None

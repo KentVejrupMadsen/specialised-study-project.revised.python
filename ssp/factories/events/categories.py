@@ -19,19 +19,19 @@ class CategoryEvent:
             self,
             category_name: str
     ):
-        self.category: str = category_name
+        self.entity: Category | None = Category(category_name)
         self.document_events: list | None = None
         self.position: None | CounterObject = None
-        self.entity: Category | None = None
         self.iterator: None | CounterObject = None
+        self.stream = None
 
     def __del__(self):
         del                         \
-            self.category,          \
             self.document_events,   \
             self.entity,            \
             self.position,          \
-            self.iterator
+            self.iterator,          \
+            self.stream
 
     def __len__(self) -> int:
         if self.is_document_events_none():
@@ -40,6 +40,15 @@ class CategoryEvent:
         return len(
             self.document_events
         )
+
+    def get_stream(self):
+        return self.stream
+
+    def set_stream(
+            self,
+            value
+    ):
+        self.stream = value
 
     def get_iterator(self) -> CounterObject:
         if self.is_iterator_none():
@@ -162,13 +171,15 @@ class CategoryEvent:
         self.entity = value
 
     def get_category_name(self) -> str:
-        return self.category
+        return self.get_entity().get_name()
 
     def set_category_name(
             self,
             value: str
     ):
-        self.category = value
+        self.get_entity().set_name(
+            value
+        )
 
     def is_document_events_none(self) -> bool:
         return self.document_events is None

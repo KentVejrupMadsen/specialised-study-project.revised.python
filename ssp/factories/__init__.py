@@ -1,2 +1,2 @@
-from ssp.factories.directory_factories  \
+from ssp.factories.dataset_factories  \
     import DataSetBuildByDirectory

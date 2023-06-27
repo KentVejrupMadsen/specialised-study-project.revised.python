@@ -14,9 +14,6 @@ from os.path                                                \
     basename,                                               \
     join
 
-from HardenedSteel \
-    import CounterObject
-
 from HardenedSteel.facades.texts.characters.ranges          \
     import                                                  \
     ascii_uppercase_begin,                                  \
@@ -50,5 +47,5 @@ from ssp.persistence.dataset_map                            \
 from ssp.persistence.dataset_map_builder                    \
     import DataSetMapBuilder
 
-from ssp.persistence.document_loader                        \
+from ssp.persistence.loaders                                \
     import DocumentLoader

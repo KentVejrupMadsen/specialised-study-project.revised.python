@@ -8,6 +8,9 @@ from HardenedSteel                              \
 from ssp.logic.structures.words                 \
     import Word
 
+from ssp.logic.structures.dataset_labels        \
+    import DataSetLabel
+
 from ssp.logic.structures.category_token        \
     import CategoryToken
 
