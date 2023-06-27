@@ -125,7 +125,6 @@ class DocumentLoader:
                 )
 
     def load(self) -> None:
-        print('\n\n\n\n')
         stream: DatasetDocumentStream = self.stream
 
         stream.set_is_to_normalise(
@@ -135,18 +134,87 @@ class DocumentLoader:
         while not stream.is_loaded():
             stream.load_line()
 
-            print('\n')
-
             if not stream.is_line_empty():
                 line: str = stream.get_buffer()
-                print('before filter:', line)
+                line: str = self.filter_padding(
+                    line
+                )
 
-                line: str = self.filter_padding(line)
-                print('result: ', line)
-
-                print('\n')
+                self.map(
+                    line
+                )
 
         stream.close()
+
+    def map(
+            self,
+            line
+    ):
+        tokens: list | None = line.split(' ')
+
+        for index in range(len(tokens)):
+            selected_token = tokens[index]
+
+            self.map_token(
+                selected_token
+            )
+
+    def map_token(
+            self,
+            token: str
+    ):
+        token = self.filter_token_for_invalid_chars(
+            token
+        )
+
+        token = self.filter_token_for_paddings(
+            token
+        )
+
+        is_valid = self.is_valid_token(
+            token
+        )
+
+        if is_valid:
+            self.trigger_event(
+                value=token
+            )
+
+    def is_valid_token(
+            self,
+            line: str
+    ) -> bool:
+        is_valid: bool = False
+        is_valid = len(line) > 3
+        return is_valid
+
+    def filter_token_for_paddings(
+            self,
+            line: str
+    ) -> str:
+        result: str = line
+        begins_at: int = get_word_begin(result)
+        ends_at: int = get_word_end(result)
+
+        result = result[begins_at:ends_at]
+        return result
+
+    def filter_token_for_invalid_chars(
+            self,
+            line: str
+    ):
+        result: str = line
+
+        result = result.replace('<', '')
+        result = result.replace('>', '')
+
+        result = result.replace('(', '')
+        result = result.replace(')', '')
+        result = result.replace('"', '')
+        result = result.replace('#', '')
+        result = result.replace('&', '')
+
+        return result
 
     def filter_padding(
             self,
@@ -156,7 +224,6 @@ class DocumentLoader:
         begins_at: int = get_line_start(result)
         ends_at: int = get_line_end(result)
         result = result[begins_at: ends_at]
-
         return result
 
 
@@ -166,14 +233,23 @@ def get_line_start(
     starts_at: CounterObject = CounterObject()
 
     for index in range(len(line)):
-        currently_selected_char: int = ord(line[index])
+        character_in_line: chr = line[index]
+        character_numerical: int = ord(character_in_line)
 
-        if currently_selected_char == ord(' '):
+        if character_numerical == ord(' '):
+            starts_at.increment()
+        if character_numerical == ord('.'):
+            starts_at.increment()
+        if character_numerical == ord(','):
+            starts_at.increment()
+        if character_numerical == ord('\''):
             starts_at.increment()
         else:
             break
 
-    return int(starts_at)
+    return int(
+        starts_at
+    )
 
 
 def get_line_end(
@@ -181,11 +257,15 @@ def get_line_end(
 ) -> int:
     ends_at: CounterObject = CounterObject()
 
-    string_character_position: CounterObject = \
-        CounterObject(start_value=len(line))
+    position: CounterObject = \
+        CounterObject(
+            start_value=len(
+                line
+            )
+        )
 
-    while string_character_position.get_value() > get_integer_zero():
-        index = string_character_position.previous()
+    while position.get_value() > get_integer_zero():
+        index: int = position.previous()
         character_in_line: chr = line[index]
         character_numerical: int = ord(character_in_line)
 
@@ -197,8 +277,7 @@ def get_line_end(
             ends_at.increment()
         else:
             break
-
-        string_character_position.decrement()
+        position.decrement()
 
     return int(
         len(line)
@@ -206,3 +285,55 @@ def get_line_end(
         int(ends_at)
     )
 
+
+def get_word_begin(line: str) -> int:
+    begins_at: CounterObject = CounterObject()
+
+    for char in line:
+        numerical: int = ord(char)
+
+        if numerical == ord('.'):
+            begins_at.increment()
+        elif numerical == ord(','):
+            begins_at.increment()
+        elif numerical == ord('\''):
+            begins_at.increment()
+        elif numerical == ord('-'):
+            begins_at.increment()
+        else:
+            break
+
+    return begins_at.get_value()
+
+
+def get_word_end(line: str) -> int:
+    ends_at: CounterObject = CounterObject()
+    position: CounterObject = CounterObject(
+        start_value=len(
+            line
+        )
+    )
+
+    while position.get_value() > get_integer_zero():
+        index: int = position.previous()
+        character_in_line: chr = line[index]
+        numeric_character: int = ord(character_in_line)
+
+        if numeric_character == ord('.'):
+            ends_at.increment()
+        elif numeric_character == ord(','):
+            ends_at.increment()
+        elif numeric_character == ord('-'):
+            ends_at.increment()
+        elif numeric_character == ord('\''):
+            ends_at.increment()
+        else:
+            break
+
+        position.decrement()
+
+    return int(
+        len(line)
+        -
+        int(ends_at)
+    )

@@ -19,7 +19,9 @@ class OnCategoryEvent(OnFire):
             value: str
     ):
         handler = self.get_category_handler()
-        pass
+        handler.get_entity().on_event_found_token(
+            value
+        )
 
     def get_category_handler(self):
         from ssp.factories.events.categories \

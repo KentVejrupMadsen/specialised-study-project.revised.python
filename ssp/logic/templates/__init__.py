@@ -15,3 +15,6 @@ from ssp.logic.templates.factory_pattern    \
 
 from ssp.logic.templates.fire_event         \
     import OnFire
+
+from ssp.logic.templates.bag_of_words       \
+    import BagOfWords

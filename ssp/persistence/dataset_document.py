@@ -144,7 +144,7 @@ class DatasetDocumentStream:
 
         line = self.get_object().readline()
         self.set_buffer(
-            line
+            self.___output_line(line)
         )
 
         if not line:
@@ -152,9 +152,7 @@ class DatasetDocumentStream:
                 True
             )
 
-        return self.___output_line(
-            self.get_buffer()
-        )
+        return self.get_buffer()
 
     def ___output_line(
             self,
