@@ -4,7 +4,8 @@ from ssp.logic.structures   \
     Word
 
 from HardenedSteel.globals  \
-    import get_integer_one
+    import                  \
+    get_integer_one
 
 
 class DocumentToken(Word):
