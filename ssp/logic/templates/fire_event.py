@@ -1,4 +1,10 @@
-class OnFire:
+from ssp.logic.templates    \
+    import                  \
+    ABC,                    \
+    abstractmethod
+
+
+class OnFire(ABC):
     def __init__(self):
         pass
 
