@@ -17,9 +17,6 @@ from ssp                            \
 from ssp.logic.structures           \
     import CounterObject
 
-from ssp.frontend.datasets          \
-    import DataSetBuildByDirectory
-
 from ssp.frontend.environment       \
     import Environment
 
