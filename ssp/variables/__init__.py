@@ -14,20 +14,5 @@ from ssp.variables.environments         \
 
 from ssp.variables.constants            \
     import                              \
-    get_one,                            \
-    get_zero,                           \
-    get_two,                            \
-    get_three,                          \
-    get_four,                           \
-    get_five,                           \
-    get_six,                            \
-    get_seven,                          \
-    get_eight,                          \
-    get_nine,                           \
     get_ascii_number_range_start,       \
     get_ascii_number_range_end
-
-
-from ssp.variables.states               \
-    import                              \
-    is_int_zero
