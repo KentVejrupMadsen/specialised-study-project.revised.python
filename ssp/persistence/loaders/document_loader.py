@@ -100,8 +100,8 @@ class DocumentLoader:
 
     def is_iterator_within_range(self):
         return bool(
-            int(self.get_iterator().previous())
-            <
+            int(self.get_iterator())
+            <=
             len(self)
         )
 
@@ -125,15 +125,84 @@ class DocumentLoader:
                 )
 
     def load(self) -> None:
+        print('\n\n\n\n')
         stream: DatasetDocumentStream = self.stream
 
         stream.set_is_to_normalise(
             True
         )
 
-        self.trigger_event(value='test')
-
         while not stream.is_loaded():
-            line: str = stream.load_line()
+            stream.load_line()
+
+            print('\n')
+
+            if not stream.is_line_empty():
+                line: str = stream.get_buffer()
+                print('before filter:', line)
+
+                line: str = self.filter_padding(line)
+                print('result: ', line)
+
+                print('\n')
 
         stream.close()
+
+    def filter_padding(
+            self,
+            line: str
+    ) -> str:
+        result: str = line
+        begins_at: int = get_line_start(result)
+        ends_at: int = get_line_end(result)
+        result = result[begins_at: ends_at]
+
+        return result
+
+
+def get_line_start(
+        line: str
+) -> int:
+    starts_at: CounterObject = CounterObject()
+
+    for index in range(len(line)):
+        currently_selected_char: int = ord(line[index])
+
+        if currently_selected_char == ord(' '):
+            starts_at.increment()
+        else:
+            break
+
+    return int(starts_at)
+
+
+def get_line_end(
+        line: str
+) -> int:
+    ends_at: CounterObject = CounterObject()
+
+    string_character_position: CounterObject = \
+        CounterObject(start_value=len(line))
+
+    while string_character_position.get_value() > get_integer_zero():
+        index = string_character_position.previous()
+        character_in_line: chr = line[index]
+        character_numerical: int = ord(character_in_line)
+
+        if character_numerical == ord(' '):
+            ends_at.increment()
+        elif character_numerical == ord('\r'):
+            ends_at.increment()
+        elif character_numerical == ord('\n'):
+            ends_at.increment()
+        else:
+            break
+
+        string_character_position.decrement()
+
+    return int(
+        len(line)
+        -
+        int(ends_at)
+    )
+
