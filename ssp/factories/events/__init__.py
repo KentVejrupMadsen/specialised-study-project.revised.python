@@ -1,6 +1,3 @@
-from HardenedSteel.objects.counters        \
-    import CounterObject
-
 from ssp.factories.events.documents         \
     import DocumentEvent
 

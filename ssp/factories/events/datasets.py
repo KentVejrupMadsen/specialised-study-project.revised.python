@@ -1,13 +1,15 @@
-from ssp.factories.events    \
-    import                  \
-    CounterObject,          \
+from ssp.factories.events       \
+    import                      \
     DataSetLabelEvent
 
-from HardenedSteel.globals  \
+from HardenedSteel.globals      \
     import get_integer_zero
 
-from ssp.logic.structures   \
+from ssp.logic.structures       \
     import DataSetWrapper
+
+from HardenedSteel.objects      \
+    import CounterObject
 
 
 class DataSetEvents:
