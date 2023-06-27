@@ -135,10 +135,11 @@ class Category(BagOfWords):
         )
 
     def get_iterator(self) -> CounterObject:
-        if self.is_tokens_none():
+        if self.is_iterator_none():
             self.set_iterator(
                 CounterObject()
             )
+
         return self.iterator
 
     def set_iterator(
