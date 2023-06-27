@@ -8,7 +8,7 @@ from ssp                            \
     join,                           \
     isdir
 
-from ssp.variables                  \
+from ssp.globals                    \
     import                          \
     get_dataset_label,              \
     get_reuters_dataset_label

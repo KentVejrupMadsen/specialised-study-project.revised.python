@@ -1,21 +1,32 @@
 #!/usr/bin/env python
-from ssp.frontend                       \
-    import                              \
-    CounterObject,                      \
-    join,                               \
-    get_zero
+from HardenedSteel.objects                  \
+    import CounterObject
 
-from ssp.frontend.events                \
-    import                              \
-    DataSetEvents,                      \
+from HardenedSteel.globals                  \
+    import get_integer_zero
+
+from HardenedSteel.facades                  \
+    import is_integer_zero
+
+from os.path                                \
+    import join
+
+from ssp.logic.structures                   \
+    import Document
+
+from ssp.factories.events                   \
+    import                                  \
+    DataSetEvents,                          \
+    DataSetLabelEvent,                      \
+    CategoryEvent,                          \
     DocumentEvent
 
-from ssp.persistence                    \
-    import                              \
-    DataSetMapBuilder,                  \
-    DataSetMapStream,                   \
-    CategoryMapStream,                  \
-    DatasetDocumentStream,              \
+from ssp.persistence                        \
+    import                                  \
+    DataSetMapBuilder,                      \
+    DataSetMapStream,                       \
+    CategoryMapStream,                      \
+    DatasetDocumentStream,                  \
     DocumentLoader
 
 
@@ -28,6 +39,7 @@ class DataSetBuildByDirectory:
         self.path_to_dataset: str = location_to_dataset
         self.categories: list = categories
         self.selection: CounterObject | None = None
+        self.iterator: CounterObject | None = None
         self.data_event: DataSetEvents | None = None
         self.complete: bool = False
         self.store: list | None = None
@@ -41,7 +53,25 @@ class DataSetBuildByDirectory:
             self.complete,          \
             self.store,             \
             self.selection,         \
-            self.data_event
+            self.data_event,        \
+            self.iterator
+
+    def is_iterator_none(self) -> bool:
+        return self.iterator is None
+
+    def get_iterator(self) -> CounterObject:
+        if self.is_iterator_none():
+            self.set_iterator(
+                CounterObject()
+            )
+
+        return self.iterator
+
+    def set_iterator(
+            self,
+            value: CounterObject
+    ) -> None:
+        self.iterator = value
 
     def is_data_event_none(self) -> bool:
         return self.data_event is None
@@ -63,8 +93,8 @@ class DataSetBuildByDirectory:
     def remove_events(self) -> None:
         self.data_event = None
 
-    def reset_selection(self) -> None:
-        self.get_selection_counter().reset()
+    def reset_iterator(self) -> None:
+        self.get_iterator().reset()
 
     def get_selection(self) -> int:
         return self.get_selection_counter().previous()
@@ -87,10 +117,16 @@ class DataSetBuildByDirectory:
         self.selection = value
 
     def next_selection(self) -> None:
-        self.selection.increment()
+        self.get_selection_counter().increment()
 
     def previous_selection(self) -> None:
-        self.selection.decrement()
+        self.get_selection_counter().decrement()
+
+    def next_iterator(self) -> None:
+        self.get_iterator().increment()
+
+    def previous_iterator(self) -> None:
+        self.get_iterator().previous()
 
     def get_full_path(self) -> str:
         return self.path_to_dataset
@@ -174,7 +210,7 @@ class DataSetBuildByDirectory:
             ==
             label_events.get_label_name_normalised()
         ):
-            events.set_position_by_label(
+            events.retrieve_selection().set_position_by_label(
                 category_stream.get_name()
             )
 
@@ -238,6 +274,32 @@ class DataSetBuildByDirectory:
                 True
             )
 
+    def add_event_for_category(
+            self,
+            value: str
+    ):
+        label = self.get_currently_selected_label()
+        label.create_category(
+            value
+        )
+
+    def add_event_for_document(
+            self,
+            value: DatasetDocumentStream
+    ):
+        category: CategoryEvent = self.get_currently_selected_category()
+
+        event: DocumentEvent = DocumentEvent()
+        event.set_entity(
+            Document()
+        )
+        event.set_stream(
+            value
+        )
+        category.insert_event(
+            event
+        )
+
     def stream_dataset_map(
             self,
             dsm: DataSetMapStream
@@ -249,6 +311,9 @@ class DataSetBuildByDirectory:
         for selected_category \
                 in dsm.get_categories():
             category_label: CategoryMapStream = selected_category
+            self.add_event_for_category(
+                category_label.get_name()
+            )
 
             self.stream_dataset_category(
                 category_label
@@ -264,6 +329,11 @@ class DataSetBuildByDirectory:
 
         for document in cms.get_documents():
             selected_document: DatasetDocumentStream = document
+
+            self.add_event_for_document(
+                selected_document
+            )
+
             self.stream_dataset_document(
                 selected_document
             )
@@ -296,7 +366,9 @@ class DataSetBuildByDirectory:
             self,
             position: int
     ) -> bool:
-        return position == get_zero()
+        return is_integer_zero(
+            position
+        )
 
     def is_at_end(
             self,
@@ -357,8 +429,17 @@ class DataSetBuildByDirectory:
 
     def is_position_within_range(self) -> bool:
         return self.is_in_range(
-            self.get_selection()
+            self.get_iterator().previous()
         )
+
+    def get_currently_selected_label(self) -> DataSetLabelEvent:
+        return self.get_events().retrieve_selection()
+
+    def get_currently_selected_category(self) -> CategoryEvent:
+        return self.get_currently_selected_label().retrieve_selected_category_event()
+
+    def get_currently_selected_document(self) -> DocumentEvent:
+        return self.get_currently_selected_category().retrieve_selected_document()
 
     def __int__(self):
         return int(
@@ -367,20 +448,20 @@ class DataSetBuildByDirectory:
 
     def __len__(self) -> int:
         if self.is_store_none():
-            return get_zero()
+            return get_integer_zero()
 
         return len(
             self.store
         )
 
     def __iter__(self):
-        self.reset_selection()
+        self.reset_iterator()
         return self
 
     def __next__(self) -> int:
-        self.next_selection()
+        self.get_iterator().increment()
 
         if self.is_position_within_range():
-            return self.get_selection()
+            return self.get_iterator().previous()
         else:
             raise StopIteration

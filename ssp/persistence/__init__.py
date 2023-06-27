@@ -27,7 +27,7 @@ from HardenedSteel.facades.texts.characters.ranges          \
     ascii_lowercase_begin,                                  \
     ascii_lowercase_end
 
-from ssp.variables                                          \
+from ssp.globals                                            \
     import                                                  \
     get_ascii_number_range_start,                           \
     get_ascii_number_range_end
