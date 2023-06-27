@@ -1,9 +1,4 @@
 #!/usr/bin/env python
-from ssp.variables                  \
-    import                          \
-    get_zero,                       \
-    get_one
-
 from ssp                            \
     import                          \
     get_dataset_categories,         \
