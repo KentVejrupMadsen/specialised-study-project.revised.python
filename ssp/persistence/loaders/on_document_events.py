@@ -19,7 +19,7 @@ class OnDocumentEvent(OnFire):
             value: str
     ):
         handler = self.get_document_event_handler()
-        pass
+
 
     def get_document_event_handler(self):
         from ssp.factories.events import DocumentEvent

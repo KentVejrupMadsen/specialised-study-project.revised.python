@@ -195,6 +195,7 @@ class DocumentLoader:
         result: str = line
         begins_at: int = get_word_begin(result)
         ends_at: int = get_word_end(result)
+
         result = result[begins_at:ends_at]
         return result
 

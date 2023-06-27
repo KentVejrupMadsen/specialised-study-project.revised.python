@@ -1,3 +1,6 @@
+from ssp.logic.templates    \
+    import BagOfWords
+
 from ssp.logic.structures   \
     import                  \
     DocumentToken,          \
@@ -7,15 +10,23 @@ from HardenedSteel.globals  \
     import get_integer_zero
 
 
-class Document:
+class Document(BagOfWords):
     def __init__(self):
+        super().__init__()
         self.iterator: CounterObject | None = None
         self.tokens: list | None = None
 
     def __del__(self):
+        super().__del__()
         del                 \
             self.tokens,    \
             self.iterator
+
+    def on_event_found(
+            self,
+            value: str
+    ):
+        pass
 
     def get_iterator(self) -> CounterObject:
         if self.is_iterator_none():
@@ -40,6 +51,12 @@ class Document:
     ) -> bool:
 
         return False
+
+    def on_event_found_token(
+            self,
+            token: str
+    ):
+        return 
 
     def exist_token_by(
             self,
