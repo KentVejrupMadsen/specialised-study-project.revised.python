@@ -204,7 +204,7 @@ class DataSetBuildByDirectory:
             ==
             label_events.get_label_name_normalised()
         ):
-            events.set_position_by_label(
+            events.retrieve_selection().set_position_by_label(
                 category_stream.get_name()
             )
 
@@ -234,6 +234,8 @@ class DataSetBuildByDirectory:
             category_event.select_by_location(
                 document_stream.get_location()
             )
+
+        print(category_event.retrieve_selected_document().get_stream().get_location())
 
     def run_stream(self):
         for index in iter(self):
@@ -282,6 +284,7 @@ class DataSetBuildByDirectory:
             value: DatasetDocumentStream
     ):
         category: CategoryEvent = self.get_currently_selected_category()
+
         event: DocumentEvent = DocumentEvent()
         event.set_entity(
             Document()
@@ -326,7 +329,7 @@ class DataSetBuildByDirectory:
             self.add_event_for_document(
                 selected_document
             )
-            
+
             self.stream_dataset_document(
                 selected_document
             )
