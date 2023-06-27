@@ -30,6 +30,7 @@ class DataSetBuildByDirectory:
         self.path_to_dataset: str = location_to_dataset
         self.categories: list = categories
         self.selection: CounterObject | None = None
+        self.iterator: CounterObject | None = None
         self.data_event: DataSetEvents | None = None
         self.complete: bool = False
         self.store: list | None = None
@@ -43,7 +44,25 @@ class DataSetBuildByDirectory:
             self.complete,          \
             self.store,             \
             self.selection,         \
-            self.data_event
+            self.data_event,        \
+            self.iterator
+
+    def is_iterator_none(self) -> bool:
+        return self.iterator is None
+
+    def get_iterator(self) -> CounterObject:
+        if self.is_iterator_none():
+            self.set_iterator(
+                CounterObject()
+            )
+
+        return self.iterator
+
+    def set_iterator(
+            self,
+            value: CounterObject
+    ) -> None:
+        self.iterator = value
 
     def is_data_event_none(self) -> bool:
         return self.data_event is None
@@ -65,8 +84,8 @@ class DataSetBuildByDirectory:
     def remove_events(self) -> None:
         self.data_event = None
 
-    def reset_selection(self) -> None:
-        self.get_selection_counter().reset()
+    def reset_iterator(self) -> None:
+        self.get_iterator().reset()
 
     def get_selection(self) -> int:
         return self.get_selection_counter().previous()
@@ -89,10 +108,16 @@ class DataSetBuildByDirectory:
         self.selection = value
 
     def next_selection(self) -> None:
-        self.selection.increment()
+        self.get_selection_counter().increment()
 
     def previous_selection(self) -> None:
-        self.selection.decrement()
+        self.get_selection_counter().decrement()
+
+    def next_iterator(self) -> None:
+        self.get_iterator().increment()
+
+    def previous_iterator(self) -> None:
+        self.get_iterator().previous()
 
     def get_full_path(self) -> str:
         return self.path_to_dataset
@@ -368,7 +393,7 @@ class DataSetBuildByDirectory:
 
     def is_position_within_range(self) -> bool:
         return self.is_in_range(
-            self.get_selection()
+            self.get_iterator().previous()
         )
 
     def __int__(self):
@@ -385,13 +410,13 @@ class DataSetBuildByDirectory:
         )
 
     def __iter__(self):
-        self.reset_selection()
+        self.reset_iterator()
         return self
 
     def __next__(self) -> int:
-        self.next_selection()
+        self.get_iterator().increment()
 
         if self.is_position_within_range():
-            return self.get_selection()
+            return self.get_iterator().previous()
         else:
             raise StopIteration
