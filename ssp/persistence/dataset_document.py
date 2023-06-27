@@ -62,6 +62,9 @@ class DatasetDocumentStream:
             self,
             location: str
     ):
+        from ssp.factories.events.documents \
+            import DocumentEvent
+
         self.location: str | None = None
         self.hash: int | None = None
 
@@ -76,6 +79,17 @@ class DatasetDocumentStream:
         self.normalise: bool = False
 
         self.buffer: str | None = None
+
+        self.event: None | DocumentEvent = None
+
+    def get_event(self):
+        return self.event
+
+    def set_event(
+            self,
+            value
+    ) -> None:
+        self.event = value
 
     def is_to_normalise(self) -> bool:
         return self.normalise

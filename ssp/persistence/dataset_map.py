@@ -2,8 +2,10 @@
 from ssp.persistence                \
     import                          \
     CategoryMapStream,              \
-    raise_category_already_exist,   \
-    CounterObject
+    raise_category_already_exist
+
+from HardenedSteel.objects          \
+    import CounterObject
 
 
 class DataSetMapStream:

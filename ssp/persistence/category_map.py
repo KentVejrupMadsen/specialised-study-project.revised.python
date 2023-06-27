@@ -1,6 +1,7 @@
 #!/usr/bin/env python
-from ssp.persistence \
-    import DatasetDocumentStream
+from ssp.persistence                    \
+    import                              \
+    DatasetDocumentStream
 
 
 class CategoryMapStream:
@@ -8,9 +9,21 @@ class CategoryMapStream:
             self,
             name: str
     ):
+        from ssp.factories.events import CategoryEvent
         self.name: str = name
         self.documents: list = []
         self.hash: int | None = None
+
+        self.event: None | CategoryEvent = None
+
+    def get_event(self):
+        return self.event
+
+    def set_event(
+            self,
+            value
+    ) -> None:
+        self.event = value
 
     def __hash__(self) -> int:
         return self.get_hash()

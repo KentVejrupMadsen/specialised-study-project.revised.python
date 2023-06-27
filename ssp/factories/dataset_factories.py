@@ -41,6 +41,7 @@ class DataSetBuildByDirectory:
         self.selection: CounterObject | None = None
         self.iterator: CounterObject | None = None
         self.data_event: DataSetEvents | None = None
+
         self.complete: bool = False
         self.store: list | None = None
 
