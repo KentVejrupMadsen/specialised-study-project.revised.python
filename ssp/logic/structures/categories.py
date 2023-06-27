@@ -1,11 +1,14 @@
-from ssp.logic.templates    \
+from ssp.logic.templates        \
     import BagOfWords
 
-from ssp.logic.structures   \
+from ssp.logic.structures       \
     import CategoryToken
 
-from HardenedSteel.objects  \
+from HardenedSteel.objects      \
     import CounterObject
+
+from HardenedSteel.facades      \
+    import is_integer_zero
 
 
 class Category(BagOfWords):
@@ -77,9 +80,7 @@ class Category(BagOfWords):
     ) -> bool:
         if self.is_empty():
             return False
-
         hash_of_input_token: int = hash(token_name)
-
         for index in iter(self):
             current_token: CategoryToken = self.retrieve_token_at(index)
             if hash_of_input_token == current_token.get_hash():
@@ -97,7 +98,9 @@ class Category(BagOfWords):
 
         hash_of_input_value: int = hash(value)
         for index in iter(self):
-            current_token: CategoryToken = self.retrieve_token_at(index)
+            current_token: CategoryToken = self.retrieve_token_at(
+                index
+            )
             if hash_of_input_value == current_token.get_hash():
                 if value == current_token.get_word():
                     return True
@@ -137,7 +140,9 @@ class Category(BagOfWords):
         return bool(
             self.is_tokens_none()
             or
-            len(self) == 0
+            is_integer_zero(
+                len(self)
+            )
         )
 
     def get_iterator(self) -> CounterObject:
@@ -164,12 +169,10 @@ class Category(BagOfWords):
             )
         else:
             self.get_iterator().reset()
-
         return self
 
     def __next__(self) -> int:
         self.get_iterator().increment()
-
         if self.get_iterator().previous() < len(self):
             return self.get_iterator().previous()
         else:

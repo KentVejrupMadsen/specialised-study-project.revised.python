@@ -6,6 +6,9 @@ from ssp.logic.structures   \
     DocumentToken,          \
     CounterObject
 
+from HardenedSteel.facades  \
+    import is_integer_zero
+
 from HardenedSteel.globals  \
     import get_integer_zero
 
@@ -40,7 +43,9 @@ class Document(BagOfWords):
         return bool(
             self.is_tokens_none()
             or
-            len(self) == get_integer_zero()
+            is_integer_zero(
+                len(self)
+            )
         )
 
     def is_iterator_none(self) -> bool:
