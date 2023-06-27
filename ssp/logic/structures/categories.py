@@ -75,6 +75,9 @@ class Category(BagOfWords):
             self,
             token_name
     ) -> bool:
+        if self.is_empty():
+            return False
+
         hash_of_input_token: int = hash(token_name)
 
         for index in iter(self):
@@ -89,6 +92,9 @@ class Category(BagOfWords):
             self,
             value: str
     ) -> bool:
+        if self.is_empty():
+            return False
+
         hash_of_input_value: int = hash(value)
         for index in iter(self):
             current_token: CategoryToken = self.retrieve_token_at(index)
@@ -152,7 +158,7 @@ class Category(BagOfWords):
         return self.iterator is None
 
     def __iter__(self):
-        if self.is_tokens_none():
+        if self.is_iterator_none():
             self.set_iterator(
                 CounterObject()
             )
@@ -162,8 +168,9 @@ class Category(BagOfWords):
         return self
 
     def __next__(self) -> int:
+        self.get_iterator().increment()
+
         if self.get_iterator().previous() < len(self):
-            self.get_iterator().increment()
             return self.get_iterator().previous()
         else:
             raise StopIteration
