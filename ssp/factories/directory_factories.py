@@ -1,32 +1,32 @@
 #!/usr/bin/env python
-from HardenedSteel.objects              \
+from HardenedSteel.objects                  \
     import CounterObject
 
-from HardenedSteel.globals              \
+from HardenedSteel.globals                  \
     import get_integer_zero
 
-from HardenedSteel.facades              \
+from HardenedSteel.facades                  \
     import is_integer_zero
 
-from os.path                            \
+from os.path                                \
     import join
 
-from ssp.logic.structures               \
+from ssp.logic.structures                   \
     import Document
 
-from ssp.frontend.events                \
-    import                              \
-    DataSetEvents,                      \
-    DataSetLabelEvent,                  \
-    CategoryEvent,                      \
+from ssp.factories.events                   \
+    import                                  \
+    DataSetEvents,                          \
+    DataSetLabelEvent,                      \
+    CategoryEvent,                          \
     DocumentEvent
 
-from ssp.persistence                    \
-    import                              \
-    DataSetMapBuilder,                  \
-    DataSetMapStream,                   \
-    CategoryMapStream,                  \
-    DatasetDocumentStream,              \
+from ssp.persistence                        \
+    import                                  \
+    DataSetMapBuilder,                      \
+    DataSetMapStream,                       \
+    CategoryMapStream,                      \
+    DatasetDocumentStream,                  \
     DocumentLoader
 
 
