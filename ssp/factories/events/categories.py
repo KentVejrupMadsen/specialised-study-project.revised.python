@@ -32,7 +32,8 @@ class CategoryEvent:
             self.document_events,   \
             self.entity,            \
             self.position,          \
-            self.iterator
+            self.iterator,          \
+            self.stream
 
     def __len__(self) -> int:
         if self.is_document_events_none():

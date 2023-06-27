@@ -22,7 +22,8 @@ class DataSetLabelEvent:
         del                         \
             self.label_name,        \
             self.position,          \
-            self.category_events
+            self.category_events,   \
+            self.stream
 
     def get_stream(self):
         return self.stream

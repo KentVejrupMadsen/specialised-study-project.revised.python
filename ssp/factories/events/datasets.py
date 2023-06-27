@@ -25,7 +25,8 @@ class DataSetEvents:
             self.labels,    \
             self.iterator,  \
             self.position,  \
-            self.entity
+            self.entity,    \
+            self.stream
 
     def get_stream(self):
         return self.stream
