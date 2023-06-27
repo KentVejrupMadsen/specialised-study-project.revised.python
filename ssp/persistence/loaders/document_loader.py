@@ -125,7 +125,6 @@ class DocumentLoader:
                 )
 
     def load(self) -> None:
-        print('\n\n\n\n')
         stream: DatasetDocumentStream = self.stream
 
         stream.set_is_to_normalise(
@@ -135,16 +134,11 @@ class DocumentLoader:
         while not stream.is_loaded():
             stream.load_line()
 
-            print('\n')
-
             if not stream.is_line_empty():
                 line: str = stream.get_buffer()
-                print('before filter:', line)
-
                 line: str = self.filter_padding(line)
-                print('result: ', line)
 
-                print('\n')
+                print(line)
 
         stream.close()
 
