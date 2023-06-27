@@ -35,3 +35,9 @@ class DocumentEvent:
             stream.set_event(self)
 
         self.stream = stream
+
+    def is_stream_none(self) -> bool:
+        return self.stream is None
+
+    def is_entity_none(self) -> bool:
+        return self.stream is None
