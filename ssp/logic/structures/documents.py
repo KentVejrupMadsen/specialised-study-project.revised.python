@@ -46,10 +46,14 @@ class Document(BagOfWords):
     def is_iterator_none(self) -> bool:
         return self.iterator is None
 
-    def exist_token(
+    def exist_document_token(
             self,
-            value: DocumentToken
+            is_in_set: DocumentToken
     ) -> bool:
+        for index in iter(self):
+            selected_token: DocumentToken = self.get_token_by_index(index)
+            if is_in_set == selected_token:
+                return True
         return False
 
     def exist_token_by_string(
@@ -57,14 +61,11 @@ class Document(BagOfWords):
             value: str
     ) -> bool:
         input_var_hash: int = hash(value)
-
         for index in iter(self):
             element = self.get_token_by_index(index)
-
             if input_var_hash == element.get_hash():
                 if value == element.get_word():
                     return True
-
         return False
 
     def increase_token_counter(
@@ -72,10 +73,8 @@ class Document(BagOfWords):
             token: str
     ):
         hashed_token: int = hash(token)
-
         for index in iter(self):
             selected = self.get_token_by_index(index)
-
             if selected.get_hash() == hashed_token:
                 if selected.get_word() == token:
                     selected.get_counter().increment()
@@ -101,17 +100,14 @@ class Document(BagOfWords):
             name: str
     ) -> bool:
         hashed_label: int = hash(name)
-
         for index in iter(self):
             token = self.get_token_by_index(index)
-
             if hashed_label == token.get_hash():
                 if name == token.get_word():
                     return True
-
         return False
 
-    def add_token(
+    def insert_token(
             self,
             value: DocumentToken
     ) -> None:
@@ -123,7 +119,7 @@ class Document(BagOfWords):
             self,
             value: str
     ) -> None:
-        self.add_token(
+        self.insert_token(
             DocumentToken(
                 value
             )
@@ -165,12 +161,10 @@ class Document(BagOfWords):
             )
         else:
             self.get_iterator().reset()
-
         return self
 
     def __next__(self) -> int:
         self.get_iterator().increment()
-
         if self.get_iterator().previous() < len(self):
             return self.get_iterator().previous()
         else:
@@ -179,7 +173,6 @@ class Document(BagOfWords):
     def __len__(self) -> int:
         if self.is_tokens_none():
             return get_integer_zero()
-
         return len(
             self.tokens
         )
