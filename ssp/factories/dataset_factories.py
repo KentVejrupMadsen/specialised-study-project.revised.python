@@ -343,12 +343,30 @@ class DataSetBuildByDirectory:
             self,
             document: DatasetDocumentStream
     ) -> None:
+        from ssp.persistence.loaders.on_document_events    \
+            import OnDocumentEvent
+
+        from ssp.persistence.loaders.on_category_events     \
+            import OnCategoryEvent
+
         self.synchronise_events_stream_document(
             document
         )
 
         loader = DocumentLoader(
             document
+        )
+
+        loader.insert_event(
+            OnDocumentEvent(
+                self.get_currently_selected_document()
+            )
+        )
+
+        loader.insert_event(
+            OnCategoryEvent(
+                self.get_currently_selected_category()
+            )
         )
 
         loader.load()

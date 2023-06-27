@@ -40,7 +40,7 @@ class DataSetMapStream:
             None
         )
 
-    def __len__(self):
+    def __len__(self) -> int:
         return len(
             self.categories
         )
@@ -51,7 +51,7 @@ class DataSetMapStream:
     def set_name(
             self,
             value: str
-    ):
+    ) -> None:
         self.name = value
 
     def get_categories(self) -> list:
