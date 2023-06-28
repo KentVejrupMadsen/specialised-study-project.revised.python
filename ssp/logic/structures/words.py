@@ -24,9 +24,22 @@ class Word(Token):
             start_value=instances
         )
 
+        self.normalise: bool = False
+
     def __del__(self):
         super().__del__()
-        del self.counter
+        del                 \
+            self.counter,   \
+            self.normalise
+
+    def is_to_normalise(self) -> bool:
+        return self.normalise
+
+    def set_is_to_normalise(
+            self,
+            value: bool
+    ) -> None:
+        self.normalise = value
 
     def get_counter(self) -> CounterObject:
         return self.counter
@@ -54,10 +67,29 @@ class Word(Token):
     def decrement_of_counter(self):
         self.get_counter().decrement()
 
+    def get_attribute_counter(self) -> str:
+        return 'counter'
+
+    def get_attribute_normalise(self) -> str:
+        return 'normalise'
+
     def __int__(self):
         return int(
             self.get_counter()
         )
+
+    def __dir__(self) -> list:
+        result: list = super().__dir__()
+
+        result.append(
+            self.get_attribute_counter()
+        )
+
+        result.append(
+            self.get_attribute_normalise()
+        )
+
+        return result
 
     def is_instance_of_implementation(
             self,

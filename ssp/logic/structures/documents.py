@@ -27,6 +27,15 @@ class Document(BagOfWords):
             self.tokens,    \
             self.iterator
 
+    def __repr__(self) -> str:
+        return str(
+            dict(
+                {
+                    'tokens': self.get_tokens()
+                }
+            )
+        )
+
     def get_iterator(self) -> CounterObject:
         if self.is_iterator_none():
             self.set_iterator(

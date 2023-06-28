@@ -19,9 +19,18 @@ class DocumentToken(Word):
             instances=instances
         )
 
-    def __del__(self):
-        del                 \
-            self.word,      \
-            self.counter,   \
-            self.hash
+        self.set_is_to_normalise(
+            True
+        )
 
+    def __del__(self):
+        super().__del__()
+
+    def __repr__(self):
+        return str(
+            dir(self)
+        )
+
+    def __dir__(self) -> list:
+        result: list = super().__dir__()
+        return result

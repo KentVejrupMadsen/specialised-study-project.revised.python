@@ -31,6 +31,34 @@ class Token(ABC):
             self.length,    \
             self.iterator
 
+    def __dir__(self) -> list:
+        result: list = list()
+        result.append(
+            self.get_attribute_word()
+        )
+        result.append(
+            self.get_attribute_hash()
+        )
+        result.append(
+            self.get_attribute_length()
+        )
+        result.append(
+            self.get_attribute_iterator()
+        )
+        return result
+
+    def get_attribute_word(self) -> str:
+        return 'word'
+
+    def get_attribute_hash(self) -> str:
+        return 'hash'
+
+    def get_attribute_length(self) -> str:
+        return 'length'
+
+    def get_attribute_iterator(self) -> str:
+        return 'iterator'
+
     def get_length(self) -> int:
         if self.is_length_none():
             self.refresh_length()
