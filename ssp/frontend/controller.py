@@ -4,6 +4,17 @@ from ssp.frontend                   \
     Environment,                    \
     WorkQueue
 
+from ssp.frontend.processes         \
+    import DebuggableAction
+
+
+is_debugging: bool = True
+
+
+def get_is_debugging() -> bool:
+    global is_debugging
+    return is_debugging
+
 
 class Controller:
     def __init__(self):
@@ -16,10 +27,14 @@ class Controller:
             self.queue
 
     def initialise(self) -> None:
-        pass
+        if get_is_debugging():
+            self.get_queue().insert_action_process(
+                DebuggableAction()
+            )
 
     def execute(self) -> None:
-        pass
+        while not self.get_queue().is_complete():
+            self.get_queue().cycle()
 
     def clean(self) -> None:
         pass

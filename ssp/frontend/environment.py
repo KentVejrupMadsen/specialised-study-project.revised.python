@@ -1,4 +1,4 @@
-from ssp.frontend                   \
+from ssp                            \
     import                          \
     get_dataset_categories,         \
     get_location_of_dataset,        \

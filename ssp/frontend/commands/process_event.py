@@ -1,13 +1,22 @@
-from ssp.frontend.commands \
+from abc                    \
+    import                  \
+    ABC,                    \
+    abstractmethod
+
+from ssp.frontend.commands  \
     import Command
 
 
-class ProcessEvent:
+class ProcessEvent(ABC):
     def __init__(self):
         self.command: Command | None = None
 
     def __del__(self):
         del self.command
+
+    @abstractmethod
+    def bootstrap_process(self):
+        pass
 
     def is_command_none(self) -> bool:
         return self.command is None

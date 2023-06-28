@@ -1,2 +1,5 @@
-from ssp.frontend.processes.calculate_action \
+from ssp.frontend.processes.calculate_action    \
     import CalculateAction
+
+from ssp.frontend.processes.debuggable_action   \
+    import DebuggableAction
