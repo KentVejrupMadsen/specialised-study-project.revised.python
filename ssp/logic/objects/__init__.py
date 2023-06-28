@@ -1,3 +1,6 @@
+from ssp.logic.templates                \
+    import Token
+
 from ssp.logic.objects.words            \
     import Word
 
