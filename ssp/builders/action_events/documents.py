@@ -1,3 +1,6 @@
+from ssp.builders.action_events \
+    import BuilderEvent
+
 from ssp.logic.structures \
     import Document
 
@@ -5,12 +8,16 @@ from ssp.persistence \
     import DatasetDocumentStream
 
 
-class DocumentEvent:
+class DocumentEvent(
+    BuilderEvent
+):
     def __init__(self):
+        super().__init__()
         self.entity: Document | None = None
         self.stream: DatasetDocumentStream | None = None
 
     def __del__(self):
+        super().__del__()
         del                 \
             self.entity,    \
             self.stream

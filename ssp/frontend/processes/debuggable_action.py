@@ -1,7 +1,7 @@
-from ssp.frontend.commands                      \
+from ssp.frontend.commands          \
     import ActionProcess
 
-from ssp.builders.dataset_builder_by_directory  \
+from ssp.builders                   \
     import DataSetBuildByDirectory
 
 
@@ -27,5 +27,18 @@ class DebuggableAction(
             True
         )
 
-    def process_to_run(self):
-        pass
+    def process_to_run(self) -> None:
+        from ssp.frontend import WorkQueue, Controller
+        parent: WorkQueue = self.get_parent_queue()
+        parent_controller: Controller = parent.get_parent()
+        env = parent_controller.get_environment()
+
+        build = DataSetBuildByDirectory(
+            env.get_path_to_dataset(),
+            env.get_categories()
+        )
+        
+        build.stream()
+
+
+

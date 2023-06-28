@@ -1,3 +1,6 @@
+from ssp.logic.templates.events.builder_event   \
+    import BuilderEvent
+
 from ssp.logic.templates.events.fire_event      \
     import OnFire
 

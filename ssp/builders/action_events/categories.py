@@ -7,18 +7,21 @@ from HardenedSteel.globals          \
 from ssp.persistence                \
     import DatasetDocumentStream
 
-from ssp.builders.action_events            \
-    import DocumentEvent
+from ssp.builders.action_events     \
+    import                          \
+    BuilderEvent,                   \
+    DocumentEvent
 
 from ssp.logic.structures           \
     import Category
 
 
-class CategoryEvent:
+class CategoryEvent(BuilderEvent):
     def __init__(
             self,
             category_name: str
     ):
+        super().__init__()
         self.entity: Category | None = Category(category_name)
         self.document_events: list | None = None
         self.position: None | CounterObject = None
@@ -26,6 +29,7 @@ class CategoryEvent:
         self.stream = None
 
     def __del__(self):
+        super().__del__()
         del                         \
             self.document_events,   \
             self.entity,            \
