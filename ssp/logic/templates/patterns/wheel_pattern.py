@@ -146,7 +146,7 @@ class WheelPattern(
         self.get_iterator().increment()
 
         index_position: int = self.get_iterator().previous()
-        
+
         is_within_begin_range: bool = index_position >= 0
         is_within_end_range: bool = index_position < len(self)
 

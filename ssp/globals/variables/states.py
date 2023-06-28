@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-is_debugging: bool = True
+is_debugging: bool = False
 
 
 def get_is_debugging() -> bool:
