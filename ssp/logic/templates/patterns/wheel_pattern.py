@@ -11,9 +11,27 @@ from HardenedSteel.objects  \
 class WheelPattern(ABC):
     def __init__(self):
         self.position: None | CounterObject = None
+        self.increment: bool = True
 
     def __del__(self):
-        del self.position
+        del                 \
+            self.position,  \
+            self.increment
+
+    def is_to_increment(self) -> bool:
+        return self.increment
+
+    def set_is_to_increment(
+            self,
+            value: bool
+    ) -> None:
+        self.increment = value
+
+    def move_position(self):
+        if self.is_to_increment():
+            self.initiate_moving_position_forward()
+        else:
+            self.initiate_moving_position_backward()
 
     def move_position_forward(self):
         self.get_position_counter().increment()
