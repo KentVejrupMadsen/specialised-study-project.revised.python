@@ -8,15 +8,36 @@ from HardenedSteel.objects  \
     import CounterObject
 
 
-class WheelPattern(ABC):
+class WheelPattern(
+    ABC
+):
     def __init__(self):
         self.position: None | CounterObject = None
+        self.iterator: None | CounterObject = None
         self.increment: bool = True
 
     def __del__(self):
         del                 \
             self.position,  \
-            self.increment
+            self.increment, \
+            self.iterator
+
+    def get_iterator(self) -> CounterObject:
+        if self.is_iterator_none():
+            self.set_iterator(
+                CounterObject()
+            )
+
+        return self.iterator
+
+    def is_iterator_none(self) -> bool:
+        return self.iterator is None
+
+    def set_iterator(
+            self,
+            value: CounterObject
+    ) -> None:
+        self.iterator = value
 
     def is_to_increment(self) -> bool:
         return self.increment
@@ -116,3 +137,20 @@ class WheelPattern(ABC):
         return (
             len(self) - 1
         )
+
+    def __iter__(self):
+        self.get_iterator().reset()
+        return self
+
+    def __next__(self):
+        self.get_iterator().increment()
+
+        index_position: int = self.get_iterator().previous()
+        
+        is_within_begin_range: bool = index_position >= 0
+        is_within_end_range: bool = index_position < len(self)
+
+        if is_within_begin_range and is_within_end_range:
+            return index_position
+        else:
+            raise StopIteration
