@@ -1,13 +1,14 @@
 #!/usr/bin/env python
-from logic.templates.objects.tokens \
-    import Token
-
-from logic.templates.events.function_class \
-    import FunctionClass
-
-from logic.templates.patterns.factory_pattern \
+from ssp.logic.templates.patterns       \
     import Factory
 
-from logic.templates.events.fire_event \
-    import OnFire
 
+from ssp.logic.templates.events         \
+    import                              \
+    OnFire,                             \
+    FunctionClass
+
+from ssp.logic.templates.objects        \
+    import                              \
+    Token,                              \
+    BagOfWords
