@@ -14,23 +14,32 @@ class Word(Token):
     def __init__(
         self,
         word: str,
-        instances: int = get_integer_one()
+        instances: int = get_integer_one(),
+        normalise: bool = False
     ):
         super().__init__(
             value=word
         )
-
         self.counter = CounterObject(
             start_value=instances
         )
-
-        self.normalise: bool = False
+        self.normalise: bool = normalise
 
     def __del__(self):
         super().__del__()
         del                 \
             self.counter,   \
             self.normalise
+
+    def on_change_event(self) -> None:
+        super().on_change_event()
+        self.on_event_normalise()
+
+    def on_event_normalise(self):
+        if self.is_to_normalise():
+            self.set_word(
+                self.get_word().lower()
+            )
 
     def is_to_normalise(self) -> bool:
         return self.normalise
@@ -80,22 +89,21 @@ class Word(Token):
 
     def __dir__(self) -> list:
         result: list = super().__dir__()
-
         result.append(
             self.get_attribute_counter()
         )
-
         result.append(
             self.get_attribute_normalise()
         )
-
         return result
 
     def is_instance_of_implementation(
             self,
             other
     ):
-        if is_instance_of_word(other):
+        if is_instance_of_word(
+                other
+        ):
             other_word_token: Word = other
             if other_word_token.get_hash() == self.get_hash():
                 if other_word_token.get_length() == self.get_length():

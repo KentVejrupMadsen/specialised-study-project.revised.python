@@ -16,7 +16,9 @@ from HardenedSteel.globals  \
     import get_integer_zero
 
 
-class Document(BagOfWords):
+class Document(
+    BagOfWords
+):
     def __init__(self):
         super().__init__()
         self.iterator: CounterObject | None = None
@@ -63,7 +65,7 @@ class Document(BagOfWords):
     def is_iterator_none(self) -> bool:
         return self.iterator is None
 
-    def exist_document_token(
+    def is_document_token_in_set(
         self,
         is_in_set: DocumentToken
     ) -> bool:
@@ -73,7 +75,7 @@ class Document(BagOfWords):
                 return True
         return False
 
-    def exist_token_by_string(
+    def exist_string_as_token_in_set(
         self,
         value: str
     ) -> bool:
@@ -97,7 +99,7 @@ class Document(BagOfWords):
             token: str
     ) -> None:
         if not self.is_empty():
-            if self.exist_token_by_string(token):
+            if self.exist_string_as_token_in_set(token):
                 self.increase_token_counter(token)
             else:
                 self.create_token(

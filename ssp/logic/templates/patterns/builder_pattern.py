@@ -5,7 +5,7 @@ from abc            \
     abstractmethod
 
 
-class BuilderPattern:
+class BuilderPattern(ABC):
     def __init__(self):
         pass
 
