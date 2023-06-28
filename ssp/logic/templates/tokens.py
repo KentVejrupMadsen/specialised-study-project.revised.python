@@ -117,15 +117,6 @@ class Token(ABC):
     ):
         return False
 
-    def __iter__(self):
-        self.get_iterator().reset()
-        return self
-
-    def __next__(self):
-        self.get_iterator().increment()
-        if self.get_iterator().previous() < len(self):
-            return self.get_iterator().previous()
-
     def __eq__(
         self,
         other
@@ -182,6 +173,15 @@ class Token(ABC):
         return int(
             self.get_length()
         )
+
+    def __iter__(self):
+        self.get_iterator().reset()
+        return self
+
+    def __next__(self):
+        self.get_iterator().increment()
+        if self.get_iterator().previous() < len(self):
+            return self.get_iterator().previous()
 
 
 def is_instance_of_token(
