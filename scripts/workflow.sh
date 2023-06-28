@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-bash .setup.sh
+git submodule update --init --recursive
 
 # setup of local environment
-python -m venv .venv
-source ./.venv/bin/activate
+python -m venv .linux
+source ./.linux/bin/activate
 
 # Upgrades pip for the local environment
 python -m pip install --upgrade pip

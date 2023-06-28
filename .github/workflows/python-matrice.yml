@@ -1,7 +1,7 @@
 name: Python package
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "working", "development" ]
   pull_request:
     branches: [ "main" ]
 
@@ -12,17 +12,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.10", "3.11"]
+        python-version: ["3.8", "3.9", "3.10", "3.11"]
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v3
       with:
         python-version: ${{ matrix.python-version }}
-    - name: Install dependencies
+    - name: Run of workflow
       run: |
-        python -m pip install --upgrade pip
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-    - name: Run workflow
-      run: |
-        bash .workflow.sh
+        bash scripts/workflow.sh
