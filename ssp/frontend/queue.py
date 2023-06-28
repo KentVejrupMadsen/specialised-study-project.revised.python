@@ -22,11 +22,14 @@ class WorkQueue:
             parent_controller=None
     ):
         self.iterator: CounterObject | None = None
-        self.queue: list | None = None
-        self.complete: bool = False
-        self.seconds_to_sleep: int = get_integer_one()
-        self.removal: list | None = None
         self.parent_controller = parent_controller
+
+        self.seconds_to_sleep: int = get_integer_one()
+
+        self.complete: bool = False
+
+        self.queue: list | None = None
+        self.removal: list | None = None
 
     def __del__(self):
         del                         \
