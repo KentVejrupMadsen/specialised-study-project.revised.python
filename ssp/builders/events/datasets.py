@@ -1,4 +1,4 @@
-from ssp.factories.events       \
+from ssp.builders.events       \
     import                      \
     DataSetLabelEvent
 

@@ -62,7 +62,7 @@ class DatasetDocumentStream:
             self,
             location: str
     ):
-        from ssp.factories.events.documents \
+        from ssp.builders.events.documents \
             import DocumentEvent
 
         self.location: str | None = None

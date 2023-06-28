@@ -7,7 +7,7 @@ from HardenedSteel.globals          \
 from ssp.persistence                \
     import DatasetDocumentStream
 
-from ssp.factories.events            \
+from ssp.builders.events            \
     import DocumentEvent
 
 from ssp.logic.structures           \

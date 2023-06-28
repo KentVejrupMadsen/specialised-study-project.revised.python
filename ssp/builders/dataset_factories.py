@@ -14,7 +14,7 @@ from os.path                                \
 from ssp.logic.structures                   \
     import Document
 
-from ssp.factories.events                   \
+from ssp.builders.events                   \
     import                                  \
     DataSetEvents,                          \
     DataSetLabelEvent,                      \
@@ -32,9 +32,9 @@ from ssp.persistence                        \
 
 class DataSetBuildByDirectory:
     def __init__(
-            self,
-            location_to_dataset: str,
-            categories: list
+        self,
+        location_to_dataset: str,
+        categories: list
     ):
         self.path_to_dataset: str = location_to_dataset
         self.categories: list = categories

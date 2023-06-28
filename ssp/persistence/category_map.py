@@ -9,7 +9,7 @@ class CategoryMapStream:
             self,
             name: str
     ):
-        from ssp.factories.events import CategoryEvent
+        from ssp.builders.events import CategoryEvent
         self.name: str = name
         self.documents: list = []
         self.hash: int | None = None

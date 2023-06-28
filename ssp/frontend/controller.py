@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from ssp.factories                  \
+from ssp.builders                  \
     import DataSetBuildByDirectory
 
 from ssp.frontend                   \
