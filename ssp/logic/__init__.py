@@ -5,6 +5,7 @@ from ssp.logic.templates    \
     FunctionClass,          \
     FactoryPattern,         \
     BuilderPattern,         \
+    WheelPattern,           \
     OnFire,                 \
     BagOfWords
 

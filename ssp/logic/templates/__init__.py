@@ -2,7 +2,8 @@
 from ssp.logic.templates.patterns       \
     import                              \
     BuilderPattern,                     \
-    FactoryPattern
+    FactoryPattern,                     \
+    WheelPattern
 
 from ssp.logic.templates.events         \
     import                              \
