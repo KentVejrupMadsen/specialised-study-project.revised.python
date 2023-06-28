@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 from ssp.logic.templates.patterns       \
-    import Factory
+    import FactoryPattern
 
 
 from ssp.logic.templates.events         \

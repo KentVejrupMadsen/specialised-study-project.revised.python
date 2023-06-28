@@ -3,7 +3,7 @@ from ssp.logic.templates    \
     import                  \
     Token,                  \
     FunctionClass,          \
-    Factory,                \
+    FactoryPattern,                \
     OnFire,                 \
     BagOfWords
 
