@@ -1,4 +1,4 @@
-from ssp.logic.templates        \
+from ssp.logic                  \
     import BagOfWords
 
 from ssp.logic.objects          \
