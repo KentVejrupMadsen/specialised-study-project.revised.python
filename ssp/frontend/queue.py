@@ -1,10 +1,13 @@
 from HardenedSteel.objects  \
     import CounterObject
 
-from HardenedSteel.facades \
+from HardenedSteel.facades  \
     import is_integer_zero
 
-from ssp.frontend.commands \
+from HardenedSteel.globals  \
+    import get_integer_zero
+
+from ssp.frontend.commands  \
     import ActionProcess
 
 from time                   \
@@ -123,7 +126,7 @@ class WorkQueue:
             start_value=size_of_removal
         )
 
-        while index_position.previous() >= 0:
+        while index_position.previous() >= get_integer_zero():
             # offsets to given index
             current_position = index_position.previous()
             index_to_remove: int = self.index_to_remove(
