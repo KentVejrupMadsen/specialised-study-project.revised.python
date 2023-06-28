@@ -81,6 +81,7 @@ class Token(ABC):
         self.iterator = value
 
     def on_change_event(self) -> None:
+        self.refresh_length()
         self.refresh_hash()
 
     def refresh_hash(self) -> None:
@@ -93,7 +94,7 @@ class Token(ABC):
     def refresh_length(self) -> None:
         self.set_length(
             len(
-                self
+                self.get_word()
             )
         )
 
@@ -117,6 +118,24 @@ class Token(ABC):
     ):
         return False
 
+    def is_hash_the_same_as(
+            self,
+            hash_by: int
+    ) -> bool:
+        return self.get_hash() == hash_by
+
+    def is_word_the_same_as(
+            self,
+            word: str
+    ) -> bool:
+        return self.get_word() == word
+
+    def is_length_of_word_same_as(
+        self,
+        size: int
+    ):
+        return self.get_length() == size
+
     def __eq__(
         self,
         other
@@ -127,10 +146,12 @@ class Token(ABC):
             return True
 
         if is_instance_of_token(other):
-            result_of_hash: bool = self.get_hash() == other.get_hash()
-            if result_of_hash:
-                result_of_hash = self.get_word() == other.get_word()
-                return result_of_hash
+            if self.is_hash_the_same_as(
+                other.get_hash()
+            ):
+                return self.is_word_the_same_as(
+                    other.get_word()
+                )
 
         if is_instance_of_string(other):
             return self.is_equal_to_string(
@@ -146,14 +167,20 @@ class Token(ABC):
         hash_of_other: int = hash(
             value.lower()
         )
-        result_of_hash: bool = self.get_hash() == hash_of_other
-        if result_of_hash:
+
+        if self.is_hash_the_same_as(
+                hash_of_other
+        ):
             length_of_other: int = len(
                 value
             )
-            is_equal_length: bool = (length_of_other == len(self))
-            if is_equal_length:
-                return value == str(self)
+            if self.is_length_of_word_same_as(
+                    length_of_other
+            ):
+                return self.is_word_the_same_as(
+                    value
+                )
+
         return False
 
     def __str__(self) -> str:
@@ -180,12 +207,18 @@ class Token(ABC):
 
     def __next__(self):
         self.get_iterator().increment()
-        if self.get_iterator().previous() < len(self):
-            return self.get_iterator().previous()
+
+        if self.get_iteration_index() < len(self):
+            return self.get_iteration_index()
+        else:
+            raise StopIteration
+
+    def get_iteration_index(self):
+        return self.get_iterator().previous()
 
 
 def is_instance_of_token(
-        value
+    value
 ) -> bool:
     return isinstance(
         value,
@@ -193,7 +226,9 @@ def is_instance_of_token(
     )
 
 
-def is_instance_of_string(value) -> bool:
+def is_instance_of_string(
+    value
+) -> bool:
     return isinstance(
         value,
         str
