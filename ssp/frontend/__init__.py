@@ -2,6 +2,9 @@
 from ssp.frontend.environment       \
     import Environment
 
+from ssp.frontend.queue             \
+    import WorkQueue
+
 from ssp.frontend.controller        \
     import Controller
 
