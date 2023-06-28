@@ -4,7 +4,7 @@ from HardenedSteel.objects  \
 from HardenedSteel.globals  \
     import get_integer_zero
 
-from ssp.factories.events    \
+from ssp.builders.action_events    \
     import CategoryEvent
 
 from ssp.logic.structures \
@@ -173,10 +173,12 @@ class DataSetLabelEvent:
         self.position = value
 
     def __repr__(self):
-        return str({
-            'label': self.label_name,
-            'categories': self.get_category_events(),
-            'position': int(
-                self.get_position()
-            )
-        })
+        return str(
+            {
+                'label': self.get_label_name(),
+                'categories': self.get_category_events(),
+                'position': int(
+                    self.get_position()
+                )
+            }
+        )

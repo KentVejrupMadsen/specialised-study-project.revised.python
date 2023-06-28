@@ -11,13 +11,16 @@ class Application:
         del self.controller
 
     def initialise(self) -> None:
-        self.get_controller().initialise()
+        controller = self.get_controller()
+        controller.initialise()
 
     def execute(self) -> None:
-        self.get_controller().execute()
+        controller = self.get_controller()
+        controller.execute()
 
     def garbage_collection(self) -> None:
-        pass
+        controller = self.get_controller()
+        controller.clean()
 
     def get_controller(self) -> None | Controller:
         return self.controller

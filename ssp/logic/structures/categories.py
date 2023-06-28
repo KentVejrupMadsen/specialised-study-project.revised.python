@@ -1,17 +1,20 @@
-from ssp.logic.templates    \
+from ssp.logic                  \
     import BagOfWords
 
-from ssp.logic.structures   \
+from ssp.logic.objects          \
     import CategoryToken
 
-from HardenedSteel.objects  \
+from HardenedSteel.objects      \
     import CounterObject
+
+from HardenedSteel.facades      \
+    import is_integer_zero
 
 
 class Category(BagOfWords):
     def __init__(
-            self,
-            category_name: str
+        self,
+        category_name: str
     ):
         super().__init__()
         self.category_name: str = category_name
@@ -63,7 +66,7 @@ class Category(BagOfWords):
             if self.exist_token_by_string(
                 token
             ):
-                self.increase_token_counter_for(
+                self.increment_of_token_counter_for(
                     token
                 )
             else:
@@ -71,21 +74,19 @@ class Category(BagOfWords):
                     token
                 )
 
-    def increase_token_counter_for(
+    def increment_of_token_counter_for(
             self,
             token_name
     ) -> bool:
         if self.is_empty():
             return False
-
-        hash_of_input_token: int = hash(token_name)
-
         for index in iter(self):
-            current_token: CategoryToken = self.retrieve_token_at(index)
-            if hash_of_input_token == current_token.get_hash():
-                if token_name == current_token.get_word():
-                    current_token.get_counter().increment()
-                    return True
+            current_token: CategoryToken = self.retrieve_token_at(
+                index
+            )
+            if current_token == token_name:
+                current_token.increment_of_counter()
+                return True
         return False
 
     def exist_token_by_string(
@@ -94,26 +95,29 @@ class Category(BagOfWords):
     ) -> bool:
         if self.is_empty():
             return False
-
-        hash_of_input_value: int = hash(value)
         for index in iter(self):
-            current_token: CategoryToken = self.retrieve_token_at(index)
-            if hash_of_input_value == current_token.get_hash():
-                if value == current_token.get_word():
-                    return True
+            current_token: CategoryToken = self.retrieve_token_at(
+                index
+            )
+            if current_token == value:
+                return True
         return False
 
     def retrieve_token_at(
             self,
             index: int
     ) -> CategoryToken:
-        return self.get_tokens()[index]
+        return self.get_tokens()[
+            index
+        ]
 
     def remove_token_at(
             self,
             index: int
     ):
-        return self.get_tokens()[index]
+        return self.get_tokens()[
+            index
+        ]
 
     def create_category_token(
             self,
@@ -137,7 +141,9 @@ class Category(BagOfWords):
         return bool(
             self.is_tokens_none()
             or
-            len(self) == 0
+            is_integer_zero(
+                len(self)
+            )
         )
 
     def get_iterator(self) -> CounterObject:
@@ -164,12 +170,10 @@ class Category(BagOfWords):
             )
         else:
             self.get_iterator().reset()
-
         return self
 
     def __next__(self) -> int:
         self.get_iterator().increment()
-
         if self.get_iterator().previous() < len(self):
             return self.get_iterator().previous()
         else:

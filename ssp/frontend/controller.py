@@ -1,35 +1,42 @@
 #!/usr/bin/env python
-from ssp.factories                  \
-    import DataSetBuildByDirectory
-
 from ssp.frontend                   \
     import                          \
-    Environment
+    Environment,                    \
+    WorkQueue
+
+from ssp.frontend.processes         \
+    import DebuggableAction
+
+
+is_debugging: bool = True
+
+
+def get_is_debugging() -> bool:
+    global is_debugging
+    return is_debugging
 
 
 class Controller:
     def __init__(self):
         self.environment = Environment()
-        self.dataset: DataSetBuildByDirectory | None = None
+        self.queue: WorkQueue | None = WorkQueue()
 
     def __del__(self):
         del                   \
             self.environment, \
-            self.dataset
-
-    def setup(self) -> None:
-        self.set_dataset(
-            DataSetBuildByDirectory(
-                self.get_environment().get_path_to_dataset(),
-                self.get_environment().get_categories()
-            )
-        )
+            self.queue
 
     def initialise(self) -> None:
-        self.setup()
-        self.get_dataset().run_stream()
+        if get_is_debugging():
+            self.get_queue().insert_action_process(
+                DebuggableAction()
+            )
 
     def execute(self) -> None:
+        while not self.get_queue().is_complete():
+            self.get_queue().cycle()
+
+    def clean(self) -> None:
         pass
 
     def get_environment(self) -> Environment:
@@ -41,11 +48,11 @@ class Controller:
     ) -> None:
         self.environment = value
 
-    def get_dataset(self) -> None | DataSetBuildByDirectory:
-        return self.dataset
+    def get_queue(self) -> WorkQueue:
+        return self.queue
 
-    def set_dataset(
+    def set_queue(
             self,
-            value: None | DataSetBuildByDirectory
+            value: WorkQueue
     ) -> None:
-        self.dataset = value
+        self.queue = value

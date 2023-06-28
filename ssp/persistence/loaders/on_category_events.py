@@ -24,7 +24,7 @@ class OnCategoryEvent(OnFire):
         )
 
     def get_category_handler(self):
-        from ssp.factories.events.categories \
+        from ssp.builders.action_events.categories \
             import CategoryEvent
         event_handler: CategoryEvent = self.handler
         return event_handler

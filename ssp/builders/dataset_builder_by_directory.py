@@ -1,4 +1,7 @@
 #!/usr/bin/env python
+from os.path                                \
+    import join
+
 from HardenedSteel.objects                  \
     import CounterObject
 
@@ -8,13 +11,13 @@ from HardenedSteel.globals                  \
 from HardenedSteel.facades                  \
     import is_integer_zero
 
-from os.path                                \
-    import join
+from ssp.logic                              \
+    import BuilderPattern
 
 from ssp.logic.structures                   \
     import Document
 
-from ssp.factories.events                   \
+from ssp.builders.action_events             \
     import                                  \
     DataSetEvents,                          \
     DataSetLabelEvent,                      \
@@ -30,12 +33,13 @@ from ssp.persistence                        \
     DocumentLoader
 
 
-class DataSetBuildByDirectory:
+class DataSetBuildByDirectory(BuilderPattern):
     def __init__(
-            self,
-            location_to_dataset: str,
-            categories: list
+        self,
+        location_to_dataset: str,
+        categories: list
     ):
+        super().__init__()
         self.path_to_dataset: str = location_to_dataset
         self.categories: list = categories
         self.selection: CounterObject | None = None
@@ -48,6 +52,7 @@ class DataSetBuildByDirectory:
         self.initialise()
 
     def __del__(self):
+        super().__del__()
         del                         \
             self.path_to_dataset,   \
             self.categories,        \

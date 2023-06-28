@@ -24,6 +24,6 @@ class OnDocumentEvent(OnFire):
         )
 
     def get_document_event_handler(self):
-        from ssp.factories.events import DocumentEvent
+        from ssp.builders.action_events import DocumentEvent
         document_event_handler: DocumentEvent = self.get_handler()
         return document_event_handler
