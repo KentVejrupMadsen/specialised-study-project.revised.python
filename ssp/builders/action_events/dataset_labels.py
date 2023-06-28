@@ -1,21 +1,26 @@
-from HardenedSteel.objects  \
+from HardenedSteel.objects          \
     import CounterObject
 
-from HardenedSteel.globals  \
+from HardenedSteel.globals          \
     import get_integer_zero
 
-from ssp.builders.action_events    \
-    import CategoryEvent
+from ssp.builders.action_events     \
+    import                          \
+    BuilderEvent,                   \
+    CategoryEvent
 
-from ssp.logic.structures \
+from ssp.logic.structures           \
     import DataSetLabel
 
 
-class DataSetLabelEvent:
+class DataSetLabelEvent(
+    BuilderEvent
+):
     def __init__(
             self,
             name: str
     ):
+        super().__init__()
         self.entity: None | DataSetLabel = None
         self.set_entity(
             DataSetLabel(
@@ -28,6 +33,7 @@ class DataSetLabelEvent:
         self.stream: None = None
 
     def __del__(self):
+        super().__del__()
         del                         \
             self.entity,            \
             self.position,          \

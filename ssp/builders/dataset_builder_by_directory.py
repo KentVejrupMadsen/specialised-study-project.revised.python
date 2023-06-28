@@ -33,7 +33,9 @@ from ssp.persistence                        \
     DocumentLoader
 
 
-class DataSetBuildByDirectory(BuilderPattern):
+class DataSetBuildByDirectory(
+    BuilderPattern
+):
     def __init__(
         self,
         location_to_dataset: str,

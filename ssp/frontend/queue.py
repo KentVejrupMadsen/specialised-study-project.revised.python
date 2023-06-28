@@ -5,7 +5,9 @@ from HardenedSteel.facades  \
     import is_integer_zero
 
 from HardenedSteel.globals  \
-    import get_integer_zero
+    import                  \
+    get_integer_zero,       \
+    get_integer_one
 
 from ssp.frontend.commands  \
     import ActionProcess
@@ -15,11 +17,18 @@ from time                   \
 
 
 class WorkQueue:
-    def __init__(self):
+    def __init__(
+            self,
+            parent_controller=None
+    ):
         self.iterator: CounterObject | None = None
-        self.queue: list | None = None
+        self.parent_controller = parent_controller
+
+        self.seconds_to_sleep: int = get_integer_one()
+
         self.complete: bool = False
-        self.seconds_to_sleep: int = 1
+
+        self.queue: list | None = None
         self.removal: list | None = None
 
     def __del__(self):
@@ -28,7 +37,20 @@ class WorkQueue:
             self.iterator,          \
             self.complete,          \
             self.seconds_to_sleep,  \
-            self.removal
+            self.removal,           \
+            self.parent_controller
+
+    def set_parent(
+            self,
+            value
+    ):
+        self.parent_controller = value
+
+    def get_parent(self):
+        return self.parent_controller
+
+    def is_parent_none(self) -> bool:
+        return self.parent_controller is None
 
     def get_removal(self) -> list:
         if self.is_removal_none():

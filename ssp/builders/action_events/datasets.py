@@ -1,19 +1,23 @@
-from ssp.builders.action_events       \
-    import                      \
+from ssp.builders.action_events         \
+    import                              \
+    BuilderEvent,                       \
     DataSetLabelEvent
 
-from HardenedSteel.globals      \
+from HardenedSteel.globals              \
     import get_integer_zero
 
-from ssp.logic.structures       \
+from ssp.logic.structures               \
     import DataSetWrapper
 
-from HardenedSteel.objects      \
+from HardenedSteel.objects              \
     import CounterObject
 
 
-class DataSetEvents:
+class DataSetEvents(
+    BuilderEvent
+):
     def __init__(self):
+        super().__init__()
         self.labels: list | None = None
         self.iterator: CounterObject | None = None
         self.position: CounterObject | None = None
@@ -21,6 +25,7 @@ class DataSetEvents:
         self.stream = None
 
     def __del__(self):
+        super().__del__()
         del                 \
             self.labels,    \
             self.iterator,  \
