@@ -48,6 +48,9 @@ class Word(Token):
             value
         )
 
+    def increment_of_counter(self):
+        self.get_counter().increment()
+
     def __int__(self):
         return int(
             self.get_counter()
@@ -60,8 +63,9 @@ class Word(Token):
         if is_instance_of_word(other):
             other_word_token: Word = other
             if other_word_token.get_hash() == self.get_hash():
-                if other_word_token.get_word() == self.get_word():
-                    return True
+                if other_word_token.get_length() == self.get_length():
+                    if other_word_token.get_word() == self.get_word():
+                        return True
         return False
 
 

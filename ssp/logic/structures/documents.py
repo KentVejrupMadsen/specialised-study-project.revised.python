@@ -54,8 +54,8 @@ class Document(BagOfWords):
         return self.iterator is None
 
     def exist_document_token(
-            self,
-            is_in_set: DocumentToken
+        self,
+        is_in_set: DocumentToken
     ) -> bool:
         for index in iter(self):
             selected_token: DocumentToken = self.get_token_by_index(index)
@@ -64,27 +64,23 @@ class Document(BagOfWords):
         return False
 
     def exist_token_by_string(
-            self,
-            value: str
+        self,
+        value: str
     ) -> bool:
-        input_var_hash: int = hash(value)
         for index in iter(self):
             element = self.get_token_by_index(index)
-            if input_var_hash == element.get_hash():
-                if value == element.get_word():
-                    return True
+            if element == value:
+                return True
         return False
 
     def increase_token_counter(
-            self,
-            token: str
+        self,
+        token: str
     ):
-        hashed_token: int = hash(token)
         for index in iter(self):
             selected = self.get_token_by_index(index)
-            if selected.get_hash() == hashed_token:
-                if selected.get_word() == token:
-                    selected.get_counter().increment()
+            if selected == token:
+                selected.increment_of_counter()
 
     def on_event_found_token(
             self,

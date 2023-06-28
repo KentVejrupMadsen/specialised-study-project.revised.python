@@ -6,9 +6,6 @@ from ssp                            \
     get_location_of_repository,     \
     get_location_of_script
 
-from ssp.logic.structures           \
-    import CounterObject
-
 from ssp.frontend.environment       \
     import Environment
 
