@@ -1,3 +1,6 @@
+from ssp.frontend.commands.command_options  \
+    import CommandOption
+
 from ssp.frontend.commands.command          \
     import Command
 
