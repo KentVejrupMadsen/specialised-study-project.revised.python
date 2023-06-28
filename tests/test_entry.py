@@ -1,7 +1,7 @@
 from ssp \
     import on_entry_call
 
-is_debugging_entry: bool = False
+is_debugging_entry: bool = True
 
 
 def test_run_application() -> None:
