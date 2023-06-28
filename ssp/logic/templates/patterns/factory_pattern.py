@@ -1,6 +1,7 @@
 #!/usr/bin/env python
-from ssp.logic.templates \
-    import ABC
+from abc            \
+    import          \
+    ABC
 
 
 class Factory:
