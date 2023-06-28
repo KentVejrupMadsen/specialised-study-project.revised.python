@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from ssp.logic.structures   \
+from ssp.logic.objects      \
     import                  \
     Word
 
@@ -8,7 +8,7 @@ from HardenedSteel.globals  \
     get_integer_one
 
 
-class DocumentToken(Word):
+class CategoryToken(Word):
     def __init__(
         self,
         word: str,
@@ -28,9 +28,20 @@ class DocumentToken(Word):
 
     def __repr__(self):
         return str(
-            dir(self)
+            dict(
+                {
+                    'word': self.get_word(),
+                    'instances': int(
+                        self.get_counter()
+                    ),
+                    'hash': self.get_hash(),
+                    'length': self.get_length()
+                }
+            )
         )
 
     def __dir__(self) -> list:
         result: list = super().__dir__()
         return result
+
+

@@ -1,7 +1,7 @@
 from ssp.logic.templates    \
     import BagOfWords
 
-from ssp.logic.structures   \
+from ssp.logic.objects      \
     import                  \
     DocumentToken
 
