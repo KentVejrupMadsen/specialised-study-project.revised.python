@@ -10,7 +10,7 @@ from os.path                    \
 from os                         \
     import listdir
 
-from ssp.globals              \
+from ssp.globals                \
     import get_entry_main_label
 
 from ssp.setup                  \
