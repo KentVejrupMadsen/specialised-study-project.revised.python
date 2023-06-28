@@ -1,10 +1,16 @@
+from ssp.globals        \
+    import              \
+    get_is_debugging,   \
+    set_is_debugging
+
 from ssp \
     import on_entry_call
 
-is_debugging_entry: bool = False
-
 
 def test_run_application() -> None:
-    global is_debugging_entry
-    if is_debugging_entry:
+    set_is_debugging(
+        True
+    )
+
+    if get_is_debugging():
         on_entry_call()
