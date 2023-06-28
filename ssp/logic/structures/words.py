@@ -40,7 +40,7 @@ class Word(Token):
     def reset_counter(self) -> None:
         self.get_counter().reset()
 
-    def set_counter_to(
+    def set_value_of_counter_to(
             self,
             value: int
     ):
@@ -50,6 +50,9 @@ class Word(Token):
 
     def increment_of_counter(self):
         self.get_counter().increment()
+
+    def decrement_of_counter(self):
+        self.get_counter().decrement()
 
     def __int__(self):
         return int(

@@ -7,6 +7,9 @@ from ssp.logic.templates        \
 from HardenedSteel.facades      \
     import is_integer_zero
 
+from HardenedSteel.objects      \
+    import CounterObject
+
 
 class Token(ABC):
     def __init__(
@@ -14,8 +17,10 @@ class Token(ABC):
         value: str | None
     ):
         self.word: str = value
+
         self.hash: int | None = None
         self.length: int | None = None
+        self.iterator: CounterObject | None = None
 
         self.on_change_event()
 
@@ -23,7 +28,8 @@ class Token(ABC):
         del                 \
             self.word,      \
             self.hash,      \
-            self.length
+            self.length,    \
+            self.iterator
 
     def get_length(self) -> int:
         if self.is_length_none():
@@ -58,6 +64,22 @@ class Token(ABC):
     ) -> None:
         self.hash = value
 
+    def get_iterator(self) -> CounterObject:
+        if self.is_iterator_none():
+            self.set_iterator(
+                CounterObject()
+            )
+        return self.iterator
+
+    def is_iterator_none(self) -> bool:
+        return self.iterator is None
+
+    def set_iterator(
+            self,
+            value: CounterObject
+    ):
+        self.iterator = value
+
     def on_change_event(self) -> None:
         self.refresh_hash()
 
@@ -90,10 +112,19 @@ class Token(ABC):
 
     @abstractmethod
     def is_instance_of_implementation(
-            self,
-            other
+        self,
+        other
     ):
         return False
+
+    def __iter__(self):
+        self.get_iterator().reset()
+        return self
+
+    def __next__(self):
+        self.get_iterator().increment()
+        if self.get_iterator().previous() < len(self):
+            return self.get_iterator().previous()
 
     def __eq__(
         self,
@@ -134,22 +165,22 @@ class Token(ABC):
                 return value == str(self)
         return False
 
-    def __str__(self):
+    def __str__(self) -> str:
         return str(
             self.get_word()
         )
 
-    def __len__(self):
-        return len(
-            self.get_word()
+    def __len__(self) -> int:
+        return int(
+            self.get_length()
         )
 
     def __hash__(self) -> int:
         return self.get_hash()
 
-    def __int__(self):
+    def __int__(self) -> int:
         return int(
-            self.word
+            self.get_length()
         )
 
 
