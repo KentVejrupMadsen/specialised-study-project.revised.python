@@ -2,7 +2,7 @@
 name: Python application
 on:
   push:
-    branches: [ "main", "working", "development" ]
+    branches: [ "main", "working", "development", "alpha" ]
   pull_request:
     branches: [ "main" ]
 
@@ -20,4 +20,5 @@ jobs:
         python-version: "3.11"
     - name: Run workflow
       run: |
-        bash scripts/workflow.sh
+        cd scripts
+        bash workflow.sh

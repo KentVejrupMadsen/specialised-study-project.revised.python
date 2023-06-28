@@ -1,7 +1,7 @@
 name: Python package
 on:
   push:
-    branches: [ "main", "working", "development" ]
+    branches: [ "main", "working", "development", "alpha" ]
   pull_request:
     branches: [ "main" ]
 
@@ -21,4 +21,5 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Run of workflow
       run: |
-        bash scripts/workflow.sh
+        cd scripts
+        bash workflow.sh
