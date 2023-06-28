@@ -9,6 +9,12 @@ class WheelPattern:
     def __del__(self):
         del self.selection
 
+    def forward_selection(self):
+        self.get_selection_counter().increment()
+
+    def backward_selection(self):
+        self.get_selection_counter().decrement()
+
     def set_selection(
         self,
         value: int
