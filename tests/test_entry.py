@@ -1,4 +1,4 @@
-from ssp.globals        \
+from tests              \
     import              \
     get_is_debugging,   \
     set_is_debugging
