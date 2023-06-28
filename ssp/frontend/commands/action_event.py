@@ -13,7 +13,8 @@ from abc                    \
 class ActionProcess(ProcessEvent):
     def __init__(
             self,
-            command_name: str
+            command_name: str,
+            parent_queue=None
     ):
         super().__init__()
         self.set_command(
@@ -28,6 +29,7 @@ class ActionProcess(ProcessEvent):
         self.done: bool = False
 
         self.process: Process | None = None
+        self.parent = parent_queue
 
     def __del__(self):
         super().__del__()
@@ -35,7 +37,17 @@ class ActionProcess(ProcessEvent):
             self.options,   \
             self.done,      \
             self.started,   \
-            self.process
+            self.process,   \
+            self.parent
+
+    def get_parent_queue(self):
+        return self.parent
+
+    def set_parent_queue(
+            self,
+            value
+    ) -> None:
+        self.parent = value
 
     def get_process(self) -> Process | None:
         return self.process

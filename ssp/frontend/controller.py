@@ -22,7 +22,9 @@ class Controller:
     def initialise(self) -> None:
         if get_is_debugging():
             self.get_queue().insert_action_process(
-                DebuggableAction()
+                DebuggableAction(
+                    self.get_queue()
+                )
             )
 
         return None
