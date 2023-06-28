@@ -11,6 +11,9 @@ from HardenedSteel.facades                  \
 from os.path                                \
     import join
 
+from ssp.logic                              \
+    import BuilderPattern
+
 from ssp.logic.structures                   \
     import Document
 
