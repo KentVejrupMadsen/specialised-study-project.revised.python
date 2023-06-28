@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from ssp.frontend.commands          \
     import ActionProcess
 
@@ -37,7 +38,7 @@ class DebuggableAction(
             env.get_path_to_dataset(),
             env.get_categories()
         )
-        
+
         build.stream()
 
 

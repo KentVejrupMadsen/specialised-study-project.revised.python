@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from ssp.logic.templates.events.builder_event   \
     import BuilderEvent
 

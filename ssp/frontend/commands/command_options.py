@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 class CommandOption:
     def __init__(self):
         self.key: str | None = None

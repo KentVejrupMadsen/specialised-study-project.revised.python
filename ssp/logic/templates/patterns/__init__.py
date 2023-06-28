@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from ssp.logic.templates.patterns.factory_pattern   \
     import FactoryPattern
 
