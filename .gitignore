@@ -1,6 +1,9 @@
 # directories
 .idea/*
 .venv/*
+.linux/*
+.windows/*
+
 .pytest_cache/*
 dist/*
 

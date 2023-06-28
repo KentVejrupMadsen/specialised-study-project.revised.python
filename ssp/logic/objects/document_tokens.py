@@ -8,20 +8,22 @@ from HardenedSteel.globals  \
     get_integer_one
 
 
-class DocumentToken(Word):
+class DocumentToken(
+    Word
+):
     def __init__(
         self,
         word: str,
-        instances: int = get_integer_one()
+        instances: int = get_integer_one(),
+        normalise: bool = True
     ):
         super().__init__(
             word=word,
-            instances=instances
+            instances=instances,
+            normalise=normalise
         )
 
-        self.set_is_to_normalise(
-            True
-        )
+        self.on_event_normalise()
 
     def __del__(self):
         super().__del__()

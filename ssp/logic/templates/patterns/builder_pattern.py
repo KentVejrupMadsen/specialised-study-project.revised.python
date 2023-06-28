@@ -1,10 +1,11 @@
+#!/usr/bin/env python
 from abc            \
     import          \
     ABC,            \
     abstractmethod
 
 
-class BuilderPattern:
+class BuilderPattern(ABC):
     def __init__(self):
         pass
 

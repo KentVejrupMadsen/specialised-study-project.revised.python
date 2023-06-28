@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from ssp.persistence.loaders.document_loader        \
     import DocumentLoader
 

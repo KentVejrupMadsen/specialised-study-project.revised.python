@@ -4,7 +4,7 @@ from abc            \
     ABC
 
 
-class FactoryPattern:
+class FactoryPattern(ABC):
     def __init__(self):
         pass
 

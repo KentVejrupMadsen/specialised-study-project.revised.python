@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from ssp.logic                  \
     import BagOfWords
 
@@ -11,7 +12,9 @@ from HardenedSteel.facades      \
     import is_integer_zero
 
 
-class Category(BagOfWords):
+class Category(
+    BagOfWords
+):
     def __init__(
         self,
         category_name: str

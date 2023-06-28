@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from ssp.builders.action_events         \
     import                              \
     BuilderEvent,                       \

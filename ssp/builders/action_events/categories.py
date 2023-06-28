@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from HardenedSteel.objects          \
     import CounterObject
 
@@ -16,7 +17,9 @@ from ssp.logic.structures           \
     import Category
 
 
-class CategoryEvent(BuilderEvent):
+class CategoryEvent(
+    BuilderEvent
+):
     def __init__(
             self,
             category_name: str

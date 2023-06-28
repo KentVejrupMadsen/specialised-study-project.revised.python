@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from ssp.globals.variables                  \
     import                                  \
     get_entry_main_label,                   \

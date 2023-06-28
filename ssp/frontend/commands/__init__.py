@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from ssp.frontend.commands.command_options  \
     import CommandOption
 
