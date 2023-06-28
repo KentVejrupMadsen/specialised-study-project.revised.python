@@ -4,7 +4,7 @@ from HardenedSteel.objects  \
 from HardenedSteel.globals  \
     import get_integer_zero
 
-from ssp.builders.events    \
+from ssp.builders.action_events    \
     import CategoryEvent
 
 from ssp.logic.structures \

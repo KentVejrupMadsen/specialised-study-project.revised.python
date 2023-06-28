@@ -14,7 +14,7 @@ from os.path                                \
 from ssp.logic.structures                   \
     import Document
 
-from ssp.builders.events                    \
+from ssp.builders.action_events             \
     import                                  \
     DataSetEvents,                          \
     DataSetLabelEvent,                      \
