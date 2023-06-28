@@ -8,4 +8,6 @@ from ssp.globals.variables                  \
     get_test_label,                         \
     get_environment_dataset_location,       \
     get_ascii_number_range_end,             \
-    get_ascii_number_range_start
+    get_ascii_number_range_start,           \
+    get_is_debugging,                       \
+    set_is_debugging

@@ -16,3 +16,8 @@ from ssp.globals.variables.constants            \
     import                                      \
     get_ascii_number_range_start,               \
     get_ascii_number_range_end
+
+from ssp.globals.variables.states               \
+    import                                      \
+    get_is_debugging,                           \
+    set_is_debugging
