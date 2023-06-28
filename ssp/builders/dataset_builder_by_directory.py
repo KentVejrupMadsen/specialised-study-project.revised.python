@@ -1,4 +1,7 @@
 #!/usr/bin/env python
+from os.path                                \
+    import join
+
 from HardenedSteel.objects                  \
     import CounterObject
 
@@ -7,9 +10,6 @@ from HardenedSteel.globals                  \
 
 from HardenedSteel.facades                  \
     import is_integer_zero
-
-from os.path                                \
-    import join
 
 from ssp.logic                              \
     import BuilderPattern
