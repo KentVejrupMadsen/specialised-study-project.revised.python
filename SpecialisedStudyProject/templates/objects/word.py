@@ -2,7 +2,7 @@ from abc                \
     import              \
     ABC
 
-from templates          \
+from SpecialisedStudyProject.templates          \
     import OnChangeEvent
 
 
@@ -86,6 +86,12 @@ class Word(ABC):
             'hash': self.get_hash()
         }
 
+    def __hash__(self):
+        return self.get_hash()
+
+    def __str__(self):
+        return self.get_token()
+
     def __repr__(self) -> str:
         return str(
             self.dictionary()
@@ -142,7 +148,6 @@ class OnWordChanges(
 
     def trigger_normalisation(self):
         token: str = self.retrieve_token()
-
         if self.get_parent().is_to_normalise():
             self.get_parent().set_token(
                 str(
@@ -152,7 +157,6 @@ class OnWordChanges(
 
     def trigger_calculation_of_length(self):
         token: str = self.retrieve_token()
-
         self.get_parent().set_length(
             len(
                 token
@@ -161,7 +165,6 @@ class OnWordChanges(
 
     def trigger_hashing_of_token(self):
         token: str = self.retrieve_token()
-
         self.get_parent().set_hash(
             int(
                 hash(

@@ -1,2 +1,2 @@
-from logic.objects \
+from SpecialisedStudyProject.logic.objects \
     import Token

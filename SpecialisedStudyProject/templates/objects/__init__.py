@@ -1,2 +1,2 @@
-from templates.objects.word \
+from SpecialisedStudyProject.templates.objects.word \
     import Word

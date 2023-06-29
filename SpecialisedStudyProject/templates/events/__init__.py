@@ -1,2 +1,2 @@
-from templates.events.on_change \
+from SpecialisedStudyProject.templates.events.on_change \
     import OnChangeEvent

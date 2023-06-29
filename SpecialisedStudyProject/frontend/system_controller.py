@@ -1,4 +1,4 @@
-from frontend \
+from SpecialisedStudyProject.frontend \
     import MemoryManagement
 
 

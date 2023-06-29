@@ -1,4 +1,4 @@
-from templates \
+from SpecialisedStudyProject.templates \
     import Word
 
 
