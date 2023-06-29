@@ -5,23 +5,35 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "sspr.python.by.designermadsen"
 dynamic = [ "version" ]
-
 authors = [
   { name="Kent vejrup Madsen", email="Kent.vejrup.Madsen@outlook.com" },
 ]
 
-readme = { file="Readme.md" }
-license = { file="License.md" }
+readme = { file="Readme.md", content-type="text/markdown" }
+license = { file="License.md", content-type="text/markdown" }
 
 description = "a revised school project that i have programmed in python instead of C#."
 requires-python = ">=3.10"
 
-dependencies = [
-
+keywords = [
+    "high-school-project",
+    "designermadsen",
+    "kentvejrupmadsen",
+    "project",
+    "old",
+    "revision",
+    "naive-bayes",
+    "Reuters21578",
+    "revised",
+    "python",
+    "python3.10",
+    "python3.11",
+    "TDD",
 ]
 
-optional-dependencies = [
-
+dependencies = [
+    "wheel",
+    "setuptools"
 ]
 
 classifiers = [
@@ -33,7 +45,11 @@ classifiers = [
 "Repository" = "https://github.com/KentVejrupMadsen/specialised-study-project.revised.python"
 "Issues" = "https://github.com/KentVejrupMadsen/specialised-study-project.revised.python/issues"
 
+"Contact" = "https://about.designermadsen.dk"
+"on Github" = "https://github.com/KentVejrupMadsen"
+"On PyPi" = "https://pypi.org/project/sspr.python.by.designermadsen/"
+
 [tool.setuptools.packages.find]
-where = ["ssp"]
-include = ["src.*"]
+where = ["SpecialisedStudyProject"]
+include = ["SpecialisedStudyProject.*"]
 exclude = ["tests.*"]
