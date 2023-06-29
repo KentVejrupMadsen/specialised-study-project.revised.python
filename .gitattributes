@@ -2,29 +2,33 @@
 * text=auto eol=lf
 
 *.py text diff=py eol=lf
-*.md text diff=md eol=crlf
+*.md text diff=md eol=lf
 
 *.yml text diff=yml eol=lf
 *.json text diff=json eol=lf
 *.xml text diff=xml eol=lf
+*.txt text diff=text eol=lf
 
 *.sh text diff=bash eol=lf
+*.ps1 text diff=ps1 eol=lf
 
 # Specific files
-Vagrantfile diff=auto eol=lf export-ignore
+Vagrantfile text diff=auto eol=lf export-ignore
 
 # Git
-.gitattributes text diff=auto eol=lf export-ignore
-.gitignore text diff=auto eol=lf export-ignore
-.gitmodules text diff=auto eol=lf export-ignore
+.gitattributes text diff=gitattributes eol=lf export-ignore
+.gitignore text diff=gitignore eol=lf export-ignore
+.gitmodules text diff=gitmodules eol=lf export-ignore
 
 # Related to workflow
-.replicate.sh export-ignore
-.setup.sh export-ignore
-.workflow.sh export-ignore
+*.toml text diff=toml eol=lf export-ignore
+
+# Removing data
+dataset/ export-ignore
+scripts/ export-ignore
 
 # removing tests
 tests/ export-ignore
-dataset/ export-ignore
 
+# Workflow for github
 /.github export-ignore
