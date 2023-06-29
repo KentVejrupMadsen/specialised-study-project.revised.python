@@ -4,14 +4,25 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "sspr.python.by.designermadsen"
-dynamic = ["version"]
+dynamic = [ "version" ]
+
 authors = [
   { name="Kent vejrup Madsen", email="Kent.vejrup.Madsen@outlook.com" },
 ]
-readme = "README.md"
-description = "a revised school project that i have programmed in python instead of C#."
 
-requires-python = ">=3.11"
+readme = { file="Readme.md" }
+license = { file="License.md" }
+
+description = "a revised school project that i have programmed in python instead of C#."
+requires-python = ">=3.10"
+
+dependencies = [
+
+]
+
+optional-dependencies = [
+
+]
 
 classifiers = [
     "Programming Language :: Python :: 3",
