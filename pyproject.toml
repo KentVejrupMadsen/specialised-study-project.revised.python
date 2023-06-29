@@ -4,25 +4,71 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "sspr.python.by.designermadsen"
-dynamic = ["version"]
+version = "0.0.5"
 authors = [
   { name="Kent vejrup Madsen", email="Kent.vejrup.Madsen@outlook.com" },
 ]
-readme = "README.md"
-description = "a revised school project that i have programmed in python instead of C#."
 
-requires-python = ">=3.11"
+readme = { file="Readme.md", content-type="text/markdown" }
+license = { file="License.md", content-type="text/markdown" }
+
+description = "a revised school project that i have programmed in python instead of C#."
+requires-python = ">=3.10"
+
+keywords = [
+    "high-school-project",
+    "designermadsen",
+    "kentvejrupmadsen",
+    "project",
+    "old",
+    "revision",
+    "naive-bayes",
+    "Reuters21578",
+    "revised",
+    "python",
+    "python3.10",
+    "python3.11",
+    "TDD",
+]
+
+dependencies = [
+    "wheel",
+    "setuptools"
+]
 
 classifiers = [
     "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+
     "Operating System :: OS Independent",
+
+    "Development Status :: 3 - Alpha",
+
+    "Environment :: Console",
+
+    "License :: OSI Approved :: MIT License",
+
+    "Topic :: Software Development",
+    "Topic :: Software Development :: Testing",
+    "Topic :: System :: Benchmark",
+
+    "Topic :: Text Processing",
+    "Topic :: Text Processing :: Indexing",
+    "Topic :: Text Processing :: Markup :: Markdown",
+    "Topic :: Text Processing :: General"
 ]
 
 [project.urls]
 "Repository" = "https://github.com/KentVejrupMadsen/specialised-study-project.revised.python"
 "Issues" = "https://github.com/KentVejrupMadsen/specialised-study-project.revised.python/issues"
 
+"Contact" = "https://about.designermadsen.dk"
+"on Github" = "https://github.com/KentVejrupMadsen"
+"On PyPi" = "https://pypi.org/project/sspr.python.by.designermadsen/"
+
 [tool.setuptools.packages.find]
-where = ["ssp"]
-include = ["ssp.*"]
-exclude = ["tests.*"]
+where = ["SpecialisedStudyProject"]
+include = ["SpecialisedStudyProject.*"]
+exclude = ["SpecialisedStudyProject.tests.*"]
