@@ -32,8 +32,8 @@ class Word(
         return self.normalise
 
     def set_is_to_normalise(
-            self,
-            value: bool
+        self,
+        value: bool
     ) -> None:
         self.normalise = value
 
@@ -58,7 +58,7 @@ class Word(
         return self.length is None
 
     def get_length(self) -> int:
-        self.get_changed_event().on_trigger()
+        self.trigger__change_event()
         return self.length
 
     def set_length(
@@ -68,18 +68,18 @@ class Word(
         self.length = value
 
     def get_token(self) -> str:
-        self.get_changed_event().on_trigger()
+        self.trigger__change_event()
         return self.token
 
     def set_token(
         self,
         value: str
     ) -> None:
-        self.get_changed_event().hint()
+        self.trigger_event__hint_change_has_happened()
         self.token = value
 
     def get_hash(self) -> int:
-        self.get_changed_event().on_trigger()
+        self.trigger__change_event()
         return self.hash
 
     def set_hash(
@@ -94,6 +94,12 @@ class Word(
             'length': self.get_length(),
             'hash': self.get_hash()
         }
+
+    def trigger_event__hint_change_has_happened(self):
+        self.get_changed_event().hint()
+
+    def trigger__change_event(self) -> None:
+        self.get_changed_event().on_trigger()
 
     def __hash__(self):
         return self.get_hash()
