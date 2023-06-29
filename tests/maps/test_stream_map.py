@@ -1,6 +1,11 @@
 from SpecialisedStudyProject.logic  \
     import TokenMapStream
 
+from HardenedSteel.facades      \
+    import                      \
+    generate_label_by_size,     \
+    generate_signed_integer
+
 
 def test_of_stream_map() -> None:
     stream: TokenMapStream = TokenMapStream()
@@ -19,7 +24,11 @@ def test_of_token_map_retrieve_list() -> None:
     pass
 
 
-def test_of_token_map_removal() -> None:
+def test_of_token_map_removal_by_individual() -> None:
+    pass
+
+
+def test_of_token_map_removal_by_list() -> None:
     pass
 
 
