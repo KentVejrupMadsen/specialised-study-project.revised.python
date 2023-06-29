@@ -111,7 +111,7 @@ def test_iteration_of_token() -> None:
     for index in iter(label_token):
         print(dict({
             'index': index,
-            'character': label_token.get_position()
+            'character': label_token.get_character_at_current_position()
         }))
 
     print('\n\n')
