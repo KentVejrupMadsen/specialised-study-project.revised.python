@@ -6,7 +6,9 @@ from SpecialisedStudyProject.templates  \
     import OnChangeEvent
 
 
-class Word(ABC):
+class Word(
+    ABC
+):
     def __init__(
         self,
         value: str,
@@ -15,16 +17,23 @@ class Word(ABC):
         self.token: str = value
         self.length: int | None = None
         self.hash: int | None = None
+        self.is_changed_event: OnWordChanges | None = None
         self.normalise: bool = is_to_normalise_on_creation
 
-        self.is_changed_event: OnWordChanges | None = None
+    def __del__(self) -> None:
+        del                         \
+            self.token,             \
+            self.length,            \
+            self.hash,              \
+            self.is_changed_event,  \
+            self.normalise
 
     def is_to_normalise(self) -> bool:
         return self.normalise
 
     def set_is_to_normalise(
-            self,
-            value: bool
+        self,
+        value: bool
     ) -> None:
         self.normalise = value
 
@@ -49,7 +58,7 @@ class Word(ABC):
         return self.length is None
 
     def get_length(self) -> int:
-        self.get_changed_event().on_trigger()
+        self.trigger__change_event()
         return self.length
 
     def set_length(
@@ -59,18 +68,18 @@ class Word(ABC):
         self.length = value
 
     def get_token(self) -> str:
-        self.get_changed_event().on_trigger()
+        self.trigger__change_event()
         return self.token
 
     def set_token(
         self,
         value: str
     ) -> None:
-        self.get_changed_event().hint()
+        self.trigger_event__hint_change_has_happened()
         self.token = value
 
     def get_hash(self) -> int:
-        self.get_changed_event().on_trigger()
+        self.trigger__change_event()
         return self.hash
 
     def set_hash(
@@ -86,6 +95,12 @@ class Word(ABC):
             'hash': self.get_hash()
         }
 
+    def trigger_event__hint_change_has_happened(self):
+        self.get_changed_event().hint()
+
+    def trigger__change_event(self) -> None:
+        self.get_changed_event().on_trigger()
+
     def __hash__(self):
         return self.get_hash()
 
@@ -96,12 +111,6 @@ class Word(ABC):
         return str(
             self.dictionary()
         )
-
-    def __del__(self) -> None:
-        del                         \
-            self.token,             \
-            self.length,            \
-            self.is_changed_event
 
     def __len__(self) -> int:
         return self.get_length()
@@ -118,7 +127,7 @@ class Word(ABC):
             return self.is_equal_to_other_word(
                 other
             )
-        
+
         return False
 
     def is_equal_to_other_word(
@@ -145,7 +154,9 @@ class Word(ABC):
         self,
         other
     ) -> bool:
-        if is_variation_of_word(other):
+        if is_variation_of_word(
+                other
+        ):
             return self.is_greater_than_other_word(
                 other
             )

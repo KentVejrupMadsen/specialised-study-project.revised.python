@@ -1,8 +1,18 @@
 # Specialised Study Project - Revised
-## Build status
-[![Python application](https://github.com/KentVejrupMadsen/specialised-study-project.revised.python/actions/workflows/python.yml/badge.svg)](https://github.com/KentVejrupMadsen/specialised-study-project.revised.python/actions/workflows/python.yml)
+## Description
+To install the project:
 
     pip install sspr.python.by.designermadsen
+
+
+## Build status
+### Python
+[![Python application](https://github.com/KentVejrupMadsen/specialised-study-project.revised.python/actions/workflows/python.yml/badge.svg)](https://github.com/KentVejrupMadsen/specialised-study-project.revised.python/actions/workflows/python.yml)
+[![Python package](https://github.com/KentVejrupMadsen/specialised-study-project.revised.python/actions/workflows/python-matrice.yml/badge.svg)](https://github.com/KentVejrupMadsen/specialised-study-project.revised.python/actions/workflows/python-matrice.yml)
+[![Upload Python Package](https://github.com/KentVejrupMadsen/specialised-study-project.revised.python/actions/workflows/publish.yml/badge.svg)](https://github.com/KentVejrupMadsen/specialised-study-project.revised.python/actions/workflows/publish.yml)
+
+### Packages
+[![Dependency Review](https://github.com/KentVejrupMadsen/specialised-study-project.revised.python/actions/workflows/rependencies.yml/badge.svg)](https://github.com/KentVejrupMadsen/specialised-study-project.revised.python/actions/workflows/rependencies.yml)
 
 ## Summary
 Old project that I decided to rewrite in Python. 
