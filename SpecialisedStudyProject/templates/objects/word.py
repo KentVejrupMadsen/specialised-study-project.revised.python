@@ -250,6 +250,7 @@ class Word(
             return self.is_greater_than_other_word(
                 other
             )
+
         return False
 
     def is_greater_than_other_word(
@@ -259,17 +260,20 @@ class Word(
         compare_to: Word = other
 
         if self.is_equal_to_other_words_length(
-                compare_to
+            compare_to
         ):
-            return bool(
-                self.is_greater_than_other_words_token(
+            if self.is_equal_to_other_words_token(
+                compare_to
+            ):
+                return False
+            else:
+                return self.is_greater_than_other_words_token(
                     compare_to
                 )
+        else:
+            return self.is_greater_than_other_words_length(
+                compare_to
             )
-
-        return self.is_greater_than_other_words_length(
-            compare_to
-        )
 
     def is_greater_than_other_words_token(
         self,
@@ -298,12 +302,11 @@ class Word(
         other
     ) -> bool:
         if is_variation_of_word(
-                other
+            other
         ):
             return self.is_lesser_than_other_word(
                 other
             )
-
         return False
 
     def is_lesser_than_other_word(
@@ -313,17 +316,20 @@ class Word(
         compare_to: Word = other
 
         if self.is_equal_to_other_words_length(
-                compare_to
+            compare_to
         ):
-            return bool(
-                self.is_lesser_than_other_words_token(
+            if self.is_equal_to_other_words_token(
+                    compare_to
+            ):
+                return False
+            else:
+                return self.is_lesser_than_other_words_token(
                     compare_to
                 )
+        else:
+            return self.is_lesser_than_other_words_length(
+                compare_to
             )
-
-        return self.is_lesser_than_other_words_length(
-            compare_to
-        )
 
     def is_lesser_than_other_words_token(
         self,
