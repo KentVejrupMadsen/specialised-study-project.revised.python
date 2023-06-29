@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "sspr.python.by.designermadsen"
-dynamic = [ "version" ]
+version = "0.0.4"
 authors = [
   { name="Kent vejrup Madsen", email="Kent.vejrup.Madsen@outlook.com" },
 ]
