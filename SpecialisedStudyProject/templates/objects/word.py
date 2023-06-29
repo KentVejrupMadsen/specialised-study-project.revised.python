@@ -9,12 +9,13 @@ from templates          \
 class Word(ABC):
     def __init__(
         self,
-        value: str
+        value: str,
+        is_to_normalise_on_creation: bool = False
     ) -> None:
         self.token: str = value
         self.length: int | None = None
         self.hash: int | None = None
-        self.normalise: bool = False
+        self.normalise: bool = is_to_normalise_on_creation
 
         self.is_changed_event: OnWordChanges | None = None
 
@@ -126,29 +127,45 @@ class OnWordChanges(
     def is_parent_none(self) -> bool:
         return self.parent is None
 
+    def retrieve_token(self) -> str:
+        return self.get_parent().token
+
     def trigger(self) -> None:
         if self.is_parent_none():
             raise ValueError(
                 'Has no parent.'
             )
 
+        self.trigger_normalisation()
+        self.trigger_calculation_of_length()
+        self.trigger_hashing_of_token()
+
+    def trigger_normalisation(self):
+        token: str = self.retrieve_token()
+
         if self.get_parent().is_to_normalise():
             self.get_parent().set_token(
                 str(
-                    self.get_parent().get_token()
+                    token
                 ).lower()
             )
 
+    def trigger_calculation_of_length(self):
+        token: str = self.retrieve_token()
+
         self.get_parent().set_length(
             len(
-                self.get_parent().get_token()
+                token
             )
         )
+
+    def trigger_hashing_of_token(self):
+        token: str = self.retrieve_token()
 
         self.get_parent().set_hash(
             int(
                 hash(
-                    self.get_parent().get_token()
+                    token
                 )
             )
         )

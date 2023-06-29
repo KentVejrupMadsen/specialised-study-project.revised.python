@@ -71,4 +71,4 @@ classifiers = [
 [tool.setuptools.packages.find]
 where = ["SpecialisedStudyProject"]
 include = ["SpecialisedStudyProject.*"]
-exclude = ["tests.*"]
+exclude = ["SpecialisedStudyProject.tests.*"]

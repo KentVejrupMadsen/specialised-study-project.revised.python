@@ -32,8 +32,8 @@ class OnChangeEvent(ABC):
 
     def on_trigger(self) -> None:
         if self.is_changed():
-            self.trigger()
             self.complete()
+            self.trigger()
 
     @abstractmethod
     def trigger(self):
