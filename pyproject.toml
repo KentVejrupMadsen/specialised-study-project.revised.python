@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "sspr.python.by.designermadsen"
-version = "0.0.4"
+version = "0.0.5"
 authors = [
   { name="Kent vejrup Madsen", email="Kent.vejrup.Madsen@outlook.com" },
 ]
@@ -38,7 +38,26 @@ dependencies = [
 
 classifiers = [
     "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+
     "Operating System :: OS Independent",
+
+    "Development Status :: 3 - Alpha",
+
+    "Environment :: Console",
+
+    "License :: OSI Approved :: MIT License",
+
+    "Topic :: Software Development",
+    "Topic :: Software Development :: Testing",
+    "Topic :: System :: Benchmark",
+
+    "Topic :: Text Processing",
+    "Topic :: Text Processing :: Indexing",
+    "Topic :: Text Processing :: Markup :: Markdown",
+    "Topic :: Text Processing :: General"
 ]
 
 [project.urls]
