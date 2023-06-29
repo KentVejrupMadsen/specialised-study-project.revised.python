@@ -1,10 +1,10 @@
 from frontend   \
-    import Controller
+    import SystemController
 
 
 class Application:
     def __init__(self):
-        self.controller: Controller | None = None
+        self.controller: SystemController | None = None
 
     def __del__(self):
         del self.controller
@@ -23,16 +23,16 @@ class Application:
         self.execute()
         self.clean()
 
-    def get_controller(self) -> Controller:
+    def get_controller(self) -> SystemController:
         if self.is_controller_none():
             self.set_controller(
-                Controller()
+                SystemController()
             )
         return self.controller
 
     def set_controller(
             self,
-            value: Controller
+            value: SystemController
     ) -> None:
         self.controller = value
 
