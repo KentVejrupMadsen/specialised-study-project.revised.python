@@ -78,6 +78,18 @@ class Word(ABC):
     ) -> None:
         self.hash = value
 
+    def dictionary(self) -> dict:
+        return {
+            'token': self.get_token(),
+            'length': self.get_length(),
+            'hash': self.get_hash()
+        }
+
+    def __repr__(self) -> str:
+        return str(
+            self.dictionary()
+        )
+
     def __del__(self) -> None:
         del                         \
             self.token,             \
