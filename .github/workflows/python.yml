@@ -1,10 +1,9 @@
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
 name: Python application
 on:
   push:
-    branches: [ "main", "working", "development" ]
+    branches: [ "main", "working", "development", "alpha" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "main", "development" ]
 
 permissions:
   contents: read
@@ -20,4 +19,5 @@ jobs:
         python-version: "3.11"
     - name: Run workflow
       run: |
-        bash scripts/workflow.sh
+        cd scripts
+        bash workflow.sh
