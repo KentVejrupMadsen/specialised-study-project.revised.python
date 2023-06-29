@@ -1,8 +1,8 @@
-from abc                \
-    import              \
+from abc                                \
+    import                              \
     ABC
 
-from SpecialisedStudyProject.templates          \
+from SpecialisedStudyProject.templates  \
     import OnChangeEvent
 
 
@@ -106,7 +106,105 @@ class Word(ABC):
     def __len__(self) -> int:
         return self.get_length()
 
+    # Base Operators
+    # ** Equal to or ==
+    def __eq__(
+        self,
+        other
+    ) -> bool:
+        return self.is_equal_to_other_word(
+            other
+        )
 
+    def is_equal_to_other_word(
+        self,
+        other
+    ):
+        compare_to: Word = other
+        return bool(
+            self.is_equal_to_other_words_hash(
+                compare_to
+            )
+            and
+            self.is_equal_to_other_words_length(
+                compare_to
+            )
+            and
+            self.is_equal_to_other_words_token(
+                compare_to
+            )
+        )
+
+    # ** Greater Than or >
+    def __gt__(
+        self,
+        other
+    ) -> bool:
+        return self.is_greater_than_word(
+            other
+        )
+
+    def is_greater_than_word(
+        self,
+        other
+    ):
+        return self.is_greater_than_others_token(other)
+
+    def is_greater_than_others_token(
+        self,
+        other
+    ):
+        compare_to: Word = other
+        return self.get_token() > compare_to.get_token()
+
+    # ** Lower than or <
+    def __lt__(
+        self,
+        other
+    ) -> bool:
+        return self.is_lesser_than_word(
+            other
+        )
+
+    def is_lesser_than_word(
+        self,
+        other
+    ):
+        return self.is_lesser_than_other_words_token(
+            other
+        )
+
+    def is_lesser_than_other_words_token(
+        self,
+        other
+    ):
+        compare_to: Word = other
+        return self.get_token() < compare_to.get_token()
+
+    # is equal to
+    def is_equal_to_other_words_token(
+        self,
+        other
+    ):
+        compare_to: Word = other
+        return self.get_token() == compare_to.get_token()
+
+    def is_equal_to_other_words_hash(
+        self,
+        other
+    ):
+        compare_to: Word = other
+        return self.get_hash() == compare_to.get_hash()
+
+    def is_equal_to_other_words_length(
+        self,
+        other
+    ):
+        compare_to: Word = other
+        return self.get_length() == compare_to.get_length()
+
+
+# Events
 class OnWordChanges(
     OnChangeEvent
 ):

@@ -2,7 +2,9 @@ from SpecialisedStudyProject.templates \
     import Word
 
 
-class Token(Word):
+class Token(
+    Word
+):
     def __init__(
         self,
         token_content: str
