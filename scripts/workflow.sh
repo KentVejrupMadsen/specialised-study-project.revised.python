@@ -17,4 +17,4 @@ then
 fi
 
 # runs test environment
-pytest
+pytest -s
