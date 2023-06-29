@@ -4,7 +4,9 @@ from abc            \
     abstractmethod
 
 
-class OnChangeEvent(ABC):
+class OnChangeEvent(
+    ABC
+):
     def __init__(self):
         self.has_changed: bool = False
 

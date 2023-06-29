@@ -6,7 +6,9 @@ from SpecialisedStudyProject.templates  \
     import OnChangeEvent
 
 
-class Word(ABC):
+class Word(
+    ABC
+):
     def __init__(
         self,
         value: str,
@@ -15,9 +17,16 @@ class Word(ABC):
         self.token: str = value
         self.length: int | None = None
         self.hash: int | None = None
+        self.is_changed_event: OnWordChanges | None = None
         self.normalise: bool = is_to_normalise_on_creation
 
-        self.is_changed_event: OnWordChanges | None = None
+    def __del__(self) -> None:
+        del                         \
+            self.token,             \
+            self.length,            \
+            self.hash,              \
+            self.is_changed_event,  \
+            self.normalise
 
     def is_to_normalise(self) -> bool:
         return self.normalise
@@ -97,12 +106,6 @@ class Word(ABC):
             self.dictionary()
         )
 
-    def __del__(self) -> None:
-        del                         \
-            self.token,             \
-            self.length,            \
-            self.is_changed_event
-
     def __len__(self) -> int:
         return self.get_length()
 
@@ -118,7 +121,7 @@ class Word(ABC):
             return self.is_equal_to_other_word(
                 other
             )
-        
+
         return False
 
     def is_equal_to_other_word(
@@ -145,7 +148,9 @@ class Word(ABC):
         self,
         other
     ) -> bool:
-        if is_variation_of_word(other):
+        if is_variation_of_word(
+                other
+        ):
             return self.is_greater_than_other_word(
                 other
             )
