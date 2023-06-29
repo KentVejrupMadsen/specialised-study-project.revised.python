@@ -36,7 +36,10 @@ def test_token():
         )
     )
 
-    assert isinstance(label, Token)
+    assert isinstance(
+        label,
+        Token
+    )
 
 
 def test_normalising():
@@ -48,7 +51,10 @@ def test_normalising():
 def test_content():
     label_as_test: Token = Token(
         generate_label_by_size(
-            generate_signed_integer(begin=1, end=240)
+            generate_signed_integer(
+                begin=1,
+                end=240
+            )
         )
     )
 
@@ -95,7 +101,7 @@ def test_tokens_in_a_sorted_set() -> None:
     content_list: list = list()
 
     print("\n")
-    print("============================================= sorted list =============================================")
+    print("# Test ====================================== Sorted list =============================================")
 
     for i in range(
             generate_signed_integer(
@@ -125,7 +131,6 @@ def test_tokens_in_a_sorted_set() -> None:
             )
         )
 
-    print("# Sorted ==========================================================================================")
     content_list.sort()
 
     print("# After ==========================================================================================")
