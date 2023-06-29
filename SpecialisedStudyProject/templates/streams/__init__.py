@@ -1,2 +1,2 @@
-from SpecialisedStudyProject.templates.streams \
+from SpecialisedStudyProject.templates.streams.stream_maps \
     import StreamMap
