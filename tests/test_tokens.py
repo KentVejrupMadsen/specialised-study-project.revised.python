@@ -97,6 +97,26 @@ def test_tokens_in_a_unsorted_set() -> None:
         )
 
 
+def test_iteration_of_token() -> None:
+    print('\n\n')
+    label_token: Token = Token(
+        generate_label_by_size(
+            20
+        )
+    )
+
+    print('iteration of a token ===================================================================================')
+    print(repr(label_token))
+
+    for index in iter(label_token):
+        print(dict({
+            'index': index,
+            'character': label_token.get_position()
+        }))
+
+    print('\n\n')
+
+
 def test_tokens_in_a_sorted_set() -> None:
     content_list: list = list()
 
