@@ -1,12 +1,41 @@
+from SpecialisedStudyProject.templates \
+    import Word
+
 from SpecialisedStudyProject.logic \
     import Token
 
 from HardenedSteel.facades \
-    import generate_label_by_size, generate_signed_integer
+    import \
+    generate_label_by_size, \
+    generate_signed_integer
+
+
+def test_token_subclass():
+    token: Token = Token(
+        generate_label_by_size(
+            generate_signed_integer(
+                begin=1,
+                end=20
+            )
+        )
+    )
+
+    assert isinstance(
+        token,
+        Word
+    )
 
 
 def test_token():
-    label: Token = Token('Test_1234')
+    label: Token = Token(
+        generate_label_by_size(
+            generate_signed_integer(
+                begin=1,
+                end=20
+            )
+        )
+    )
+
     assert isinstance(label, Token)
 
 

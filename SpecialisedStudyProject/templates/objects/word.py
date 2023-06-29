@@ -112,9 +112,14 @@ class Word(ABC):
         self,
         other
     ) -> bool:
-        return self.is_equal_to_other_word(
-            other
-        )
+        if is_variation_of_word(
+                other
+        ):
+            return self.is_equal_to_other_word(
+                other
+            )
+        
+        return False
 
     def is_equal_to_other_word(
         self,
@@ -140,38 +145,64 @@ class Word(ABC):
         self,
         other
     ) -> bool:
-        return self.is_greater_than_word(
-            other
-        )
+        if is_variation_of_word(other):
+            return self.is_greater_than_other_word(
+                other
+            )
 
-    def is_greater_than_word(
+        return False
+
+    def is_greater_than_other_word(
         self,
         other
     ):
-        return self.is_greater_than_others_token(other)
+        compare_to: Word = other
+        return self.is_greater_than_other_words_token(
+            compare_to
+        )
 
-    def is_greater_than_others_token(
+    def is_greater_than_other_words_token(
         self,
         other
     ):
         compare_to: Word = other
         return self.get_token() > compare_to.get_token()
 
+    def is_greater_than_other_words_length(
+        self,
+        other
+    ):
+        compare_to: Word = other
+        return self.get_length() > compare_to.get_length()
+
+    def is_greater_than_other_words_hash(
+        self,
+        other
+    ):
+        compare_to: Word = other
+        return self.get_hash() > compare_to.get_hash()
+
     # ** Lower than or <
     def __lt__(
         self,
         other
     ) -> bool:
-        return self.is_lesser_than_word(
-            other
-        )
+        if is_variation_of_word(
+                other
+        ):
+            return self.is_lesser_than_other_word(
+                other
+            )
 
-    def is_lesser_than_word(
+        return False
+
+    def is_lesser_than_other_word(
         self,
         other
     ):
+        compare_to: Word = other
         return self.is_lesser_than_other_words_token(
-            other
+            compare_to
         )
 
     def is_lesser_than_other_words_token(
@@ -180,6 +211,20 @@ class Word(ABC):
     ):
         compare_to: Word = other
         return self.get_token() < compare_to.get_token()
+
+    def is_lesser_than_other_words_length(
+        self,
+        other
+    ):
+        compare_to: Word = other
+        return self.get_length() < compare_to.get_length()
+
+    def is_lesser_than_other_words_hash(
+        self,
+        other
+    ):
+        compare_to: Word = other
+        return self.get_hash() < compare_to.get_hash()
 
     # is equal to
     def is_equal_to_other_words_token(
@@ -202,6 +247,15 @@ class Word(ABC):
     ):
         compare_to: Word = other
         return self.get_length() == compare_to.get_length()
+
+
+def is_variation_of_word(
+    value
+) -> bool:
+    return isinstance(
+        value,
+        Word
+    )
 
 
 # Events
