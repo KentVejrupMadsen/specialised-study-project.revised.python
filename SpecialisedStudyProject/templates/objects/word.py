@@ -38,3 +38,5 @@ class Word(ABC):
 
     def __len__(self) -> int:
         return self.get_length()
+
+
