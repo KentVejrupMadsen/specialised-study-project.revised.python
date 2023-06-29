@@ -250,7 +250,6 @@ class Word(
             return self.is_greater_than_other_word(
                 other
             )
-
         return False
 
     def is_greater_than_other_word(
@@ -258,7 +257,17 @@ class Word(
         other
     ):
         compare_to: Word = other
-        return self.is_greater_than_other_words_token(
+
+        if self.is_equal_to_other_words_length(
+                compare_to
+        ):
+            return bool(
+                self.is_greater_than_other_words_token(
+                    compare_to
+                )
+            )
+
+        return self.is_greater_than_other_words_length(
             compare_to
         )
 
@@ -302,7 +311,17 @@ class Word(
         other
     ):
         compare_to: Word = other
-        return self.is_lesser_than_other_words_token(
+
+        if self.is_equal_to_other_words_length(
+                compare_to
+        ):
+            return bool(
+                self.is_lesser_than_other_words_token(
+                    compare_to
+                )
+            )
+
+        return self.is_lesser_than_other_words_length(
             compare_to
         )
 
