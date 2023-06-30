@@ -1,9 +1,9 @@
 name: Python package
 on:
   push:
-    branches: [ "main", "working", "development", "alpha" ]
+    branches: [ "development", "alpha", "beta", "working", "developing" ]
   pull_request:
-    branches: [ "main", "development" ]
+    branches: [ "main", "development", "publish", "test" ]
 
 jobs:
   build:

@@ -22,6 +22,7 @@ class StreamMap(
         self.stream: list | None = None
         self.event_on_size_change: StreamMapOnSizeChange | None = None
         self.iterator: CounterObject | None = None
+        self.length: int | None = None
 
     def __del__(
         self
@@ -29,7 +30,111 @@ class StreamMap(
         del                             \
             self.stream,                \
             self.event_on_size_change,  \
-            self.iterator
+            self.iterator,              \
+            self.length
+
+    def __getitem__(
+        self,
+        index: int
+    ):
+        return self.get_stream()[
+            index
+        ]
+
+    def __setitem__(
+        self,
+        index: int,
+        value
+    ):
+        self.assign_to(
+            index,
+            value
+        )
+
+    def __int__(self):
+        return int(
+            self.get_iterator().previous()
+        )
+
+    def __len__(
+        self
+    ) -> int:
+        return self.get_length()
+
+    def __iter__(self):
+        self.trigger_event_size_change()
+        self.get_iterator().reset()
+        return self
+
+    def __next__(
+        self
+    ) -> int:
+        self.get_iterator().increment()
+        next_index_position: int = int(self)
+        if next_index_position < len(self):
+            return next_index_position
+        else:
+            raise StopIteration
+
+    def __iadd__(
+        self,
+        other
+    ):
+        if self.is_instance_token(
+            other
+        ):
+            self.insert(
+                other
+            )
+
+        return self
+
+    def consolidate(
+        self,
+        other_map
+    ) -> None:
+        return None
+
+    def assign_to(
+        self,
+        index: int,
+        value
+    ):
+        if self.is_instance_token(
+            value
+        ):
+            self.get_stream()[index] = value
+        else:
+            raise ValueError(
+                'wrong type'
+            )
+
+    def is_length_none(self) -> bool:
+        return self.length is None
+
+    def refresh_length(self):
+        if self.is_length_none():
+            self.length: int = 0
+
+        self.set_length(
+            len(self.stream)
+        )
+
+    def get_length(
+        self
+    ) -> int:
+        if self.is_length_none():
+            self.refresh_length()
+
+        self.trigger_event_size_change()
+
+        return self.length
+
+    def set_length(
+        self,
+        value: int
+    ) -> None:
+        self.length = value
 
     def get_iterator(
         self
@@ -103,31 +208,31 @@ class StreamMap(
     def insert(
         self,
         value
-    ):
-        self.hint_event_size_change()
+    ) -> None:
         self.get_stream().append(
             value
         )
+        self.hint_event_size_change()
 
     def insert_at(
         self,
         index: int,
         value_object
     ) -> None:
-        self.hint_event_size_change()
         self.get_stream().insert(
             index,
             value_object
         )
+        self.hint_event_size_change()
 
     def remove_at(
         self,
         index: int
     ) -> None:
-        self.hint_event_size_change()
         self.get_stream().pop(
             index
         )
+        self.hint_event_size_change()
 
     def retrieve_at(
         self,
@@ -170,25 +275,3 @@ class StreamMap(
         return is_integer_zero(
             len(self)
         )
-
-    def __len__(
-        self
-    ):
-        self.trigger_event_size_change()
-        return len(
-            self.get_stream()
-        )
-
-    def __iter__(self):
-        self.trigger_event_size_change()
-        self.get_iterator().reset()
-        return self
-
-    def __next__(self):
-        self.get_iterator().increment()
-        next_index_position: int = self.get_iterator().previous()
-
-        if next_index_position < len(self):
-            return next_index_position
-        else:
-            raise StopIteration

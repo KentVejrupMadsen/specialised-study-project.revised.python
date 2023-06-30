@@ -23,14 +23,16 @@ class OnChangeEvent(
         self.has_changed = value
 
     def hint(self):
-        self.set_has_changed(
-            True
-        )
+        if not self.is_changed():
+            self.set_has_changed(
+                True
+            )
 
     def complete(self):
-        self.set_has_changed(
-            False
-        )
+        if self.is_changed():
+            self.set_has_changed(
+                False
+            )
 
     def on_trigger(self) -> None:
         if self.is_changed():
