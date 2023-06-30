@@ -3,7 +3,7 @@ on:
   push:
     branches: [ "development", "alpha", "beta", "working", "developing" ]
   pull_request:
-    branches: [ "main", "development", "publish", "test"]
+    branches: [ "main", "development", "publish", "test" ]
 
 jobs:
   build:
