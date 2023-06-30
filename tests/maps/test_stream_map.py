@@ -51,7 +51,6 @@ def generate_stream_map(
 
 
 def test_of_token_map_retrieve_individually() -> None:
-    print('\nRetrieve individually =======================================================================')
     stream_to_test: TokenMapStream = generate_stream_map()
 
     for i in range(
@@ -67,6 +66,27 @@ def test_of_token_map_retrieve_individually() -> None:
         print(
             repr(
                 result
+            )
+        )
+
+
+def test_of_iterate_token_map() -> None:
+    print('Iterate ==================================================================')
+    stream: TokenMapStream = generate_stream_map()
+
+    print(
+        len(
+            stream.get_stream()
+        )
+    )
+
+    for i in iter(stream):
+        current: Token = stream[i]
+        print(
+            i,
+            ', ',
+            repr(
+                current
             )
         )
 
@@ -137,14 +157,11 @@ def test_of_insertion_by_operator() -> None:
         generated_token: Token = Token(
             token_content=label
         )
-
         assert isinstance(
             generated_token,
             Token
         )
-
         stream += generated_token
-
         assert 0 < len(stream)
 
     assert isinstance(
