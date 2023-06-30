@@ -51,6 +51,7 @@ def generate_stream_map(
 
 
 def test_of_token_map_retrieve_individually() -> None:
+    print('Traversing individually ==================================================================')
     stream_to_test: TokenMapStream = generate_stream_map()
 
     for i in range(
