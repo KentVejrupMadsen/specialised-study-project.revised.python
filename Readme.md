@@ -7,7 +7,8 @@ To install the project:
 
 [![The MIT License][license-image]][license-url]
 [![Dependency Review][workflow-dependency-image]][workflow-dependency-url]
-
+[![CodeScene Code Health][codescene-health-image]][codescene-health-url]
+[![CodeScene System Mastery][codescene-mastery-image]][codescene-mastery-url]
 
 [![Python application][workflow-python-image]][workflow-python-test-url] 
 [![Python package][workflow-python-matrices-image]][workflow-python-test-matrices-url]
@@ -30,6 +31,11 @@ To install the project:
 [workflow-python-image]: https://github.com/KentVejrupMadsen/specialised-study-project.revised.python/actions/workflows/python.yml/badge.svg
 [workflow-python-test-url]: https://github.com/KentVejrupMadsen/specialised-study-project.revised.python/actions/workflows/python.yml
 
+[codescene-health-image]: https://codescene.io/projects/27478/status-badges/code-health
+[codescene-health-url]: https://codescene.io/projects/27478
+
+[codescene-mastery-image]: https://codescene.io/projects/27478/status-badges/system-mastery
+[codescene-mastery-url]: https://codescene.io/projects/27478
 
 ## Summary
 Old project that I decided to rewrite in Python. 
