@@ -1,10 +1,21 @@
 from SpecialisedStudyProject.logic  \
-    import TokenMapStream
+    import                          \
+    TokenMapStream,                 \
+    Token
 
-from HardenedSteel.facades      \
-    import                      \
-    generate_label_by_size,     \
+from HardenedSteel.facades          \
+    import                          \
+    generate_label_by_size,         \
     generate_signed_integer
+
+
+def generate_random_label() -> str:
+    return generate_label_by_size(
+        generate_signed_integer(
+            begin=4,
+            end=30
+        )
+    )
 
 
 def test_of_stream_map() -> None:
@@ -17,7 +28,18 @@ def test_of_stream_map() -> None:
 
 
 def test_of_token_map_retrieve_individual() -> None:
-    pass
+    stream: TokenMapStream = TokenMapStream()
+
+    for i in range(100):
+        label = generate_random_label()
+        generated_token: Token = Token(
+            token_content=label
+        )
+
+        stream += generated_token
+
+        assert len(stream) > 0
+
 
 
 def test_of_token_map_retrieve_list() -> None:
