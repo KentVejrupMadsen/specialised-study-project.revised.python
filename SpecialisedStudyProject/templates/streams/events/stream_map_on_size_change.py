@@ -59,3 +59,4 @@ class StreamMapOnSizeChange(
             return None
 
         parent.refresh_length()
+

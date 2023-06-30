@@ -59,7 +59,6 @@ class StreamMap(
     def __len__(
         self
     ) -> int:
-        self.trigger_event_size_change()
         return self.get_length()
 
     def __iter__(self):
@@ -90,6 +89,12 @@ class StreamMap(
 
         return self
 
+    def consolidate(
+        self,
+        other_map
+    ) -> None:
+        return None
+
     def assign_to(
         self,
         index: int,
@@ -108,10 +113,11 @@ class StreamMap(
         return self.length is None
 
     def refresh_length(self):
+        if self.is_length_none():
+            self.length: int = 0
+
         self.set_length(
-            len(
-                self.get_stream()
-            )
+            len(self.stream)
         )
 
     def get_length(
@@ -119,6 +125,8 @@ class StreamMap(
     ) -> int:
         if self.is_length_none():
             self.refresh_length()
+
+        self.trigger_event_size_change()
 
         return self.length
 
@@ -200,31 +208,31 @@ class StreamMap(
     def insert(
         self,
         value
-    ):
-        self.hint_event_size_change()
+    ) -> None:
         self.get_stream().append(
             value
         )
+        self.hint_event_size_change()
 
     def insert_at(
         self,
         index: int,
         value_object
     ) -> None:
-        self.hint_event_size_change()
         self.get_stream().insert(
             index,
             value_object
         )
+        self.hint_event_size_change()
 
     def remove_at(
         self,
         index: int
     ) -> None:
-        self.hint_event_size_change()
         self.get_stream().pop(
             index
         )
+        self.hint_event_size_change()
 
     def retrieve_at(
         self,
