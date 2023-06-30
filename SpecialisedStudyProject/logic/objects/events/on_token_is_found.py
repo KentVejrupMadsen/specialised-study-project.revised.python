@@ -1,5 +1,8 @@
-from SpecialisedStudyProject.templates \
+from SpecialisedStudyProject.templates              \
     import OnFoundEvent
+
+from SpecialisedStudyProject.logic.objects.events   \
+    import token_exception_not_found
 
 
 class TokenIsFoundEvent(
@@ -23,7 +26,7 @@ class TokenIsFoundEvent(
             import Token
 
         if self.is_parent_none():
-            raise TypeError('Has no Token')
+            token_exception_not_found()
 
         parent: Token = self.get_parent()
         parent.event_is_found()
