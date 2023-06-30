@@ -1,8 +1,12 @@
-# Specialised Study Project - Revised
+# SSP - Revised School project
 [![Python application](https://github.com/KentVejrupMadsen/specialised-study-project.revised.python/actions/workflows/python.yml/badge.svg)](https://github.com/KentVejrupMadsen/specialised-study-project.revised.python/actions/workflows/python.yml)
 [![Python package](https://github.com/KentVejrupMadsen/specialised-study-project.revised.python/actions/workflows/python-matrice.yml/badge.svg)](https://github.com/KentVejrupMadsen/specialised-study-project.revised.python/actions/workflows/python-matrice.yml)
 [![Upload Python Package](https://github.com/KentVejrupMadsen/specialised-study-project.revised.python/actions/workflows/publish.yml/badge.svg)](https://github.com/KentVejrupMadsen/specialised-study-project.revised.python/actions/workflows/publish.yml)
 [![Dependency Review](https://github.com/KentVejrupMadsen/specialised-study-project.revised.python/actions/workflows/rependencies.yml/badge.svg)](https://github.com/KentVejrupMadsen/specialised-study-project.revised.python/actions/workflows/rependencies.yml)
+[![The MIT License][license-image]][license-url]
+
+[license-image]: https://img.shields.io/badge/License-MIT-yellow.svg
+[license-url]: https://opensource.org/licenses/MIT
 
 ## Description
 To install the project:
