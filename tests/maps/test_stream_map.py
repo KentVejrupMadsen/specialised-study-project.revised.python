@@ -85,7 +85,7 @@ def test_of_iterate_token_map() -> None:
         current: Token = stream[i]
         print(
             i,
-            ', ',
+            ' ',
             repr(
                 current
             )
