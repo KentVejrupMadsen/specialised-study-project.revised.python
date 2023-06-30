@@ -51,6 +51,11 @@ class StreamMap(
             value
         )
 
+    def __int__(self):
+        return int(
+            self.get_iterator().previous()
+        )
+
     def __len__(
         self
     ) -> int:
@@ -66,12 +71,24 @@ class StreamMap(
         self
     ) -> int:
         self.get_iterator().increment()
-        next_index_position: int = self.get_iterator().previous()
+        next_index_position: int = int(self)
         if next_index_position < len(self):
             return next_index_position
         else:
             raise StopIteration
 
+    def __iadd__(
+        self,
+        other
+    ):
+        if self.is_instance_token(
+            other
+        ):
+            self.insert(
+                other
+            )
+
+        return self
 
     def assign_to(
         self,
