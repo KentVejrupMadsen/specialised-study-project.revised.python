@@ -5,6 +5,14 @@ from abc                                \
 from SpecialisedStudyProject.templates  \
     import OnChangeEvent
 
+from HardenedSteel.objects              \
+    import CounterObject
+
+from HardenedSteel.globals              \
+    import                              \
+    get_integer_one,                    \
+    get_integer_zero
+
 
 class Word(
     ABC
@@ -19,6 +27,7 @@ class Word(
         self.hash: int | None = None
         self.is_changed_event: OnWordChanges | None = None
         self.normalise: bool = is_to_normalise_on_creation
+        self.iterator: CounterObject | None = None
 
     def __del__(self) -> None:
         del                         \
@@ -26,7 +35,32 @@ class Word(
             self.length,            \
             self.hash,              \
             self.is_changed_event,  \
-            self.normalise
+            self.normalise,         \
+            self.iterator
+
+    def is_token_empty(self) -> bool:
+        return len(self) == get_integer_zero()
+
+    def is_iterator_none(
+        self
+    ) -> bool:
+        return self.iterator is None
+
+    def set_iterator(
+        self,
+        value: CounterObject
+    ) -> None:
+        self.iterator = value
+
+    def get_iterator(self) -> CounterObject:
+        if self.is_iterator_none():
+            self.set_iterator(
+                CounterObject(
+                    start_value=get_integer_one()
+                )
+            )
+
+        return self.iterator
 
     def is_to_normalise(self) -> bool:
         return self.normalise
@@ -88,31 +122,102 @@ class Word(
     ) -> None:
         self.hash = value
 
-    def dictionary(self) -> dict:
+    def attribute_name_for_token(self) -> str:
+        return 'token'
+
+    def attribute_name_for_length(self) -> str:
+        return 'length'
+
+    def attribute_name_for_hash(self) -> str:
+        return 'hash'
+
+    def attribute_name_for_position(self) -> str:
+        return 'position'
+
+    def attribute_name_for_index(self) -> str:
+        return 'index'
+
+    def attribute_name_for_character(self) -> str:
+        return 'character'
+
+    def dictionary(
+        self
+    ) -> dict:
         return {
-            'token': self.get_token(),
-            'length': self.get_length(),
-            'hash': self.get_hash()
+            self.attribute_name_for_token(): self.get_token(),
+            self.attribute_name_for_length(): self.get_length(),
+            self.attribute_name_for_hash(): self.get_hash(),
+            self.attribute_name_for_position():
+                {
+                    self.attribute_name_for_index(): int(self),
+                    self.attribute_name_for_character(): self.get_character_at_current_position()
+                }
         }
 
-    def trigger_event__hint_change_has_happened(self):
+    def get_character_at_position(
+        self,
+        index: int
+    ) -> chr:
+        return self.get_token()[index]
+
+    def get_character_at_current_position(
+            self
+    ) -> chr:
+        return self.get_character_at_position(
+            int(self)
+        )
+
+    def trigger_event__hint_change_has_happened(
+            self
+    ) -> None:
         self.get_changed_event().hint()
 
-    def trigger__change_event(self) -> None:
+    def trigger__change_event(
+        self
+    ) -> None:
         self.get_changed_event().on_trigger()
 
-    def __hash__(self):
+    def __iter__(self):
+        self.get_iterator().reset()
+        return self
+
+    def __next__(self) -> int:
+        iterator = self.get_iterator()
+        iterator.increment()
+        index_position: int = iterator.previous()
+
+        if int(index_position) < len(self):
+            return int(
+                index_position
+            )
+        else:
+            raise StopIteration
+
+    def __int__(self):
+        return int(
+            self.get_iterator().previous()
+        )
+
+    def __hash__(
+            self
+    ) -> int:
         return self.get_hash()
 
-    def __str__(self):
+    def __str__(
+            self
+    ) -> str:
         return self.get_token()
 
-    def __repr__(self) -> str:
+    def __repr__(
+        self
+    ) -> str:
         return str(
             self.dictionary()
         )
 
-    def __len__(self) -> int:
+    def __len__(
+            self
+    ) -> int:
         return self.get_length()
 
     # Base Operators
@@ -135,6 +240,7 @@ class Word(
         other
     ):
         compare_to: Word = other
+
         return bool(
             self.is_equal_to_other_words_hash(
                 compare_to
@@ -168,9 +274,22 @@ class Word(
         other
     ):
         compare_to: Word = other
-        return self.is_greater_than_other_words_token(
+
+        if self.is_equal_to_other_words_length(
             compare_to
-        )
+        ):
+            if self.is_equal_to_other_words_token(
+                compare_to
+            ):
+                return False
+            else:
+                return self.is_greater_than_other_words_token(
+                    compare_to
+                )
+        else:
+            return self.is_greater_than_other_words_length(
+                compare_to
+            )
 
     def is_greater_than_other_words_token(
         self,
@@ -199,12 +318,11 @@ class Word(
         other
     ) -> bool:
         if is_variation_of_word(
-                other
+            other
         ):
             return self.is_lesser_than_other_word(
                 other
             )
-
         return False
 
     def is_lesser_than_other_word(
@@ -212,9 +330,22 @@ class Word(
         other
     ):
         compare_to: Word = other
-        return self.is_lesser_than_other_words_token(
+
+        if self.is_equal_to_other_words_length(
             compare_to
-        )
+        ):
+            if self.is_equal_to_other_words_token(
+                    compare_to
+            ):
+                return False
+            else:
+                return self.is_lesser_than_other_words_token(
+                    compare_to
+                )
+        else:
+            return self.is_lesser_than_other_words_length(
+                compare_to
+            )
 
     def is_lesser_than_other_words_token(
         self,
@@ -280,11 +411,15 @@ class OnWordChanges(
         super().__init__()
         self.parent: Word = parent_token
 
-    def __del__(self):
+    def __del__(
+        self
+    ):
         super().__del__()
         del self.parent
 
-    def get_parent(self) -> Word:
+    def get_parent(
+        self
+    ) -> Word:
         return self.parent
 
     def set_parent(
@@ -293,13 +428,19 @@ class OnWordChanges(
     ) -> None:
         self.parent = parent
 
-    def is_parent_none(self) -> bool:
+    def is_parent_none(
+        self
+    ) -> bool:
         return self.parent is None
 
-    def retrieve_token(self) -> str:
+    def retrieve_token(
+        self
+    ) -> str:
         return self.get_parent().token
 
-    def trigger(self) -> None:
+    def trigger(
+        self
+    ) -> None:
         if self.is_parent_none():
             raise ValueError(
                 'Has no parent.'
@@ -309,7 +450,9 @@ class OnWordChanges(
         self.trigger_calculation_of_length()
         self.trigger_hashing_of_token()
 
-    def trigger_normalisation(self):
+    def trigger_normalisation(
+        self
+    ) -> None:
         token: str = self.retrieve_token()
         if self.get_parent().is_to_normalise():
             self.get_parent().set_token(
@@ -318,7 +461,9 @@ class OnWordChanges(
                 ).lower()
             )
 
-    def trigger_calculation_of_length(self):
+    def trigger_calculation_of_length(
+        self
+    ) -> None:
         token: str = self.retrieve_token()
         self.get_parent().set_length(
             len(
@@ -326,7 +471,9 @@ class OnWordChanges(
             )
         )
 
-    def trigger_hashing_of_token(self):
+    def trigger_hashing_of_token(
+        self
+    ) -> None:
         token: str = self.retrieve_token()
         self.get_parent().set_hash(
             int(
