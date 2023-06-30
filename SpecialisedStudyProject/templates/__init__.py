@@ -3,3 +3,6 @@ from SpecialisedStudyProject.templates.events       \
 
 from SpecialisedStudyProject.templates.objects      \
     import Word
+
+from SpecialisedStudyProject.templates.streams      \
+    import StreamMap

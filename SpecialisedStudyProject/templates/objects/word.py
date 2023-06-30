@@ -8,6 +8,11 @@ from SpecialisedStudyProject.templates  \
 from HardenedSteel.objects              \
     import CounterObject
 
+from HardenedSteel.globals              \
+    import                              \
+    get_integer_one,                    \
+    get_integer_zero
+
 
 class Word(
     ABC
@@ -33,6 +38,9 @@ class Word(
             self.normalise,         \
             self.iterator
 
+    def is_token_empty(self) -> bool:
+        return len(self) == get_integer_zero()
+
     def is_iterator_none(
         self
     ) -> bool:
@@ -48,7 +56,7 @@ class Word(
         if self.is_iterator_none():
             self.set_iterator(
                 CounterObject(
-                    start_value=1
+                    start_value=get_integer_one()
                 )
             )
 
@@ -142,14 +150,22 @@ class Word(
             self.attribute_name_for_position():
                 {
                     self.attribute_name_for_index(): int(self),
-                    self.attribute_name_for_character(): self.get_position()
+                    self.attribute_name_for_character(): self.get_character_at_current_position()
                 }
         }
 
-    def get_position(self) -> chr:
-        return self.get_token()[
+    def get_character_at_position(
+        self,
+        index: int
+    ) -> chr:
+        return self.get_token()[index]
+
+    def get_character_at_current_position(
+            self
+    ) -> chr:
+        return self.get_character_at_position(
             int(self)
-        ]
+        )
 
     def trigger_event__hint_change_has_happened(
             self
