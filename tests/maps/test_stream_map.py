@@ -1,27 +1,95 @@
 from SpecialisedStudyProject.logic  \
-    import TokenMapStream
+    import                          \
+    TokenMapStream,                 \
+    Token
 
-from HardenedSteel.facades      \
-    import                      \
-    generate_label_by_size,     \
+from HardenedSteel.facades          \
+    import                          \
+    generate_label_by_size,         \
     generate_signed_integer
 
+do_not_test: bool = False
 
-def test_of_stream_map() -> None:
+
+def get_do_not_test() -> bool:
+    global do_not_test
+    return do_not_test
+
+
+def generate_random_token() -> Token:
+    return Token(
+        token_content=generate_random_label()
+    )
+
+
+def generate_random_label() -> str:
+    return generate_label_by_size(
+        generate_signed_integer(
+            begin=4,
+            end=30
+        )
+    )
+
+
+def generate_stream_map(
+        size: int = generate_signed_integer(
+            begin=5,
+            end=100
+        )
+) -> TokenMapStream:
     stream: TokenMapStream = TokenMapStream()
+
+    for i in range(size):
+        stream += generate_random_token()
 
     assert isinstance(
         stream,
         TokenMapStream
     )
 
-
-def test_of_token_map_retrieve_individual() -> None:
-    pass
+    return stream
 
 
-def test_of_token_map_retrieve_list() -> None:
-    pass
+def test_of_token_map_retrieve_individually() -> None:
+    print('Traversing individually ==================================================================')
+    stream_to_test: TokenMapStream = generate_stream_map()
+
+    for i in range(
+        len(
+            stream_to_test
+        )
+    ):
+        result = stream_to_test[i]
+        assert isinstance(
+            result,
+            Token
+        )
+        print(
+            repr(
+                result
+            )
+        )
+
+
+def test_of_iterate_token_map() -> None:
+    print('Iterate ==================================================================')
+    stream: TokenMapStream = generate_stream_map()
+
+    print(
+        len(
+            stream.get_stream()
+        )
+    )
+
+    for i in iter(stream):
+        current: Token = stream[i]
+        print(
+            i,
+            ' ',
+            repr(
+                current
+            )
+        )
 
 
 def test_of_token_map_removal_by_individual() -> None:
@@ -60,22 +128,75 @@ def test_of_final_sorting() -> None:
     pass
 
 
-def test_of_insertion_by_default() -> None:
-    pass
+def test_of_token_map_insert_individually() -> None:
+    stream: TokenMapStream = TokenMapStream()
+
+    token_size: int = 200
+
+    for i in range(
+        0,
+        token_size
+    ):
+        stream.insert(
+            generate_random_token()
+        )
+
+    print(
+        len(
+            stream
+        )
+    )
+    assert len(stream) == token_size
+
+
+def test_of_insertion_by_operator() -> None:
+    stream: TokenMapStream = TokenMapStream()
+    size: int = 100
+
+    for i in range(size):
+        label = generate_random_label()
+        generated_token: Token = Token(
+            token_content=label
+        )
+        assert isinstance(
+            generated_token,
+            Token
+        )
+        stream += generated_token
+        assert 0 < len(stream)
+
+    assert isinstance(
+        stream,
+        TokenMapStream
+    )
+
+    assert len(stream) == size
 
 
 def test_of_consolidation_by_two_maps() -> None:
-    pass
+    stream: TokenMapStream = generate_stream_map()
+    stream.consolidate(
+        generate_stream_map()
+    )
+
+    assert isinstance(
+        stream,
+        TokenMapStream
+    )
 
 
 def test_of_consolidation_by_three_maps() -> None:
-    pass
+    stream: TokenMapStream = generate_stream_map()
 
+    stream.consolidate(
+        generate_stream_map()
+    )
 
-def test_of_consolidation_by_five_maps() -> None:
-    pass
+    stream.consolidate(
+        generate_stream_map()
+    )
 
-
-def test_of_consolidation_by_ten_maps() -> None:
-    pass
-
+    assert isinstance(
+        stream,
+        TokenMapStream
+    )

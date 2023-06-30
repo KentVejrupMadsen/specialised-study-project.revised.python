@@ -1,5 +1,7 @@
 from SpecialisedStudyProject.templates.events       \
-    import OnChangeEvent
+    import                                          \
+    OnChangeEvent,                                  \
+    OnFoundEvent
 
 from SpecialisedStudyProject.templates.objects      \
     import Word
