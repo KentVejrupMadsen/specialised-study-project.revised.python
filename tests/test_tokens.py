@@ -9,7 +9,7 @@ from HardenedSteel.facades \
     generate_label_by_size, \
     generate_signed_integer
 
-do_not_test: bool = True
+do_not_test: bool = False
 
 
 def get_do_not_test() -> bool:
