@@ -3,9 +3,11 @@ from abc                                                \
     ABC,                                                \
     abstractmethod
 
-from HardenedSteel.globals                              \
-    import                                              \
-    get_integer_zero
+from HardenedSteel.facades                              \
+    import is_integer_zero
+
+from HardenedSteel.objects                              \
+    import CounterObject
 
 from SpecialisedStudyProject.templates.streams.events   \
     import StreamMapOnSizeChange
@@ -16,13 +18,30 @@ class StreamMap(
 ):
     def __init__(self):
         self.stream: list | None = None
-
         self.event_on_size_change: StreamMapOnSizeChange | None = None
+        self.iterator: CounterObject | None = None
 
     def __del__(self):
         del                             \
             self.stream,                \
-            self.event_on_size_change
+            self.event_on_size_change,  \
+            self.iterator
+
+    def get_iterator(self) -> CounterObject:
+        if self.is_iterator_none():
+            self.set_iterator(
+                CounterObject()
+            )
+        return self.iterator
+
+    def set_iterator(
+        self,
+        value: CounterObject
+    ) -> None:
+        self.iterator = value
+
+    def is_iterator_none(self) -> bool:
+        return self.iterator is None
 
     def hint_event_size_change(self):
         event = self.get_event_on_size_change()
@@ -124,9 +143,9 @@ class StreamMap(
             return True
 
         self.trigger_event_size_change()
-        return len(
-            self
-        ) == get_integer_zero()
+        return is_integer_zero(
+            len(self)
+        )
 
     def __len__(self):
         self.trigger_event_size_change()
