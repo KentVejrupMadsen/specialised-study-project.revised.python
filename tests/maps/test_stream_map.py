@@ -36,9 +36,18 @@ def test_of_token_map_retrieve_individual() -> None:
             token_content=label
         )
 
+        assert isinstance(
+            generated_token,
+            Token
+        )
+
         stream += generated_token
 
-        assert len(stream) > 0
+        assert 0 < len(stream)
+    assert isinstance(
+        stream,
+        TokenMapStream
+    )
 
 
 
