@@ -1,18 +1,18 @@
 from SpecialisedStudyProject.frontend \
-    import MemoryManagement
+    import MemoryStoreManagement
 
 
 class SystemController:
     def __init__(self):
-        self.memory_management: MemoryManagement | None = None
+        self.memory_management: MemoryStoreManagement | None = None
 
     def __del__(self):
         del self.memory_management
 
-    def get_memory_manager(self) -> MemoryManagement:
+    def get_memory_manager(self) -> MemoryStoreManagement:
         if self.is_memory_manager_none():
             self.set_memory_manager(
-                MemoryManagement()
+                MemoryStoreManagement()
             )
         return self.memory_management
 
@@ -21,6 +21,6 @@ class SystemController:
 
     def set_memory_manager(
             self,
-            value: MemoryManagement
+            value: MemoryStoreManagement
     ) -> None:
         self.memory_management = value
