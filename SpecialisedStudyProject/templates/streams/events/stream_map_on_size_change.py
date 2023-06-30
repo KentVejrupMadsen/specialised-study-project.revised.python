@@ -58,3 +58,4 @@ class StreamMapOnSizeChange(
         if parent.is_stream_empty():
             return None
 
+        parent.refresh_length()
