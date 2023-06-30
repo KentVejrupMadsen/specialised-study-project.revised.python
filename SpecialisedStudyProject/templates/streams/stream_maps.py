@@ -178,3 +178,17 @@ class StreamMap(
         return len(
             self.get_stream()
         )
+
+    def __iter__(self):
+        self.trigger_event_size_change()
+        self.get_iterator().reset()
+        return self
+
+    def __next__(self):
+        self.get_iterator().increment()
+        next_index_position: int = self.get_iterator().previous()
+
+        if next_index_position < len(self):
+            return next_index_position
+        else:
+            raise StopIteration
