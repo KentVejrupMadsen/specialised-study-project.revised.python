@@ -1,19 +1,35 @@
 # SSP - Revised School project
-[![The MIT License][license-image]][license-url]
-
-[![Python application](https://github.com/KentVejrupMadsen/specialised-study-project.revised.python/actions/workflows/python.yml/badge.svg)](https://github.com/KentVejrupMadsen/specialised-study-project.revised.python/actions/workflows/python.yml)
-[![Python package](https://github.com/KentVejrupMadsen/specialised-study-project.revised.python/actions/workflows/python-matrice.yml/badge.svg)](https://github.com/KentVejrupMadsen/specialised-study-project.revised.python/actions/workflows/python-matrice.yml)
-[![Upload Python Package](https://github.com/KentVejrupMadsen/specialised-study-project.revised.python/actions/workflows/publish.yml/badge.svg)](https://github.com/KentVejrupMadsen/specialised-study-project.revised.python/actions/workflows/publish.yml)
-
-[![Dependency Review](https://github.com/KentVejrupMadsen/specialised-study-project.revised.python/actions/workflows/rependencies.yml/badge.svg)](https://github.com/KentVejrupMadsen/specialised-study-project.revised.python/actions/workflows/rependencies.yml)
-
-[license-image]: https://img.shields.io/badge/License-MIT-yellow.svg
-[license-url]: https://opensource.org/licenses/MIT
-
 ## Description
 To install the project:
 
     pip install sspr.python.by.designermadsen
+
+
+[![The MIT License][license-image]][license-url]
+[![Dependency Review][workflow-dependency-image]][workflow-dependency-url]
+
+
+[![Python application][workflow-python-image]][workflow-python-test-url] 
+[![Python package][workflow-python-matrices-image]][workflow-python-test-matrices-url]
+[![Upload Python Package][workflow-python-publish-image]][workflow-python-publish-url]
+
+
+
+[license-image]: https://img.shields.io/badge/License-MIT-yellow.svg
+[license-url]: https://opensource.org/licenses/MIT
+
+[workflow-dependency-image]: https://github.com/KentVejrupMadsen/specialised-study-project.revised.python/actions/workflows/rependencies.yml/badge.svg
+[workflow-dependency-url]: https://github.com/KentVejrupMadsen/specialised-study-project.revised.python/actions/workflows/rependencies.yml
+
+[workflow-python-publish-image]: https://github.com/KentVejrupMadsen/specialised-study-project.revised.python/actions/workflows/publish.yml/badge.svg
+[workflow-python-publish-url]: https://github.com/KentVejrupMadsen/specialised-study-project.revised.python/actions/workflows/publish.yml
+
+[workflow-python-matrices-image]: https://github.com/KentVejrupMadsen/specialised-study-project.revised.python/actions/workflows/python-matrice.yml/badge.svg
+[workflow-python-test-matrices-url]: https://github.com/KentVejrupMadsen/specialised-study-project.revised.python/actions/workflows/python-matrice.yml
+
+[workflow-python-image]: https://github.com/KentVejrupMadsen/specialised-study-project.revised.python/actions/workflows/python.yml/badge.svg
+[workflow-python-test-url]: https://github.com/KentVejrupMadsen/specialised-study-project.revised.python/actions/workflows/python.yml
+
 
 ## Summary
 Old project that I decided to rewrite in Python. 
