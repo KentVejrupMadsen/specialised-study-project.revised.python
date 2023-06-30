@@ -23,3 +23,15 @@ class TokenMapStream(
             Token
         )
 
+    def insert_instances_from_a_token(
+        self,
+        value: Token
+    ):
+        for i in range(len(self)):
+            current: Token = self[i]
+
+            if current == value:
+                current.set_counter(
+                    current.get_counter() + value.get_counter()
+                )
+

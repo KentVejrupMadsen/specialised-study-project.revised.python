@@ -93,7 +93,37 @@ class StreamMap(
         self,
         other_map
     ) -> None:
-        return None
+        include_to_set: StreamMap = other_map
+
+        for i in iter(include_to_set):
+            selected_element = include_to_set[i]
+
+            exist: bool = self.exist_element_in_set(
+                selected_element
+            )
+
+            if not exist:
+                self.insert(
+                    value=selected_element
+                )
+
+        return
+
+    def exist_element_in_set(
+        self,
+        element
+    ) -> bool:
+        if self.is_stream_empty():
+            return False
+
+        for i in iter(self):
+            current_element = self[i]
+
+            if current_element == element:
+                print('found element')
+                return True
+
+        return False
 
     def assign_to(
         self,
