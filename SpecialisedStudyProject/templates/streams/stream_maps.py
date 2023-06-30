@@ -1,13 +1,13 @@
-from abc                                        \
-    import                                      \
-    ABC,                                        \
+from abc                                                \
+    import                                              \
+    ABC,                                                \
     abstractmethod
 
-from HardenedSteel.globals                      \
-    import                                      \
+from HardenedSteel.globals                              \
+    import                                              \
     get_integer_zero
 
-from SpecialisedStudyProject.templates.streams.events \
+from SpecialisedStudyProject.templates.streams.events   \
     import StreamMapOnSizeChange
 
 
