@@ -16,18 +16,24 @@ from SpecialisedStudyProject.templates.streams.events   \
 class StreamMap(
     ABC
 ):
-    def __init__(self):
+    def __init__(
+        self
+    ):
         self.stream: list | None = None
         self.event_on_size_change: StreamMapOnSizeChange | None = None
         self.iterator: CounterObject | None = None
 
-    def __del__(self):
+    def __del__(
+        self
+    ):
         del                             \
             self.stream,                \
             self.event_on_size_change,  \
             self.iterator
 
-    def get_iterator(self) -> CounterObject:
+    def get_iterator(
+        self
+    ) -> CounterObject:
         if self.is_iterator_none():
             self.set_iterator(
                 CounterObject()
@@ -40,18 +46,26 @@ class StreamMap(
     ) -> None:
         self.iterator = value
 
-    def is_iterator_none(self) -> bool:
+    def is_iterator_none(
+        self
+    ) -> bool:
         return self.iterator is None
 
-    def hint_event_size_change(self):
+    def hint_event_size_change(
+        self
+    ):
         event = self.get_event_on_size_change()
         event.hint()
 
-    def trigger_event_size_change(self):
+    def trigger_event_size_change(
+        self
+    ):
         event = self.get_event_on_size_change()
         event.on_trigger()
 
-    def get_event_on_size_change(self):
+    def get_event_on_size_change(
+        self
+    ):
         if self.is_event_on_size_change_empty():
             self.set_event_on_size_change(
                 StreamMapOnSizeChange(
@@ -68,10 +82,14 @@ class StreamMap(
         event: StreamMapOnSizeChange = value
         self.event_on_size_change = event
 
-    def is_event_on_size_change_empty(self) -> bool:
+    def is_event_on_size_change_empty(
+        self
+    ) -> bool:
         return self.event_on_size_change is None
 
-    def clear(self) -> None:
+    def clear(
+        self
+    ) -> None:
         self.hint_event_size_change()
         self.get_stream().clear()
 
@@ -120,7 +138,9 @@ class StreamMap(
             index
         ]
 
-    def get_stream(self) -> list:
+    def get_stream(
+        self
+    ) -> list:
         self.trigger_event_size_change()
         if self.is_stream_none():
             self.set_stream(
@@ -135,10 +155,14 @@ class StreamMap(
         self.hint_event_size_change()
         self.stream = value
 
-    def is_stream_none(self) -> bool:
+    def is_stream_none(
+        self
+    ) -> bool:
         return self.stream is None
 
-    def is_stream_empty(self) -> bool:
+    def is_stream_empty(
+        self
+    ) -> bool:
         if self.is_stream_none():
             return True
 
@@ -147,7 +171,9 @@ class StreamMap(
             len(self)
         )
 
-    def __len__(self):
+    def __len__(
+        self
+    ):
         self.trigger_event_size_change()
         return len(
             self.get_stream()
