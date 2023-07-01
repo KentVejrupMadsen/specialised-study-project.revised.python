@@ -7,12 +7,14 @@ To install the project:
 
 [![The MIT License][license-image]][license-url]
 [![Dependency Review][workflow-dependency-image]][workflow-dependency-url]
-[![CodeScene Code Health][codescene-health-image]][codescene-health-url]
-[![CodeScene System Mastery][codescene-mastery-image]][codescene-mastery-url]
+[![Upload Python Package][workflow-python-publish-image]][workflow-python-publish-url]
 
 [![Python application][workflow-python-image]][workflow-python-test-url] 
 [![Python package][workflow-python-matrices-image]][workflow-python-test-matrices-url]
-[![Upload Python Package][workflow-python-publish-image]][workflow-python-publish-url]
+
+[![CodeScene Code Health][codescene-health-image]][codescene-health-url]
+[![CodeScene System Mastery][codescene-mastery-image]][codescene-mastery-url]
+
 
 
 
